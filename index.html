@@ -87,7 +87,7 @@ footer{flex:none;padding:2px 12px;font-size:10.5px}
 <div class="card"><h3>Por status</h3><div class="chart"><canvas id="c3"></canvas></div></div>
 </div>
 </main>
-<footer>Dados salvos neste navegador (localStorage). Use “Backup JSON” para guardar uma cópia. Contém dados pessoais (LGPD): compartilhe com cuidado.</footer>
+<footer>Contém dados pessoais (LGPD): compartilhe com cuidado. · <a href="#" onclick="openSync();return false" id="syncst">☁ Sincronização: não configurada</a></footer>
 <div class="modal" id="m"><div class="box" id="mb"></div></div>
 <script>
 const STS={"Agendada":"#2f6fb5","Confirmada":"#1f9d8b","Realizada":"#2e8b57","Não compareceu":"#c0392b","Cancelada":"#8a8f98","Reagendada":"#E6A100"};
@@ -95,7 +95,29 @@ const SEED=[];
 const KEY="okSaudeAgendamentos_v1";
 let D=load(),sort={k:"dt",d:1};
 function load(){try{const s=localStorage.getItem(KEY);if(s)return JSON.parse(s)}catch(e){}return JSON.parse(JSON.stringify(SEED))}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(D))}catch(e){}}
+const UKEY="okSaudeAtualizadoEm_v1",SKEY="okSaudeSync_v1";
+function upd(){try{return +localStorage.getItem(UKEY)||0}catch(e){return 0}}
+function touch(){try{localStorage.setItem(UKEY,String(Date.now()))}catch(e){}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(D))}catch(e){}touch();schedulePush()}
+function saveRules(){try{localStorage.setItem(RKEY,JSON.stringify(RULES))}catch(e){}touch();schedulePush()}
+/* ---- sincronização com Google Sheets (Apps Script) ---- */
+function syncCfg(){try{return JSON.parse(localStorage.getItem(SKEY))}catch(e){return null}}
+function syncMsg(s){const e=document.getElementById("syncst");if(e)e.textContent="☁ Sincronização: "+s}
+let pushT=null;
+function schedulePush(){if(!syncCfg())return;clearTimeout(pushT);pushT=setTimeout(push,1500)}
+async function push(){const c=syncCfg();if(!c)return;syncMsg("enviando…");
+ try{const r=await fetch(c.url,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({k:c.key,updatedAt:upd()||Date.now(),data:D,rules:RULES})});const j=await r.json();
+  if(!j.ok)throw new Error(j.erro||"erro");syncMsg("ok · "+new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"}))}catch(e){syncMsg("falhou (dados seguem salvos neste navegador)")}}
+async function pull(){const c=syncCfg();if(!c)return;syncMsg("sincronizando…");
+ try{const r=await fetch(c.url+(c.url.includes("?")?"&":"?")+"k="+encodeURIComponent(c.key));const j=await r.json();if(!j.ok)throw new Error(j.erro||"erro");
+  if(j.updatedAt>upd()&&(j.data||[]).length){D=j.data;if(j.rules&&j.rules.length)RULES=j.rules;try{localStorage.setItem(KEY,JSON.stringify(D));localStorage.setItem(RKEY,JSON.stringify(RULES));localStorage.setItem(UKEY,String(j.updatedAt))}catch(e){}render();syncMsg("ok · dados da nuvem carregados")}
+  else if(D.length||j.updatedAt===0){await push()}else syncMsg("ok")}catch(e){syncMsg("falhou (usando dados deste navegador)")}}
+function openSync(){const c=syncCfg()||{url:"",key:""};$("mb").innerHTML=`<h3 style="margin:0;color:#1B2A4A">Sincronização (Google Sheets)</h3>
+ <p style="color:#666;font-size:12px;margin:4px 0">Guarda os dados numa planilha Google e permite o relatório diário das 08h. Cole o endereço do Apps Script (termina em /exec) e a chave definida no script.</p>
+ <label>URL do Apps Script</label><input id="s_url" value="${esc(c.url)}" placeholder="https://script.google.com/macros/s/.../exec">
+ <label>Chave de acesso</label><input id="s_key" type="password" value="${esc(c.key)}">
+ <div style="display:flex;gap:8px;justify-content:space-between;margin-top:14px"><button class="btn d" onclick="try{localStorage.removeItem(SKEY)}catch(e){};syncMsg('não configurada');closeM()">Desconectar</button>
+ <div><button class="btn" onclick="closeM()">Cancelar</button> <button class="btn p" onclick="const u=$('s_url').value.trim(),k=$('s_key').value.trim();if(!u||!k){alert('Informe a URL e a chave.');return}try{localStorage.setItem(SKEY,JSON.stringify({url:u,key:k}))}catch(e){};closeM();pull()">Salvar e sincronizar</button></div></div>`;$("m").classList.add("on")}
 const $=id=>document.getElementById(id);
 const pad=n=>String(n).padStart(2,"0");
 const iso=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
@@ -267,7 +289,7 @@ function openRules(list){const L=list||RULES;$("mb").innerHTML=`<h3 style="margi
  <div id="rl">${L.map(ruleRow).join("")}</div>
  <button class="btn mini" style="margin-top:8px" onclick="const c=collectRules();c.push({id:'x'+Date.now(),on:true,kind:'horas',h:12,txt:'Nova ação',cond:'todas',fx:'',msg:''});openRules(c)">+ Adicionar regra</button>
  <div style="display:flex;gap:8px;justify-content:space-between;margin-top:14px"><button class="btn" onclick="openRules(JSON.parse(JSON.stringify(DEFR)))">Restaurar padrão</button>
- <div><button class="btn" onclick="closeM()">Cancelar</button> <button class="btn p" onclick="RULES=collectRules();try{localStorage.setItem(RKEY,JSON.stringify(RULES))}catch(e){};closeM();render()">Salvar</button></div></div>`;$("m").classList.add("on")}
+ <div><button class="btn" onclick="closeM()">Cancelar</button> <button class="btn p" onclick="RULES=collectRules();saveRules();closeM();render()">Salvar</button></div></div>`;$("m").classList.add("on")}
 function closeM(){$("m").classList.remove("on")}
 function saveF(id){
  const o={nome:$("f_nome").value.trim(),cpf:$("f_cpf").value.replace(/\D/g,""),esp:$("f_esp").value.trim(),prof:$("f_prof").value.trim(),dt:$("f_dt").value,status:$("f_st").value,link:$("f_link").value.trim(),obs:$("f_obs").value.trim()};
@@ -289,22 +311,19 @@ async function loadFile(f){if(!f)return;
  if(!ok.length){alert("Nenhuma linha válida encontrada. Confira se é a planilha de agendamentos (colunas Nome, CPF, Status, Especialidade, Profissional, Horário agendado, Link do paciente).");return}
  PEND={name:f.name,rows:ok};showPend()}
 function showPend(){const el=$("rep");if(!PEND){el.innerHTML="";return}
- el.innerHTML=`<div class="pend"><span>📄 <b>${esc(PEND.name)}</b> — ${PEND.rows.length} agendamento(s) na planilha</span> <button class="btn p mini" onclick="confirmLoad()">OK</button> <button class="btn mini" onclick="PEND=null;showPend()">Cancelar</button></div>`}
-function confirmLoad(){if(!PEND)return;const seen=new Set(),rows=PEND.rows;
- rows.forEach(x=>{const dt=toIso(x["Horário agendado"]);
+ el.innerHTML=`<div class="pend"><span>📄 <b>${esc(PEND.name)}</b> — ${PEND.rows.length} agendamento(s). Ao clicar em OK, a base atual é <b>substituída</b>; quem já está no painel mantém o status.</span> <button class="btn p mini" onclick="confirmLoad()">OK</button> <button class="btn mini" onclick="PEND=null;showPend()">Cancelar</button></div>`}
+function confirmLoad(){if(!PEND)return;
+ const norm=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/\s+/g," ").trim();
+ const old=D.slice(),used=new Set(),out=[];let n=0,mant=0;
+ PEND.rows.forEach(x=>{const dt=toIso(x["Horário agendado"]),nome=String(x["Nome"]).trim(),nn=norm(nome),esp=x["Especialidade"];
   const cpf=String(x["CPF"]).replace(/\D/g,"").padStart(11,"0"),link=x["Link do paciente"]||"";
-  const st=STS[x["Status"]]?x["Status"]:"Agendada";
-  const ex=D.find(r=>(link&&r.link===link)||(r.cpf===cpf&&r.dt===dt));
-  if(ex){seen.add(ex.id);ex.ausente=false;
-   if(ex.dt!==dt){ex.dt=dt;ex.done={}}
-   if(link&&ex.link!==link)ex.link=link;
-   if(!ex.criado)ex.criado=toIso(x["Criado em"]);
-   if(x["Especialidade"])ex.esp=x["Especialidade"];if(x["Profissional"])ex.prof=x["Profissional"];
-   if(ex.status==="Agendada"&&st!=="Agendada")ex.status=st}
-  else{const id="i"+Date.now()+Math.random().toString(36).slice(2,6);seen.add(id);
-   D.push({id,nome:x["Nome"],cpf,esp:x["Especialidade"],prof:x["Profissional"],dt,status:st,link,obs:"",criado:toIso(x["Criado em"])})}});
- let aus=0;D.forEach(r=>{if(!seen.has(r.id)&&!r.manual&&open(r)&&r.dt.slice(0,10)>=TODAY){r.ausente=true;aus++}});
- try{localStorage.setItem(IKEY,JSON.stringify({at:Date.now(),n:rows.length,aus}))}catch(_){}
+  const free=old.filter(o=>!used.has(o.id));
+  const m=free.find(o=>link&&o.link===link)||free.find(o=>norm(o.nome)===nn&&o.dt===dt)||free.find(o=>norm(o.nome)===nn&&o.esp===esp)||free.find(o=>norm(o.nome)===nn);
+  if(m){used.add(m.id);mant++;
+   out.push({...m,cpf,esp:esp||m.esp,prof:x["Profissional"]||m.prof,dt,link:link||m.link,criado:m.criado||toIso(x["Criado em"]),done:m.dt===dt?(m.done||{}):{},ausente:false})}
+  else out.push({id:"i"+Date.now()+"_"+(n++),nome,cpf,esp,prof:x["Profissional"],dt,status:STS[x["Status"]]?x["Status"]:"Agendada",link,obs:"",criado:toIso(x["Criado em"])})});
+ D=out;
+ try{localStorage.setItem(IKEY,JSON.stringify({at:Date.now(),n:out.length,mant}))}catch(_){}
  PEND=null;save();render();showPend()}
 $("imp").onchange=async e=>{await loadFile(e.target.files[0]);e.target.value=""};
 const up=$("up");["dragenter","dragover"].forEach(v=>up.addEventListener(v,e=>{e.preventDefault();up.style.background="#fff8e1"}));
@@ -313,5 +332,5 @@ up.addEventListener("drop",e=>loadFile(e.dataTransfer.files[0]));
 $("m").onclick=e=>{if(e.target.id==="m")closeM()};
 ["q","fs","fe","fp","fd","fa","cpfv"].forEach(i=>$(i).addEventListener("input",render));
 setInterval(()=>{if(!$("m").classList.contains("on")&&document.activeElement.tagName!=="SELECT"&&document.activeElement.tagName!=="INPUT")render()},60000);
-render();showPend();
+render();showPend();if(syncCfg())pull();else syncMsg('não configurada');
 </script></body></html>
