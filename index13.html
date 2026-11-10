@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Painel de Agendamentos | OK Saúde</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+:root{--y:#FFC400;--yd:#E6A100;--navy:#1B2A4A;--tx:#333;--bg:#F7F7F5;--card:#fff;--bd:#e4e2da;--ok:#2e8b57;--red:#c0392b;--blue:#2f6fb5;--gray:#8a8f98}
+*{box-sizing:border-box}body{margin:0;font:14px/1.45 system-ui,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--tx)}
+header{background:var(--navy);color:#fff;padding:14px 20px;border-bottom:4px solid var(--y);display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+header h1{margin:0;font-size:18px}header small{color:#cfd5e3;display:block;font-weight:400}
+.btn{border:1px solid var(--bd);background:#fff;color:var(--navy);padding:7px 12px;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px}
+.btn:hover{border-color:var(--yd)}.btn.p{background:var(--y);border-color:var(--yd)}.btn.d{color:var(--red)}
+header .btn{background:transparent;color:#fff;border-color:#5a6785}header .btn.p{background:var(--y);color:var(--navy);border-color:var(--y)}
+main{max-width:1280px;margin:0 auto;padding:16px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.kpi{background:var(--card);border:1px solid var(--bd);border-left:4px solid var(--y);border-radius:10px;padding:10px 12px;cursor:pointer}
+.kpi b{display:block;font-size:24px;color:var(--navy)}.kpi span{font-size:12px;color:#666}.kpi.w{border-left-color:var(--red)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:12px}.card h3{margin:0 0 8px;font-size:13px;color:var(--navy)}
+.chart{height:220px;position:relative}
+.alert{background:#fff6d6;border:1px solid var(--yd);border-radius:10px;padding:10px 12px;margin-top:14px;display:none}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 8px}
+input,select,textarea{font:inherit;padding:7px 9px;border:1px solid var(--bd);border-radius:8px;background:#fff;color:var(--tx)}
+.tw{overflow-x:auto;background:#fff;border:1px solid var(--bd);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:1250px}th{background:var(--navy);color:#fff;text-align:left;padding:8px 10px;font-size:12px;cursor:pointer;white-space:nowrap}
+td{padding:7px 10px;border-top:1px solid var(--bd);vertical-align:middle}tr.hoje td{background:#fffbe8}tr.atraso td:first-child{box-shadow:inset 4px 0 var(--red)}
+.st{border:0;border-radius:99px;padding:4px 8px;font-weight:700;font-size:12px;color:#fff}
+.mini{padding:3px 7px;font-size:12px}
+.modal{position:fixed;inset:0;background:#0007;display:none;align-items:center;justify-content:center;padding:12px;z-index:9}.modal.on{display:flex}
+.box{background:#fff;border-radius:12px;padding:16px;max-width:520px;width:100%;max-height:92vh;overflow:auto}
+.box label{display:block;font-size:12px;font-weight:700;color:var(--navy);margin-top:8px}.box input,.box select,.box textarea{width:100%}
+tr.due td{background:#fff8e1}.cdn{white-space:nowrap}.cdn b{display:block;font-size:15px;color:var(--navy)}.cdn small{color:#666}.cdn.neg b{color:var(--red)}.cdn.hot b{color:var(--yd)}
+.ac{min-width:210px}.ac b{display:block;font-size:12.5px;margin-bottom:3px}.ac.cx b{color:var(--red)}.ac.post b{color:var(--navy)}.ac.due b{color:#8a5a00}.nx{font-size:12px;color:#777}
+.aus{display:inline-block;margin-top:3px;background:#fdecea;color:var(--red);border-radius:6px;padding:1px 6px;font-size:11px;font-weight:700}
+.rl{border:1px solid var(--bd);border-radius:8px;padding:8px;margin-top:8px}.rl .row{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:4px}.rl input[type=number]{width:70px}
+footer{text-align:center;color:#777;font-size:12px;padding:16px}
+@media(max-width:600px){main{padding:10px}}
+
+/* ===== uma página só (sem rolagem da página) ===== */
+html,body{height:100%}body{height:100vh;height:100dvh;display:flex;flex-direction:column;overflow:hidden;font-size:13px}
+header{padding:8px 16px;border-bottom-width:3px;flex:none}header h1{font-size:16px}header small{font-size:11px}
+main{flex:1;min-height:0;display:flex;flex-direction:column;width:100%;max-width:1700px;padding:8px 14px;gap:6px}
+#up{flex:none;padding:6px 10px;position:relative;margin:0!important;border:1px dashed var(--yd)!important}
+.uprow{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}.uprow input{padding:3px 6px;font-size:12px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1B2A4A;color:#fff;padding:8px 16px;border-radius:99px;font-size:13px;opacity:0;pointer-events:none;transition:.2s;z-index:20}.toast.on{opacity:1}.pend{display:flex;gap:8px;align-items:center;margin-top:4px;font-size:12px}.repd summary{cursor:pointer;font-size:12px;margin-top:3px;color:#444}.repp{position:absolute;left:0;right:0;top:100%;z-index:6;background:#fff;border:1px solid var(--bd);border-radius:0 0 10px 10px;padding:8px 12px;max-height:55vh;overflow:auto;box-shadow:0 8px 20px #0003}
+.kpis{display:flex!important;gap:6px;flex:none}.kpi{flex:1;min-width:0;padding:2px 8px;border-radius:8px;border-left-width:3px}.kpi b{font-size:15px;line-height:1.1}.kpi span{font-size:10.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.alert{flex:none;margin:0!important;padding:3px 10px;font-size:12px}
+.filters{flex:none;margin:0!important;gap:6px}.filters input,.filters select{padding:4px 7px;font-size:12px}.filters label{font-size:12px;white-space:nowrap}.filters select{max-width:200px}.filters .btn{padding:4px 10px}
+.tw{flex:1;min-height:110px;overflow:auto}table{min-width:0;font-size:12px}th{position:sticky;top:0;z-index:2;padding:6px 6px}td{padding:3px 6px}
+td:nth-child(4){max-width:165px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}td:nth-child(6){max-width:165px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ac{min-width:175px;max-width:270px}.ac b{font-size:11.5px;margin-bottom:2px;line-height:1.2}.cdn b{font-size:13px;display:inline}.cdn small{display:block;font-size:11px}
+.st{padding:2px 6px;font-size:11px}.mini{padding:2px 6px;font-size:11px}
+#cnt{flex:none;margin:0!important;font-size:11px}
+.grid{flex:none;margin:0!important;height:clamp(130px,22vh,190px);gap:8px}.grid .card{padding:6px 10px;display:flex;flex-direction:column;min-height:0}.grid .card h3{margin:0 0 2px;font-size:12px}.grid .chart{flex:1;height:auto;min-height:0}
+footer{flex:none;padding:2px 12px;font-size:10.5px}
+@media(max-width:900px){body{height:auto;overflow:auto;display:block}main{display:block}.tw{max-height:70vh}.grid{height:auto}.grid .chart{height:200px}.kpis{flex-wrap:wrap}.kpi{flex:1 1 90px}}
+.tabs{display:flex;gap:4px;flex:none;margin:0}.tab{border:1px solid var(--bd);border-bottom:3px solid transparent;background:#fff;color:var(--navy);padding:5px 14px;border-radius:8px 8px 0 0;font-weight:700;font-size:12.5px;cursor:pointer}.tab.on{background:var(--y);border-bottom-color:var(--yd)}.tn{display:inline-block;background:var(--red);color:#fff;border-radius:99px;padding:0 7px;font-size:11px;margin-left:4px}.tn:empty{display:none}
+#resumo{display:none;flex:1;min-height:0;overflow:auto;background:#fff;border:1px solid var(--bd);border-radius:10px}
+body[data-tab=resumo] #resumo{display:block}
+body[data-tab=resumo] .kpis,body[data-tab=resumo] .alert,body[data-tab=resumo] .filters,body[data-tab=resumo] .tw,body[data-tab=resumo] #cnt,body[data-tab=resumo] .grid{display:none!important}
+.rs h3{margin:18px 0 6px;font-size:16px}.rs table{border-collapse:collapse;width:100%;font-size:13px;min-width:0}.rs th{position:static;background:#1B2A4A;color:#fff;padding:6px;text-align:left}.rs td{padding:5px 6px;border-bottom:1px solid #e4e2da}
+@media(min-width:901px){.grid{grid-template-columns:1fr 1.7fr!important}}
+.hmw{display:grid;gap:1px;font-size:9px;min-height:0;overflow:auto;min-width:0;max-width:100%}.grid .card{min-width:0}.grid{min-width:0}.hmw .hl{color:#666;display:flex;align-items:center;justify-content:center}.hmw .hy{justify-content:flex-start}
+.hc{display:flex;align-items:center;justify-content:center;border-radius:3px;color:#1B2A4A;font-weight:700;min-width:0;background:#f0eee8}
+body.nograf .grid{display:none!important}
+
+/* ===== celular ===== */
+@media(max-width:700px){
+html,body{height:auto}body{display:block;overflow:auto;font-size:14px}
+header{padding:8px 12px;display:block}header h1{font-size:15px}header small{font-size:10.5px;margin-top:2px}
+main{display:block;padding:8px 10px;max-width:100%}main>*{margin-bottom:8px!important}
+#up{padding:8px 10px}.uprow{display:block}.uprow>div:first-child{margin-bottom:6px}.uprow .nx{display:block}
+.uprow>div:last-child{display:flex!important;gap:8px;align-items:center}.uprow input[type=file]{flex:1;min-width:0;font-size:12px}
+.pend{flex-wrap:wrap}
+.tabs{margin-bottom:0!important}.tab{flex:1;padding:8px 6px;font-size:13px}
+.kpis{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto;gap:6px;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+.kpi{flex:0 0 112px!important;padding:5px 8px}.kpi b{font-size:18px}.kpi span{font-size:11px}
+.alert{font-size:12px;padding:6px 10px}
+.filters{display:flex;flex-wrap:wrap;gap:6px}.filters input,.filters select{font-size:16px;padding:8px}
+.filters #q{flex:1 1 100%!important;min-width:0!important}.filters select{flex:1 1 calc(50% - 6px);max-width:none;min-width:0}.filters .btn{flex:1}.filters label{flex:1 1 100%;font-size:13px}
+.tw{max-height:none;overflow:visible;border:0;background:transparent;min-height:0}
+table,thead,tbody{display:block;min-width:0;width:100%}thead{display:none}
+tr{display:grid!important;grid-template-columns:1fr 1fr;gap:6px 12px;padding:10px 12px 12px;margin:0 0 10px;border:1px solid var(--bd);border-radius:12px;background:#fff;height:auto!important}
+tr.atraso{border-left:4px solid var(--red)}tr.hoje,tr.due{background:#fffbe8}
+td{display:block!important;border:0!important;padding:0!important;max-width:none!important;min-width:0!important;white-space:normal!important;overflow:visible!important;background:transparent!important;box-shadow:none!important}
+td::before{display:block;font-size:10px;font-weight:700;color:#8a8f98;text-transform:uppercase;letter-spacing:.03em;margin-bottom:1px}
+td:nth-child(1)::before{content:"Horário"}td:nth-child(2)::before{content:"Faltam"}td:nth-child(3)::before{content:"O que fazer"}td:nth-child(5)::before{content:"Especialidade"}td:nth-child(6)::before{content:"Profissional"}td:nth-child(7)::before{content:"Status"}td:nth-child(8)::before{content:"CPF"}td:nth-child(9)::before{content:"Observação"}
+td:nth-child(4){grid-column:1/-1;order:-2;font-size:15px;font-weight:700;color:var(--navy)}
+td:nth-child(1){order:-1}td:nth-child(2){order:-1}
+td:nth-child(3){grid-column:1/-1;order:0;background:#faf7ea!important;border-radius:8px;padding:7px 9px!important}
+td:nth-child(9){grid-column:1/-1}td:nth-child(9):empty{display:none!important}
+td:nth-child(10){grid-column:1/-1;display:flex!important;gap:8px}td:nth-child(10) .btn{flex:1;padding:9px;font-size:13px}
+.ac{min-width:0;max-width:none}.ac b,.ac .nx{display:block;-webkit-line-clamp:unset}.ac .btn{padding:7px 10px;font-size:12px}
+.st{font-size:13px;padding:6px 10px}
+#cnt{margin:0!important}
+.grid{display:block!important;height:auto!important}.grid .card{margin-bottom:8px;min-height:0}.grid .chart{height:230px}.grid .card .hmw{height:340px}
+#resumo{overflow:visible;border-radius:10px}
+.rs h3{font-size:14px}.rs table{display:table;font-size:11.5px}.rs thead{display:table-header-group}.rs tbody{display:table-row-group}.rs tr{display:table-row!important;border:0;padding:0;margin:0;background:transparent}.rs td,.rs th{display:table-cell!important;padding:4px 4px!important;border-bottom:1px solid #e4e2da!important}.rs td::before{content:none!important}.rs th:nth-child(4),.rs td:nth-child(4){display:none!important}
+.rs>div{padding-left:10px!important;padding-right:10px!important}
+.rs td:nth-child(n){background:transparent!important;border-radius:0!important;padding:4px!important;font-size:11.5px!important;font-weight:400!important;color:#333!important;order:0!important}
+footer{padding:8px 10px;font-size:10.5px}
+.box{padding:14px;max-height:90vh}.box input,.box select,.box textarea{font-size:16px}
+}
+</style></head><body>
+<header><div><h1>Painel de Agendamentos — OK Saúde</h1><small id="sub">Telemedicina · Rapidoc</small></div>
+<div id="hdrbtns" style="display:none;gap:6px;flex-wrap:wrap">
+<button class="btn p" onclick="document.getElementById('imp').click()">⟳ Atualizar base (planilha)</button>
+<button class="btn" onclick="openForm()">+ Novo</button>
+<button class="btn" onclick="openRules()">⚙ Regras de ação</button>
+<button class="btn" onclick="exportCsv()">Exportar CSV</button>
+<button class="btn" onclick="backup()">Backup JSON</button>
+<button class="btn" onclick="resetBase()">Restaurar base original</button>
+</div></header>
+<main>
+<section class="card" id="up">
+<div class="uprow"><div><b>Carregar planilha de agendamentos</b> <span class="nx">arraste o arquivo (.xls, .xlsx, .csv) aqui ou escolha ao lado e clique em OK</span></div>
+<div style="display:flex;gap:8px;align-items:center"><input type="file" id="imp" accept=".xls,.xlsx,.csv"><button class="btn mini d" style="padding:5px 10px" onclick="zerar()">Zerar dados</button></div></div>
+<div id="rep"></div></section>
+<div class="tabs"><button id="t_agenda" class="tab on" onclick="setTab('agenda')">Agendamentos</button><button id="t_resumo" class="tab" onclick="setTab('resumo')">Resumo <span id="t_n" class="tn"></span></button></div>
+<div id="resumo"></div>
+<div class="kpis" id="kpis"></div>
+<div class="alert" id="alert"></div>
+<div class="filters">
+<input id="q" placeholder="Buscar paciente, CPF, profissional…" style="flex:1;min-width:120px">
+<select id="fs"></select><select id="fe"></select><select id="fp"></select>
+<select id="fd"><option value="">Todo o período</option><option value="hoje">Hoje</option><option value="amanha">Amanhã</option><option value="7">Próximos 7 dias</option><option value="atraso">Passadas sem baixa</option></select>
+<select id="fa"><option value="">Todas as ações</option><option value="pend">Com ação a executar</option><option value="wait">Aguardando</option></select>
+<button class="btn" onclick="clearF()">Limpar</button>
+<label style="align-self:center"><input type="checkbox" id="cpfv"> mostrar CPF completo</label>
+</div>
+<div class="tw"><table><thead><tr id="th"></tr></thead><tbody id="tb"></tbody></table></div>
+<div style="display:flex;justify-content:space-between;align-items:center;flex:none"><div id="cnt" style="margin:0;color:#666;font-size:12px"></div><button class="btn mini" id="gtog" onclick="togGraf()">Ocultar gráficos</button></div>
+<div class="grid">
+<div class="card"><h3>Por especialidade</h3><div class="chart"><canvas id="c2"></canvas></div></div>
+<div class="card"><h3>Mapa de calor: data × horário <span class="nx" id="hmleg"></span></h3><div class="chart hmw" id="hm"></div></div>
+</div>
+</main>
+<footer>Contém dados pessoais (LGPD): compartilhe com cuidado. · <a href="#" onclick="openSync();return false" id="syncst">☁ Sincronização: não configurada</a></footer>
+<div class="modal" id="m"><div class="box" id="mb"></div></div>
+<script>
+const STS={"Agendada":"#2f6fb5","Confirmada":"#1f9d8b","Realizada":"#2e8b57","Não compareceu":"#c0392b","Cancelada":"#8a8f98","Reagendada":"#E6A100"};
+const SEED=[];
+const KEY="okSaudeAgendamentos_v1";
+let D=load(),sort={k:"dt",d:1};
+function load(){try{const s=localStorage.getItem(KEY);if(s)return JSON.parse(s)}catch(e){}return JSON.parse(JSON.stringify(SEED))}
+const UKEY="okSaudeAtualizadoEm_v1",SKEY="okSaudeSync_v1";
+function upd(){try{return +localStorage.getItem(UKEY)||0}catch(e){return 0}}
+function touch(){try{localStorage.setItem(UKEY,String(Date.now()))}catch(e){}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(D))}catch(e){}touch();schedulePush()}
+function saveRules(){try{localStorage.setItem(RKEY,JSON.stringify(RULES))}catch(e){}touch();schedulePush()}
+/* ---- sincronização com Google Sheets (Apps Script) ---- */
+function syncCfg(){try{return JSON.parse(localStorage.getItem(SKEY))}catch(e){return null}}
+function syncMsg(s){const e=document.getElementById("syncst");if(e)e.textContent="☁ Sincronização: "+s}
+let pushT=null;
+function schedulePush(){if(!syncCfg())return;clearTimeout(pushT);pushT=setTimeout(push,1500)}
+async function push(){const c=syncCfg();if(!c)return;syncMsg("enviando…");
+ try{const r=await fetch(c.url,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({k:c.key,updatedAt:upd()||Date.now(),data:D,rules:RULES})});const j=await r.json();
+  if(!j.ok)throw new Error(j.erro||"erro");syncMsg("ok · "+new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"}))}catch(e){syncMsg("falhou (dados seguem salvos neste navegador)")}}
+async function pull(){const c=syncCfg();if(!c)return;syncMsg("sincronizando…");
+ try{const r=await fetch(c.url+(c.url.includes("?")?"&":"?")+"k="+encodeURIComponent(c.key));const j=await r.json();if(!j.ok)throw new Error(j.erro||"erro");
+  if(j.updatedAt>upd()&&(j.data||[]).length){D=j.data;if(j.rules&&j.rules.length)RULES=j.rules;try{localStorage.setItem(KEY,JSON.stringify(D));localStorage.setItem(RKEY,JSON.stringify(RULES));localStorage.setItem(UKEY,String(j.updatedAt))}catch(e){}render();syncMsg("ok · dados da nuvem carregados")}
+  else if(D.length||j.updatedAt===0){await push()}else syncMsg("ok")}catch(e){syncMsg("falhou (usando dados deste navegador)")}}
+function openSync(){const c=syncCfg()||{url:"",key:""};$("mb").innerHTML=`<h3 style="margin:0;color:#1B2A4A">Sincronização (Google Sheets)</h3>
+ <p style="color:#666;font-size:12px;margin:4px 0">Guarda os dados numa planilha Google e permite o relatório diário das 08h. Cole o endereço do Apps Script (termina em /exec) e a chave definida no script.</p>
+ <label>URL do Apps Script</label><input id="s_url" value="${esc(c.url)}" placeholder="https://script.google.com/macros/s/.../exec">
+ <label>Chave de acesso</label><input id="s_key" type="password" value="${esc(c.key)}">
+ <div style="display:flex;gap:8px;justify-content:space-between;margin-top:14px"><button class="btn d" onclick="try{localStorage.removeItem(SKEY)}catch(e){};syncMsg('não configurada');closeM()">Desconectar</button>
+ <div><button class="btn" onclick="closeM()">Cancelar</button> <button class="btn p" onclick="const u=$('s_url').value.trim(),k=$('s_key').value.trim();if(!u||!k){alert('Informe a URL e a chave.');return}try{localStorage.setItem(SKEY,JSON.stringify({url:u,key:k}))}catch(e){};closeM();pull()">Salvar e sincronizar</button></div></div>`;$("m").classList.add("on")}
+const $=id=>document.getElementById(id);
+const pad=n=>String(n).padStart(2,"0");
+const iso=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+let TODAY=iso(new Date());
+const fmt=s=>s?`${s.slice(8,10)}/${s.slice(5,7)}/${s.slice(0,4)} ${s.slice(11,16)}`:"";
+const fmtD=s=>`${s.slice(8,10)}/${s.slice(5,7)}`;
+const addDays=(n)=>{const d=new Date();d.setDate(d.getDate()+n);return iso(d)};
+const open=r=>["Agendada","Confirmada","Reagendada"].includes(r.status);
+const late=r=>open(r)&&r.dt.slice(0,16)<new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,16);
+const mask=c=>{c=String(c).replace(/\D/g,"").padStart(11,"0");return "***."+c.slice(3,6)+"."+c.slice(6,9)+"-**"};
+const fcpf=c=>{c=String(c).replace(/\D/g,"").padStart(11,"0");return `${c.slice(0,3)}.${c.slice(3,6)}.${c.slice(6,9)}-${c.slice(9)}`};
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function fill(sel,label,arr){const v=sel.value;sel.innerHTML=`<option value="">${label}</option>`+arr.map(a=>`<option>${esc(a)}</option>`).join("");sel.value=arr.includes(v)?v:""}
+function uniq(k){return [...new Set(D.map(r=>r[k]))].sort((a,b)=>a.localeCompare(b,"pt"))}
+const DEFR=[
+{id:"r0",on:true,kind:"criar",h:48,txt:"Ao agendar: enviar a confirmação do agendamento com o link do paciente",cond:"todas",fx:"",msg:"m1"},
+{id:"r1",on:true,kind:"horas",h:72,txt:"72h: lembrar da consulta e pedir que responda CONFIRMO",cond:"naoconf",fx:"",msg:"m2"},
+{id:"r2",on:true,kind:"horas",h:48,txt:"48h sem resposta: cancelar o agendamento e avisar o paciente",cond:"naoconf",fx:"cancel",msg:"m3"},
+{id:"r3",on:true,kind:"dia",h:0,txt:"Hoje: lembrar o horário da consulta e reenviar o link",cond:"conf",fx:"",msg:"m4"}];
+const MSG={
+m1:`Olá, {nome}! 👋
+
+Sua consulta de *{especialidade}* pela OK Saúde foi agendada:
+
+📅 Data: {data}
+🕒 Horário: {hora}
+👨‍⚕️ Profissional: {profissional}
+
+Guarde o link da sua consulta:
+🔗 {link}
+
+Próximo passo: próximo ao dia da consulta vamos pedir a sua confirmação de presença. Qualquer dúvida, estamos à disposição!`,
+m2:`Olá, {nome}! Tudo bem?
+
+Passando para lembrar da sua consulta de *{especialidade}* com {profissional}:
+📅 {data} às {hora}
+
+Para mantermos o seu horário reservado, *responda CONFIRMO* a esta mensagem.
+
+⚠️ Se não recebermos sua confirmação até {prazo}, o agendamento será cancelado para liberar o horário a outro paciente. Se preferir reagendar, é só nos avisar.`,
+m3:`Olá, {nome}.
+
+Como não recebemos a confirmação da sua consulta de *{especialidade}* ({data} às {hora}), o agendamento foi *cancelado* para liberar o horário.
+
+Se ainda tiver interesse na consulta, é só responder esta mensagem que providenciamos um novo agendamento. Estamos à disposição!`,
+m4:`Bom dia, {nome}! ☀️
+
+Hoje é o dia da sua consulta de *{especialidade}* com {profissional}, às *{hora}*.
+
+Acesse pelo link no horário:
+🔗 {link}
+
+Dica: entre alguns minutos antes, em um local silencioso, com boa internet e com câmera e microfone liberados. Até já!`};
+function fillMsg(key,r){const d=new Date(Date.parse(r.dt)-((RULES.find(x=>x.fx==="cancel")||{h:48}).h)*36e5);
+ const nome=(r.nome.split(" ")[0]||"").toLowerCase().replace(/^./,c=>c.toUpperCase());
+ const v={nome,especialidade:r.esp,data:fmt(r.dt).slice(0,10),hora:r.dt.slice(11,16),profissional:r.prof,link:r.link||"(link indisponível)",prazo:`${pad(d.getDate())}/${pad(d.getMonth()+1)} às ${pad(d.getHours())}:${pad(d.getMinutes())}`};
+ return (MSG[key]||"").replace(/\{(\w+)\}/g,(m,k)=>v[k]??m)}
+function toast(s){let e=$("toast");if(!e){e=document.createElement("div");e.id="toast";document.body.appendChild(e)}e.textContent=s;e.className="toast on";clearTimeout(toast.t);toast.t=setTimeout(()=>e.className="toast",2200)}
+function copyMsg(id,key){const r=D.find(x=>x.id===id),txt=fillMsg(key,r);
+ (navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(()=>toast("Mensagem copiada: cole no WhatsApp"),()=>prompt("Copie a mensagem:",txt))}
+const RKEY="okSaudeRegras_v2",IKEY="okSaudeUltimaBase_v1";
+let RULES=(()=>{try{const s=localStorage.getItem(RKEY);if(s)return JSON.parse(s)}catch(e){}return JSON.parse(JSON.stringify(DEFR))})();
+const POST={id:"post",txt:"Horário já passou: dar baixa (Realizada ou Não compareceu)",post:true};
+const condOk=(x,r)=>x.cond==="todas"||(x.cond==="conf"?r.status==="Confirmada":r.status!=="Confirmada");
+const hrs=r=>(Date.parse(r.dt)-Date.now())/36e5;
+const isDue=(x,r,h)=>{if(!x.on||!condOk(x,r)||(r.done&&r.done[x.id]))return false;
+ if(x.kind==="criar")return !r.criado||(Date.now()-Date.parse(r.criado))/36e5<=x.h;
+ if(x.kind==="dia")return h>=0&&r.dt.slice(0,10)===TODAY;
+ return h<=x.h};
+function act(r){if(!open(r))return null;const h=hrs(r);if(h<0)return POST;
+ const rs=RULES.filter(x=>isDue(x,r,h));
+ return rs.find(x=>x.kind==="criar")||rs.sort((a,b)=>(a.kind==="dia"?-1:a.h)-(b.kind==="dia"?-1:b.h))[0]||null}
+function nextRule(r){if(!open(r))return null;const h=hrs(r);if(h<0)return null;let best=null;
+ RULES.forEach(x=>{if(!x.on||x.kind==="criar"||!condOk(x,r)||(r.done&&r.done[x.id]))return;let wait;
+  if(x.kind==="dia"){if(r.dt.slice(0,10)===TODAY)return;wait=Date.parse(r.dt.slice(0,10)+"T00:00")-Date.now()}else{if(h<=x.h)return;wait=(h-x.h)*36e5}
+  if(wait>0&&(!best||wait<best.wait))best={x,wait}});return best}
+const dur=ms=>{const m=Math.max(0,Math.floor(ms/6e4)),d=Math.floor(m/1440),h=Math.floor(m%1440/60);return d?`${d}d ${h}h`:h?`${h}h ${m%60}min`:`${m}min`};
+function cd(r){if(!open(r))return null;const ms=Date.parse(r.dt)-Date.now();
+ const dd=Math.round((Date.parse(r.dt.slice(0,10)+"T00:00")-Date.parse(TODAY+"T00:00"))/864e5);
+ if(ms<0)return{t:"Vencida",s:"há "+dur(-ms),c:"neg"};
+ if(dd===0)return{t:"Hoje",s:"em "+dur(ms),c:"hot"};
+ if(dd===1)return{t:"1 dia",s:"amanhã · "+dur(ms),c:"hot"};
+ return{t:dd+" dias",s:"em "+dur(ms),c:""}}
+function acaoCell(r){const a=act(r);
+ if(a){const btn=a.post?`<button class="btn mini" onclick="setSt('${r.id}','Realizada')">Realizada</button> <button class="btn mini d" onclick="setSt('${r.id}','Não compareceu')">Não compareceu</button>`
+  :`${a.msg?`<button class="btn mini" onclick="copyMsg('${r.id}','${a.msg}')">Copiar mensagem</button> `:""}<button class="btn mini p" onclick="doAct('${r.id}','${a.id}')">${a.fx==="cancel"?"Cancelar consulta":"Feito"}</button>`;
+  return `<div class="ac ${a.post?"post":a.fx==="cancel"?"cx":"due"}"><b>${esc(a.txt)}</b>${btn}</div>`}
+ if(!open(r))return "—";const n=nextRule(r);
+ return `<div class="ac"><b style="color:#2e8b57">Aguardar</b>${n?`<span class="nx">Próxima: ${esc(n.x.txt)} em ${dur(n.wait)}</span>`:""}</div>`}
+function doAct(id,rid){const r=D.find(x=>x.id===id),x=RULES.find(y=>y.id===rid);if(!x)return;
+ if(x.fx==="cancel"&&!confirm("Cancelar a consulta de "+r.nome+"?"))return;
+ r.done=r.done||{};r.done[rid]=new Date().toISOString();if(x.fx==="cancel")r.status="Cancelada";save();render()}
+const sv=(r,k)=>k==="falta"?r.dt:k==="acao"?(a=>a?(a.post?0:1+a.h/1000):9)(act(r)):(r[k]??"");
+function filtered(){
+ const q=$("q").value.toLowerCase(),s=$("fs").value,e=$("fe").value,p=$("fp").value,d=$("fd").value;
+ return D.filter(r=>{
+  if(q&&!(r.nome+" "+r.cpf+" "+r.prof+" "+r.esp+" "+(r.obs||"")).toLowerCase().includes(q))return false;
+  if(s&&r.status!==s)return false;if(e&&r.esp!==e)return false;if(p&&r.prof!==p)return false;
+  const day=r.dt.slice(0,10);
+  if(d==="hoje"&&day!==TODAY)return false;if(d==="amanha"&&day!==addDays(1))return false;
+  if(d==="7"&&!(day>=TODAY&&day<=addDays(7)))return false;if(d==="atraso"&&!late(r))return false;
+  const fa=$("fa").value;if(fa==="pend"&&!act(r))return false;if(fa==="wait"&&(act(r)||!open(r)))return false;
+  return true}).sort((a,b)=>{const x=sv(a,sort.k),y=sv(b,sort.k);return (x>y?1:x<y?-1:0)*sort.d});
+}
+const COLS=[["dt","Horário"],["falta","Faltam"],["acao","O que fazer"],["nome","Paciente"],["esp","Especialidade"],["prof","Profissional"],["status","Status"],["cpf","CPF"],["obs","Observação"],["","Ações"]];
+let ch={};
+function render(){
+ TODAY=iso(new Date());
+ fill($("fs"),"Todos os status",Object.keys(STS));fill($("fe"),"Todas as especialidades",uniq("esp"));fill($("fp"),"Todos os profissionais",uniq("prof"));
+ $("th").innerHTML=COLS.map(([k,l])=>`<th ${k?`onclick="sortBy('${k}')"`:""}>${l}${sort.k===k?(sort.d>0?" ▲":" ▼"):""}</th>`).join("");
+ const L=filtered(),show=$("cpfv").checked;
+ $("tb").innerHTML=L.map(r=>{const c=cd(r);return `<tr class="${r.dt.slice(0,10)===TODAY?"hoje":""} ${late(r)?"atraso":""} ${act(r)&&!act(r).post?"due":""}">
+ <td style="white-space:nowrap"><b>${fmt(r.dt)}</b></td><td class="cdn ${c?c.c:""}">${c?`<b>${c.t}</b><small>${c.s}</small>`:"—"}</td><td>${acaoCell(r)}</td>
+ <td>${esc(r.nome)}${r.ausente?`<br><span class="aus" title="Não veio na última planilha: possível cancelamento ou reagendamento no Rapidoc. Verifique.">⚠ fora da última base</span>`:""}</td><td>${esc(r.esp)}</td><td>${esc(r.prof)}</td>
+ <td><select class="st" style="background:${STS[r.status]}" onchange="setSt('${r.id}',this.value)">${Object.keys(STS).map(s=>`<option ${s===r.status?"selected":""}>${s}</option>`).join("")}</select></td>
+ <td style="white-space:nowrap">${show?fcpf(r.cpf):mask(r.cpf)}</td><td style="min-width:130px">${esc(r.obs)}</td>
+ <td style="white-space:nowrap"><button class="btn mini" onclick="cp('${r.id}')">Copiar link</button> <button class="btn mini" onclick="openForm('${r.id}')">Editar</button></td></tr>`}).join("")||`<tr><td colspan="10" style="text-align:center;padding:20px">Nenhum agendamento encontrado.</td></tr>`;
+ let li=null;try{li=JSON.parse(localStorage.getItem(IKEY))}catch(e){}
+ $("sub").textContent="Telemedicina · Rapidoc · data-base: hoje "+fmt(TODAY+"T00:00").slice(0,10)+" · "+(li?"base atualizada em "+new Date(li.at).toLocaleString("pt-BR",{dateStyle:"short",timeStyle:"short"}):(D.length?"base: planilha original":"nenhuma base carregada"));
+ $("cnt").textContent=`${L.length} de ${D.length} agendamentos`;
+ // KPIs
+ const t=D.length,hj=D.filter(r=>r.dt.slice(0,10)===TODAY).length,s7=D.filter(r=>open(r)&&r.dt.slice(0,10)>=TODAY&&r.dt.slice(0,10)<=addDays(7)).length;
+ const pend=D.filter(r=>r.status==="Agendada"&&r.dt.slice(0,10)>=TODAY).length,at=D.filter(late).length;
+ const real=D.filter(r=>r.status==="Realizada").length,nc=D.filter(r=>r.status==="Não compareceu").length,canc=D.filter(r=>r.status==="Cancelada").length;
+ const tx=(real+nc)?Math.round(nc/(real+nc)*100)+"%":"—";
+ const ap=D.filter(r=>act(r)&&!act(r).post).length,cx=D.filter(r=>{const a=act(r);return a&&a.fx==="cancel"}).length;
+ const K=[["Total",t,"",""],["Hoje",hj,"fd","hoje"],["Próx. 7 dias",s7,"fd","7"],["Ações a executar",ap,"fa","pend",ap?"w":""],["Para cancelar",cx,"fa","pend",cx?"w":""],["A confirmar",pend,"fs","Agendada"],["Passadas sem baixa",at,"fd","atraso",at?"w":""],["Realizadas",real,"fs","Realizada"],["Taxa de falta",tx,"fs","Não compareceu"],["Canceladas",canc,"fs","Cancelada"]];
+ $("kpis").innerHTML=K.map(k=>`<div class="kpi ${k[4]||""}" onclick="kf('${k[2]}','${k[3]}')"><b>${k[1]}</b><span>${k[0]}</span></div>`).join("");
+ const al=$("alert");al.style.display=at?"block":"none";al.innerHTML=`⚠ <b>${at}</b> agendamento(s) com horário vencido ainda sem baixa. <a href="#" onclick="kf('fd','atraso');return false">Ver e atualizar status</a>`;
+  charts();heatmap();renderResumo();
+}
+function heatmap(){const el=$("hm");if(!el)return;const rows=D.filter(r=>r.status!=="Cancelada"&&r.dt);
+ const DS=["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"],map={};let hs=rows.map(r=>+r.dt.slice(11,13)),mx=0;
+ rows.forEach(r=>{const d=r.dt.slice(0,10),h=+r.dt.slice(11,13);((map[d]=map[d]||{})[h]=map[d][h]||[]).push(r.nome)});
+ const days=Object.keys(map).sort();let a=Math.min(8,...hs),z=Math.max(18,...hs);if(!rows.length){a=8;z=18}
+ days.forEach(d=>Object.values(map[d]).forEach(l=>mx=Math.max(mx,l.length)));
+ const N=days.length,H=z-a+1;el.style.gridTemplateColumns=`56px repeat(${H},minmax(0,1fr))`;el.style.gridTemplateRows=`14px repeat(${Math.max(N,1)},minmax(10px,1fr))`;
+ const wd=d=>DS[new Date(+d.slice(0,4),+d.slice(5,7)-1,+d.slice(8,10)).getDay()];
+ let h='<div class="hl"></div>';
+ for(let i=a;i<=z;i++)h+=`<div class="hl">${String(i).padStart(2,"0")}h</div>`;
+ days.forEach(d=>{h+=`<div class="hl hy" style="white-space:nowrap;${d===TODAY?"font-weight:700;color:#1B2A4A;":""}">${d.slice(8,10)}/${d.slice(5,7)} ${wd(d)}${d===TODAY?" •":""}</div>`;
+  for(let i=a;i<=z;i++){const hh=String(i).padStart(2,"0")+"h",l=(map[d]||{})[i]||[],v=l.length;
+   h+=v?`<div class="hc" style="background:rgba(230,161,0,${(.25+.75*v/mx).toFixed(2)});${v/mx>.7?"color:#fff;":""}" title="${wd(d)} ${d.slice(8,10)}/${d.slice(5,7)} às ${hh} — ${v} consulta(s):&#10;${l.map(esc).join("&#10;")}">${v}</div>`:`<div class="hc"></div>`}});
+ el.innerHTML=h;$("hmleg").textContent=rows.length?`· escuro = mais (máx. ${mx})`:"· sem dados"}
+function togGraf(){const on=!document.body.classList.contains("nograf");document.body.classList.toggle("nograf",on);try{localStorage.setItem("okSaudeGraf",on?"1":"")}catch(e){}$("gtog").textContent=on?"Mostrar gráficos":"Ocultar gráficos";if(!on){charts();heatmap()}}
+function setTab(k){document.body.dataset.tab=k;$("t_agenda").classList.toggle("on",k==="agenda");$("t_resumo").classList.toggle("on",k==="resumo");try{if(k==="agenda"){charts();heatmap()}}catch(e){}}
+function zerar(){if(!confirm("Zerar TODOS os dados do painel (agendamentos, status e ações marcadas)?\n\nSe a sincronização estiver ativa, a base na nuvem também será zerada. Depois, carregue a nova planilha."))return;
+ D=[];PEND=null;try{localStorage.removeItem(IKEY)}catch(e){}save();render();showPend();toast("Dados zerados. Carregue a nova planilha.")}
+function renderResumo(){
+ const rows=D.filter(open),groups={},order=[],hoje=[];
+ rows.forEach(r=>{if(r.dt.slice(0,10)===TODAY)hoje.push(r);const a=act(r);if(!a)return;if(!groups[a.id]){groups[a.id]={a,rows:[]};order.push(a.id)}groups[a.id].rows.push({r,h:hrs(r)})});
+ const pri=id=>id==="post"?-2:(groups[id].a.fx==="cancel"?-1:RULES.findIndex(x=>x.id===id));order.sort((x,y)=>pri(x)-pri(y));
+ const total=order.reduce((s,id)=>s+groups[id].rows.length,0),nAcoes=order.filter(id=>id!=="post").reduce((s,id)=>s+groups[id].rows.length,0);
+ const sh=s=>s.slice(8,10)+"/"+s.slice(5,7)+" "+s.slice(11,16);
+ const tbl=(L,ex)=>`<table><tr><th>Horário</th><th>Paciente</th><th>Especialidade</th><th>Profissional</th><th>${ex}</th></tr>${L.map(x=>{const r=x.r||x;return `<tr><td style="white-space:nowrap">${sh(r.dt)}</td><td>${esc(r.nome)}</td><td>${esc(r.esp)}</td><td>${esc(r.prof)}</td><td style="white-space:nowrap">${x.r?(x.h<0?"vencida":dur(x.h*36e5)):esc(r.status)}</td></tr>`}).join("")}</table>`;
+ let li=null;try{li=JSON.parse(localStorage.getItem(IKEY))}catch(e){}
+ let h=`<div class="rs"><div style="background:#1B2A4A;color:#fff;padding:12px 18px;border-bottom:4px solid #FFC400;border-radius:10px 10px 0 0"><b style="font-size:17px">Agendamentos OK Saúde — ações de hoje</b><br><span style="font-size:12px;color:#cfd5e3">${fmt(TODAY+"T00:00").slice(0,5)} · base atualizada em ${li?new Date(li.at).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}):"—"}</span></div><div style="padding:4px 18px 18px">`
+ +`<p style="font-size:14px"><b>${total}</b> ação(ões) a executar · <b>${hoje.length}</b> consulta(s) hoje · <b>${rows.length}</b> agendamento(s) em aberto.</p>`;
+ if(!order.length)h+=`<p style="background:#eef7f1;padding:10px;border-radius:6px">${D.length?"Nenhuma ação pendente para hoje.":"Nenhuma base carregada. Carregue a planilha de agendamentos."}</p>`;
+ order.forEach(id=>{const g=groups[id],cor=id==="post"?"#1B2A4A":(g.a.fx==="cancel"?"#c0392b":"#8a5a00");g.rows.sort((p,q)=>p.h-q.h);
+  h+=`<h3 style="color:${cor}">${esc(g.a.txt)} (${g.rows.length})</h3>`+tbl(g.rows,"Faltam")});
+ if(hoje.length){hoje.sort((p,q)=>p.dt<q.dt?-1:1);h+=`<h3 style="color:#1B2A4A">Agenda de hoje (${hoje.length})</h3>`+tbl(hoje,"Status")}
+ $("resumo").innerHTML=h+"</div></div>";$("t_n").textContent=nAcoes||"";}
+function kf(id,v){if(!id)return;setTab('agenda');clearF(true);$(id).value=v;render();$("tb").scrollIntoView({behavior:"smooth"})}
+function clearF(nr){["q","fs","fe","fp","fd","fa"].forEach(i=>$(i).value="");if(!nr)render()}
+function sortBy(k){sort=sort.k===k?{k,d:-sort.d}:{k,d:1};render()}
+function setSt(id,s){const r=D.find(x=>x.id===id);r.status=s;save();render()}
+function cp(id){const r=D.find(x=>x.id===id);navigator.clipboard?.writeText(r.link||"").then(()=>alert("Link do paciente copiado."),()=>prompt("Copie o link:",r.link))}
+function mk(id,type,labels,data,colors,opt={}){ch[id]?.destroy();ch[id]=new Chart($(id),{type,data:{labels,datasets:[{data,backgroundColor:colors,borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:type==="doughnut",position:"right"}},...opt}})}
+function charts(){
+ const be={};D.forEach(r=>be[r.esp]=(be[r.esp]||0)+1);const ek=Object.keys(be).sort((a,b)=>be[b]-be[a]);
+ mk("c2","bar",ek,ek.map(k=>be[k]),"#1B2A4A",{indexAxis:"y",scales:{x:{beginAtZero:true,ticks:{precision:0}},y:{ticks:{autoSkip:false,font:{size:10}}}}});
+}
+function openForm(id){
+ const r=id?D.find(x=>x.id===id):{nome:"",cpf:"",esp:"",prof:"",dt:TODAY+"T08:00",status:"Agendada",obs:"",link:""};
+ $("mb").innerHTML=`<h3 style="margin:0;color:#1B2A4A">${id?"Editar":"Novo"} agendamento</h3>
+ <label>Paciente</label><input id="f_nome" value="${esc(r.nome)}">
+ <label>CPF</label><input id="f_cpf" value="${esc(r.cpf)}">
+ <label>Especialidade</label><input id="f_esp" list="le" value="${esc(r.esp)}"><datalist id="le">${uniq("esp").map(e=>`<option>${esc(e)}`).join("")}</datalist>
+ <label>Profissional</label><input id="f_prof" list="lp" value="${esc(r.prof)}"><datalist id="lp">${uniq("prof").map(e=>`<option>${esc(e)}`).join("")}</datalist>
+ <label>Data e hora</label><input type="datetime-local" id="f_dt" value="${r.dt.slice(0,16)}">
+ <label>Status</label><select id="f_st">${Object.keys(STS).map(s=>`<option ${s===r.status?"selected":""}>${s}</option>`).join("")}</select>
+ <label>Link do paciente</label><input id="f_link" value="${esc(r.link)}">
+ <label>Observação</label><textarea id="f_obs" rows="2">${esc(r.obs)}</textarea>
+ <div style="display:flex;gap:8px;justify-content:space-between;margin-top:14px"><div>${id?`<button class="btn d" onclick="del('${id}')">Excluir</button>`:""}</div>
+ <div><button class="btn" onclick="closeM()">Cancelar</button> <button class="btn p" onclick="saveF('${id||""}')">Salvar</button></div></div>`;
+ $("m").classList.add("on")}
+function ruleRow(x){const k=x.kind||"horas";return `<div class="rl" data-id="${x.id}" data-msg="${x.msg||""}"><div class="row"><label><input type="checkbox" class="r_on" ${x.on?"checked":""}> Ativa</label>
+ <select class="r_k"><option value="criar" ${k==="criar"?"selected":""}>Ao agendar (até N h após a criação)</option><option value="horas" ${k==="horas"?"selected":""}>Faltando até N h</option><option value="dia" ${k==="dia"?"selected":""}>No dia da consulta</option></select> N = <input type="number" min="0" step="0.5" class="r_h" value="${x.h}"> h</div>
+ <div class="row"><input class="r_t" style="flex:1" value="${esc(x.txt)}"></div>
+ <div class="row"><select class="r_c"><option value="todas" ${x.cond==="todas"?"selected":""}>Todas as consultas</option><option value="naoconf" ${x.cond==="naoconf"?"selected":""}>Só não confirmadas</option><option value="conf" ${x.cond==="conf"?"selected":""}>Só confirmadas</option></select>
+ <select class="r_f"><option value="" ${!x.fx?"selected":""}>Apenas lembrar</option><option value="cancel" ${x.fx==="cancel"?"selected":""}>Cancela a consulta ao executar</option></select>
+ <button class="btn mini d" onclick="this.closest('.rl').remove()">Remover</button></div></div>`}
+function collectRules(){return [...document.querySelectorAll("#rl .rl")].map(e=>({id:e.dataset.id,msg:e.dataset.msg||"",on:e.querySelector(".r_on").checked,kind:e.querySelector(".r_k").value,h:parseFloat(e.querySelector(".r_h").value)||0,txt:e.querySelector(".r_t").value.trim(),cond:e.querySelector(".r_c").value,fx:e.querySelector(".r_f").value})).filter(x=>x.txt)}
+function openRules(list){const L=list||RULES;$("mb").innerHTML=`<h3 style="margin:0;color:#1B2A4A">Regras de ação</h3>
+ <p style="color:#666;font-size:12px;margin:4px 0">Definem o "O que fazer" de cada paciente conforme o momento da consulta (ao agendar, horas antes ou no dia). Cada regra com mensagem tem o botão “Copiar mensagem” já preenchida com os dados do paciente. Vale a regra mais próxima do horário que já tenha vencido e ainda não tenha sido marcada como feita. Após o horário, o painel pede a baixa (Realizada / Não compareceu).</p>
+ <div id="rl">${L.map(ruleRow).join("")}</div>
+ <button class="btn mini" style="margin-top:8px" onclick="const c=collectRules();c.push({id:'x'+Date.now(),on:true,kind:'horas',h:12,txt:'Nova ação',cond:'todas',fx:'',msg:''});openRules(c)">+ Adicionar regra</button>
+ <div style="display:flex;gap:8px;justify-content:space-between;margin-top:14px"><button class="btn" onclick="openRules(JSON.parse(JSON.stringify(DEFR)))">Restaurar padrão</button>
+ <div><button class="btn" onclick="closeM()">Cancelar</button> <button class="btn p" onclick="RULES=collectRules();saveRules();closeM();render()">Salvar</button></div></div>`;$("m").classList.add("on")}
+function closeM(){$("m").classList.remove("on")}
+function saveF(id){
+ const o={nome:$("f_nome").value.trim(),cpf:$("f_cpf").value.replace(/\D/g,""),esp:$("f_esp").value.trim(),prof:$("f_prof").value.trim(),dt:$("f_dt").value,status:$("f_st").value,link:$("f_link").value.trim(),obs:$("f_obs").value.trim()};
+ if(!o.nome||!o.dt||!o.esp){alert("Informe paciente, especialidade e data/hora.");return}
+ if(id){const e=D.find(x=>x.id===id);if(e.dt!==o.dt)e.done={};Object.assign(e,o)}else D.push({id:"n"+Date.now(),manual:true,criado:iso(new Date())+"T"+pad(new Date().getHours())+":"+pad(new Date().getMinutes()),...o});
+ save();closeM();render()}
+function del(id){if(confirm("Excluir este agendamento?")){D=D.filter(x=>x.id!==id);save();closeM();render()}}
+function resetBase(){if(confirm("Descartar todas as alterações e voltar à base original?")){D=JSON.parse(JSON.stringify(SEED));save();render()}}
+function dl(name,txt,type){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([txt],{type}));a.download=name;a.click()}
+function exportCsv(){const h=["Nome","CPF","Status","Especialidade","Profissional","Horário agendado","Observação","Link do paciente"];
+ const q=v=>`"${String(v??"").replace(/"/g,'""')}"`;
+ dl("agendamentos_oksaude.csv","﻿"+[h.join(";")].concat(filtered().map(r=>[r.nome,r.cpf,r.status,r.esp,r.prof,fmt(r.dt),r.obs,r.link].map(q).join(";"))).join("\n"),"text/csv")}
+function backup(){dl("backup_agendamentos_"+TODAY+".json",JSON.stringify(D),"application/json")}
+function toIso(s){const m=String(s).match(/(\d{2})\/(\d{2})\/(\d{4})\s+(\d{2}):(\d{2})/);return m?`${m[3]}-${m[2]}-${m[1]}T${m[4]}:${m[5]}`:""}
+let PEND=null;
+async function loadFile(f){if(!f)return;
+ let rows;try{const wb=XLSX.read(await f.arrayBuffer(),{type:"array",raw:true});rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:"",raw:false})}catch(err){alert("Não foi possível ler o arquivo.");return}
+ const ok=rows.filter(x=>toIso(x["Horário agendado"])&&x["Nome"]);
+ if(!ok.length){alert("Nenhuma linha válida encontrada. Confira se é a planilha de agendamentos (colunas Nome, CPF, Status, Especialidade, Profissional, Horário agendado, Link do paciente).");return}
+ PEND={name:f.name,rows:ok};showPend()}
+function showPend(){const el=$("rep");if(!PEND){el.innerHTML="";return}
+ el.innerHTML=`<div class="pend"><span>📄 <b>${esc(PEND.name)}</b> — ${PEND.rows.length} agendamento(s). Ao clicar em OK, a base atual é <b>substituída</b>; quem já está no painel mantém o status.</span> <button class="btn p mini" onclick="confirmLoad()">OK</button> <button class="btn mini" onclick="PEND=null;showPend()">Cancelar</button></div>`}
+function confirmLoad(){if(!PEND)return;
+ const norm=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/\s+/g," ").trim();
+ const old=D.slice(),used=new Set(),out=[];let n=0,mant=0;
+ PEND.rows.forEach(x=>{const dt=toIso(x["Horário agendado"]),nome=String(x["Nome"]).trim(),nn=norm(nome),esp=x["Especialidade"];
+  const cpf=String(x["CPF"]).replace(/\D/g,"").padStart(11,"0"),link=x["Link do paciente"]||"";
+  const free=old.filter(o=>!used.has(o.id));
+  const m=free.find(o=>link&&o.link===link)||free.find(o=>norm(o.nome)===nn&&o.dt===dt)||free.find(o=>norm(o.nome)===nn&&o.esp===esp)||free.find(o=>norm(o.nome)===nn);
+  if(m){used.add(m.id);mant++;
+   out.push({...m,cpf,esp:esp||m.esp,prof:x["Profissional"]||m.prof,dt,link:link||m.link,criado:m.criado||toIso(x["Criado em"]),done:m.dt===dt?(m.done||{}):{},ausente:false})}
+  else out.push({id:"i"+Date.now()+"_"+(n++),nome,cpf,esp,prof:x["Profissional"],dt,status:STS[x["Status"]]?x["Status"]:"Agendada",link,obs:"",criado:toIso(x["Criado em"])})});
+ D=out;
+ try{localStorage.setItem(IKEY,JSON.stringify({at:Date.now(),n:out.length,mant}))}catch(_){}
+ PEND=null;save();render();showPend()}
+$("imp").onchange=async e=>{await loadFile(e.target.files[0]);e.target.value=""};
+const up=$("up");["dragenter","dragover"].forEach(v=>up.addEventListener(v,e=>{e.preventDefault();up.style.background="#fff8e1"}));
+["dragleave","drop"].forEach(v=>up.addEventListener(v,e=>{e.preventDefault();up.style.background=""}));
+up.addEventListener("drop",e=>loadFile(e.dataTransfer.files[0]));
+$("m").onclick=e=>{if(e.target.id==="m")closeM()};
+["q","fs","fe","fp","fd","fa","cpfv"].forEach(i=>$(i).addEventListener("input",render));
+setInterval(()=>{if(!$("m").classList.contains("on")&&document.activeElement.tagName!=="SELECT"&&document.activeElement.tagName!=="INPUT")render()},60000);
+document.body.dataset.tab='agenda';try{if(localStorage.getItem('okSaudeGraf')){document.body.classList.add('nograf');$('gtog').textContent='Mostrar gráficos'}}catch(e){}render();showPend();if(syncCfg())pull();else syncMsg('não configurada');
+</script></body></html>
