@@ -35,6 +35,25 @@ tr.due td{background:#fff8e1}.cdn{white-space:nowrap}.cdn b{display:block;font-s
 .rl{border:1px solid var(--bd);border-radius:8px;padding:8px;margin-top:8px}.rl .row{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:4px}.rl input[type=number]{width:70px}
 footer{text-align:center;color:#777;font-size:12px;padding:16px}
 @media(max-width:600px){main{padding:10px}}
+
+/* ===== uma página só (sem rolagem da página) ===== */
+html,body{height:100%}body{height:100vh;height:100dvh;display:flex;flex-direction:column;overflow:hidden;font-size:13px}
+header{padding:8px 16px;border-bottom-width:3px;flex:none}header h1{font-size:16px}header small{font-size:11px}
+main{flex:1;min-height:0;display:flex;flex-direction:column;width:100%;max-width:1700px;padding:8px 14px;gap:6px}
+#up{flex:none;padding:6px 10px;position:relative;margin:0!important;border:1px dashed var(--yd)!important}
+.uprow{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}.uprow input{padding:3px 6px;font-size:12px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1B2A4A;color:#fff;padding:8px 16px;border-radius:99px;font-size:13px;opacity:0;pointer-events:none;transition:.2s;z-index:20}.toast.on{opacity:1}.pend{display:flex;gap:8px;align-items:center;margin-top:4px;font-size:12px}.repd summary{cursor:pointer;font-size:12px;margin-top:3px;color:#444}.repp{position:absolute;left:0;right:0;top:100%;z-index:6;background:#fff;border:1px solid var(--bd);border-radius:0 0 10px 10px;padding:8px 12px;max-height:55vh;overflow:auto;box-shadow:0 8px 20px #0003}
+.kpis{display:flex!important;gap:6px;flex:none}.kpi{flex:1;min-width:0;padding:4px 8px;border-radius:8px;border-left-width:3px}.kpi b{font-size:17px;line-height:1.1}.kpi span{font-size:10.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.alert{flex:none;margin:0!important;padding:3px 10px;font-size:12px}
+.filters{flex:none;margin:0!important;gap:6px}.filters input,.filters select{padding:4px 7px;font-size:12px}.filters label{font-size:12px;white-space:nowrap}.filters select{max-width:200px}.filters .btn{padding:4px 10px}
+.tw{flex:1;min-height:110px;overflow:auto}table{min-width:0;font-size:12px}th{position:sticky;top:0;z-index:2;padding:6px 6px}td{padding:3px 6px}
+td:nth-child(4){max-width:165px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}td:nth-child(6){max-width:165px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ac{min-width:175px;max-width:270px}.ac b{font-size:11.5px;margin-bottom:2px;line-height:1.2}.cdn b{font-size:13px;display:inline}.cdn small{display:block;font-size:11px}
+.st{padding:2px 6px;font-size:11px}.mini{padding:2px 6px;font-size:11px}
+#cnt{flex:none;margin:0!important;font-size:11px}
+.grid{flex:none;margin:0!important;height:clamp(130px,23vh,210px);gap:8px}.grid .card{padding:6px 10px;display:flex;flex-direction:column;min-height:0}.grid .card h3{margin:0 0 2px;font-size:12px}.grid .chart{flex:1;height:auto;min-height:0}
+footer{flex:none;padding:2px 12px;font-size:10.5px}
+@media(max-width:900px){body{height:auto;overflow:auto;display:block}main{display:block}.tw{max-height:70vh}.grid{height:auto}.grid .chart{height:200px}.kpis{flex-wrap:wrap}.kpi{flex:1 1 90px}}
 </style></head><body>
 <header><div><h1>Painel de Agendamentos — OK Saúde</h1><small id="sub">Telemedicina · Rapidoc</small></div>
 <div id="hdrbtns" style="display:none;gap:6px;flex-wrap:wrap">
@@ -46,15 +65,14 @@ footer{text-align:center;color:#777;font-size:12px;padding:16px}
 <button class="btn" onclick="resetBase()">Restaurar base original</button>
 </div></header>
 <main>
-<section class="card" id="up" style="margin-bottom:12px;border:2px dashed var(--yd)">
-<div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between">
-<div><h3 style="margin:0 0 2px;font-size:14px">Carregar planilha de agendamentos</h3><div style="color:#666;font-size:12px">Arraste o arquivo (.xls, .xlsx ou .csv) para cá ou escolha no computador. Ao carregar, o painel gera as atualizações dos agendamentos.</div></div>
+<section class="card" id="up">
+<div class="uprow"><div><b>Carregar planilha de agendamentos</b> <span class="nx">arraste o arquivo (.xls, .xlsx, .csv) aqui ou escolha ao lado e clique em OK</span></div>
 <input type="file" id="imp" accept=".xls,.xlsx,.csv"></div>
 <div id="rep"></div></section>
 <div class="kpis" id="kpis"></div>
 <div class="alert" id="alert"></div>
 <div class="filters">
-<input id="q" placeholder="Buscar paciente, CPF, profissional…" style="flex:1;min-width:200px">
+<input id="q" placeholder="Buscar paciente, CPF, profissional…" style="flex:1;min-width:120px">
 <select id="fs"></select><select id="fe"></select><select id="fp"></select>
 <select id="fd"><option value="">Todo o período</option><option value="hoje">Hoje</option><option value="amanha">Amanhã</option><option value="7">Próximos 7 dias</option><option value="atraso">Passadas sem baixa</option></select>
 <select id="fa"><option value="">Todas as ações</option><option value="pend">Com ação a executar</option><option value="wait">Aguardando</option></select>
@@ -73,7 +91,7 @@ footer{text-align:center;color:#777;font-size:12px;padding:16px}
 <div class="modal" id="m"><div class="box" id="mb"></div></div>
 <script>
 const STS={"Agendada":"#2f6fb5","Confirmada":"#1f9d8b","Realizada":"#2e8b57","Não compareceu":"#c0392b","Cancelada":"#8a8f98","Reagendada":"#E6A100"};
-const SEED=[{"id": "s0", "nome": "Ricardo Ferreira de Lima", "cpf": "24728926400", "esp": "Cardiologia", "prof": "Leonardo Lopes Lazarino", "dt": "2026-11-06T16:00", "status": "Agendada", "link": "https://apt.r-c-content.com/consult/appointment/86d0fa82-7ac4-40fe-ae26-0627c4225284?t=mrvRym89Lp883BlTuNH4HqrD5CVsWl0KJrZ9eob7b-Y", "obs": ""}, {"id": "s1", "nome": "Maria Daniela da Silva Andrade", "cpf": "06187468384", "esp": "Ortopedia", "prof": "Camila Werneck Valansi", "dt": "2026-11-09T10:40", "status": "Agendada", "link": "https://apt.r-c-content.com/consult/appointment/113009df-1311-47dd-b72c-e2566d0c52e8?t=yO_48riutjAPSfWEBSsgFUelq0WzGsZ4FcTZy4slaHg", "obs": ""}, {"id": "s2", "nome": "Ana Lucia Mascarenhas Pereira", "cpf": "68770545715", "esp": "Ortopedia", "prof": "Pedro Victor de Arruda Armelin", "dt": "2026-11-09T19:20", "status": "Agendada", "link": "https://apt.r-c-content.com/consult/appointment/8a980d0f-02ef-4f9b-a816-517c134ce91c?t=9IxtzJH3GGIravNG38x2sizbNd93431QrXdcouB6wUY", "obs": ""}, {"id": "s3", "nome": "Heloisa Daniela Santos", "cpf": "09129500486", "esp": "Endocrinologia", "prof": "Thiago Silva Mendes", "dt": "2026-11-09T20:00", "status": "Agendada", "link": "https://apt.r-c-content.com/consult/appointment/f3f04832-b87f-4159-9105-658966262d68?t=t_urSZVMfHeZC1gP2zeA8x7JovCMC2UCTAHd90PK_7I", "obs": ""}, {"id": "s4", "nome": "Amanda de Oliveira Moraes", "cpf": "06690970205", "esp": "Psicologia", "prof": "Anie Paola Ferreira", "dt": "2026-11-10T19:50", "status": "Agendada", "link": "https://apt.r-c-content.com/consult/appointment/0c1d790c-ffe0-4196-9d6e-54498eb1013b?t=UWFSCAeZbwGb_H6qzfcD8gyIxVIX8ig1jOdvd1SNIXA", "obs": ""}, {"id": "s5", "nome": "Joiciene Gomes Costa", "cpf": "03796781284", "esp": "Neurologia", "prof": "Ana Carina Breunig Nunes", "dt": "2026-11-11T09:00", "status": "Agendada", "link": "https://apt.r-c-content.com/consult/appointment/50999cdb-8f44-441d-b8ed-b8a99d1eae5e?t=OKR0vYRuuqEbq7HhGfRBgHimxoiytLQf1AmjINja9Vw", "obs": ""}, {"id": "s6", "nome": "Daisy Cirino Silva", "cpf": "05976932266", "esp": "Psicologia", "prof": "Lucas Gangorra Henrique", "dt": "2026-11-11T09:40", "status": "Agendada", "link": "https://apt.r-c-content.com/consult/appointment/25b864c5-d861-47d4-9672-a1a21e652f54?t=diGm8xKI3FUdt8FMV2Bn7-irGSWEsgtFj5k2nxE_xlI", "obs": ""}, {"id": "s7", "nome": "Anderson Neres de Moura", "cpf": "01620033232", "esp": "Cardiologia", "prof": "Eliane Macedo Lima Bastos", "dt": "2026-11-11T15:00", "status": "Agendada", "link": "https://apt.r-c-content.com/consult/appointment/b41aef0d-92a2-4b79-b411-44c0bca970c0?t=n_0Iklf43kQVCBgWWU1kaLR9GKV9k26pe112hyduLfo", "obs": ""}, {"id": "s8", "nome": "Keven Santos Amorim", "cpf": "06762391532", "esp": "Psiquiatria", "prof": "Milena Ramos do Espírito Santo", "dt": "2026-11-12T09:30", "status": "Agendada", "link": "https://apt.r-c-content.com/consult/appointment/70fc3616-8cd6-453e-8b39-da77e9de5662?t=qPE6PJoqEeLDNGyW1XlbRFyGmJ4eLtdNDcitTF8EKho", "obs": ""}, {"id": "s9", "nome": "Rodrigo Scrochio de Carvalho", "cpf": "31081547880", "esp": "Psicologia", "prof": "Vanessa Barrichelo Castaldeli", "dt": "2026-11-12T10:20", "status": "Agendada", "link": "https://apt.r-c-content.com/consult/appointment/ce7af752-e0f5-4286-91cb-7eaec70a0d14?t=qeJ_G481Efw5ZXRISSjpTeLyw-POBrq83QsGf4wRaFo", "obs": ""}, {"id": "s10", "nome": "Maria Jose Guedes Duarte", "cpf": "17246270310", "esp": "Dermatologia", "prof": "Bruno Silva Cardoso", "dt": "2026-11-12T17:40", "status": "Agendada", "link": "https://apt.r-c-content.com/consult/appointment/528fdb05-f02d-4cbe-b10f-86c596505a9d?t=m5NwCEFO-SPiYpmn83Xl7Ke9WhXwtZNNV3MkVf34y7Q", "obs": ""}, {"id": "s11", "nome": "Lucicleide Alves dos Santos Silva", "cpf": "45887217472", "esp": "Ortopedia", "prof": "Adriana Cerqueira de Amorim Oliveira", "dt": "2026-11-13T17:20", "status": "Agendada", "link": "https://apt.r-c-content.com/consult/appointment/f427fb7b-8982-4fee-9199-2f72478bc19b?t=ANbsA2X1d3mHxfQtZGEOxpzpx9iXWNwqwKT07Y8hFu8", "obs": ""}, {"id": "s12", "nome": "Isabelle Santana de Medeiros", "cpf": "10860094448", "esp": "Psiquiatria", "prof": "Maria Paula Gouveia Bernardes", "dt": "2026-11-13T20:30", "status": "Agendada", "link": "https://apt.r-c-content.com/consult/appointment/307c2fc6-edfb-43b1-b2cf-9397f7315a05?t=ON1_m09_UGtCLmrzk5X4Spnbbv5xqRJbvSxPMSVm3Cw", "obs": ""}, {"id": "s13", "nome": "Katia Cristina Pereira Rafael", "cpf": "06720663437", "esp": "Ginecologia e Obstetrícia", "prof": "Marcelle Vaz Gontijo", "dt": "2026-11-14T08:00", "status": "Agendada", "link": "https://apt.r-c-content.com/consult/appointment/9bd7b2d9-3966-4a97-b7af-8170df4716e0?t=tep3MndPAgsFbI_RtYVJ4uYQf1f059aoABUOw-SnXsc", "obs": ""}, {"id": "s14", "nome": "Allysson da Silva Rabelo", "cpf": "11854556479", "esp": "Dermatologia", "prof": "Jessica Alves Soares", "dt": "2026-11-16T13:00", "status": "Agendada", "link": "https://apt.r-c-content.com/consult/appointment/34a8936d-d505-49f2-91e7-3b1b056ecdd6?t=gpKGeWeJaX02TgbJ-maTHdTq5bCvVG5FvQqrIUKWWDQ", "obs": ""}, {"id": "s15", "nome": "Joiciene Gomes Costa", "cpf": "03796781284", "esp": "Dermatologia", "prof": "Letícia dos Santos Valandro Noriega", "dt": "2026-11-16T15:40", "status": "Agendada", "link": "https://apt.r-c-content.com/consult/appointment/f0b1a21f-1586-4ab3-8788-75085014b446?t=n-eBttxpDyVghM2RS1vJM2rG8iqXi6WcuinE5tL5538", "obs": ""}, {"id": "s16", "nome": "Brenda Kelly Santana Casseano", "cpf": "49837523824", "esp": "Psiquiatria", "prof": "Milena Ramos do Espírito Santo", "dt": "2026-11-17T11:30", "status": "Agendada", "link": "https://apt.r-c-content.com/consult/appointment/3d1065a0-a3c0-436f-a0f1-88021533c583?t=hzMzCs6Ql-YttrlCzrkybzaXI6l_fAdk7Qga38_Llfk", "obs": ""}, {"id": "s17", "nome": "Fabiana Isabel de Macedo", "cpf": "14285161664", "esp": "Psiquiatria", "prof": "Maurício Marques Moura Ribeiro", "dt": "2026-11-17T13:00", "status": "Agendada", "link": "https://apt.r-c-content.com/consult/appointment/b825adec-2e22-428b-b9ba-991e09311ddc?t=_rkOJPJC-A-bv7-rGpBEMAGqhgZEtC7u_kjRUNnQ7EA", "obs": ""}, {"id": "s18", "nome": "Daisy Cirino Silva", "cpf": "05976932266", "esp": "Psiquiatria", "prof": "Angela Beatriz Mercado Acevedo", "dt": "2026-11-17T21:30", "status": "Agendada", "link": "https://apt.r-c-content.com/consult/appointment/5747a696-3215-4f18-b398-b40221d08b9f?t=CtsALBA3Dgnp3OelaLYl2O6ELblENO0rhKqqbNNYp8Y", "obs": ""}, {"id": "s19", "nome": "Maria Luisa Borges Barroso da Silva", "cpf": "08851270562", "esp": "Ginecologia e Obstetrícia", "prof": "Marcelle Vaz Gontijo", "dt": "2026-11-18T10:40", "status": "Agendada", "link": "https://apt.r-c-content.com/consult/appointment/f19f1e7f-f67e-4429-9441-de99ce570817?t=rl5rbQ-HKi3ULaX8bWRq4yZy6FoiLxbypNYnOZ377U4", "obs": ""}, {"id": "s20", "nome": "isabela scottin ribeiro", "cpf": "07622215694", "esp": "Psiquiatria", "prof": "Filipe Levy Leite Visgueira", "dt": "2026-11-18T14:00", "status": "Agendada", "link": "https://apt.r-c-content.com/consult/appointment/d348d611-4667-4310-aedb-cb7d01764897?t=A4jXemrlmTXKmq7iB5CjNXZJ997O98LFJyU66-8u6a4", "obs": ""}, {"id": "s21", "nome": "Maria Jose Guedes Duarte", "cpf": "17246270310", "esp": "Urologia", "prof": "Márcio Alexander dos Santos Ferraz", "dt": "2026-11-19T09:40", "status": "Agendada", "link": "https://apt.r-c-content.com/consult/appointment/2f093ddd-065b-4fc5-8456-7212f96cd6ea?t=69SjaX3UHpCoEb4VfvI4Ptk6tQvPHZsRf20w-9dYPdA", "obs": ""}, {"id": "s22", "nome": "Celso jesus rodrigues", "cpf": "01434671585", "esp": "Endocrinologia", "prof": "Victor França de Almeida", "dt": "2026-11-24T15:20", "status": "Agendada", "link": "https://apt.r-c-content.com/consult/appointment/2f0fe66a-ee71-448c-b570-810a1a8ea420?t=8ZpN9XtBbU61hu_8TRQmz1w9XuKYyUVB69UxX897UEw", "obs": ""}, {"id": "s23", "nome": "Dhelaide Santos", "cpf": "03467777392", "esp": "Endocrinologia", "prof": "Thiago Silva Mendes", "dt": "2026-11-27T19:00", "status": "Agendada", "link": "https://apt.r-c-content.com/consult/appointment/0520df8d-0e96-4ead-b0b8-8960f175cd92?t=DkATO23qxk4ZVY3kRA1Jl4d75rHFz1v-JC-e-BqtsP4", "obs": ""}, {"id": "s24", "nome": "Ana Luisa Rodrigues Santos Reis", "cpf": "03362199208", "esp": "Endocrinologia", "prof": "Thiago Silva Mendes", "dt": "2026-11-27T19:20", "status": "Agendada", "link": "https://apt.r-c-content.com/consult/appointment/6c31b391-7ff4-408d-a9a9-cab9e78dcd5b?t=i1Z2Pk3VnyGdzLR8YNsKpogJT4s4io796q0bcmobLno", "obs": ""}];
+const SEED=[];
 const KEY="okSaudeAgendamentos_v1";
 let D=load(),sort={k:"dt",d:1};
 function load(){try{const s=localStorage.getItem(KEY);if(s)return JSON.parse(s)}catch(e){}return JSON.parse(JSON.stringify(SEED))}
@@ -93,19 +111,67 @@ const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&g
 function fill(sel,label,arr){const v=sel.value;sel.innerHTML=`<option value="">${label}</option>`+arr.map(a=>`<option>${esc(a)}</option>`).join("");sel.value=arr.includes(v)?v:""}
 function uniq(k){return [...new Set(D.map(r=>r[k]))].sort((a,b)=>a.localeCompare(b,"pt"))}
 const DEFR=[
-{id:"r1",on:true,h:72,txt:"Confirmar presença com o paciente",cond:"naoconf",fx:""},
-{id:"r2",on:true,h:24,txt:"Enviar o link da consulta ao paciente",cond:"todas",fx:""},
-{id:"r3",on:true,h:4,txt:"Cancelar consulta (paciente não confirmou)",cond:"naoconf",fx:"cancel"},
-{id:"r4",on:true,h:1,txt:"Lembrete final: reenviar o link da consulta",cond:"conf",fx:""}];
-const RKEY="okSaudeRegras_v1",IKEY="okSaudeUltimaBase_v1";
+{id:"r0",on:true,kind:"criar",h:48,txt:"Ao agendar: enviar a confirmação do agendamento com o link do paciente",cond:"todas",fx:"",msg:"m1"},
+{id:"r1",on:true,kind:"horas",h:72,txt:"72h: lembrar da consulta e pedir que responda CONFIRMO",cond:"naoconf",fx:"",msg:"m2"},
+{id:"r2",on:true,kind:"horas",h:48,txt:"48h sem resposta: cancelar o agendamento e avisar o paciente",cond:"naoconf",fx:"cancel",msg:"m3"},
+{id:"r3",on:true,kind:"dia",h:0,txt:"Hoje: lembrar o horário da consulta e reenviar o link",cond:"conf",fx:"",msg:"m4"}];
+const MSG={
+m1:`Olá, {nome}! 👋
+
+Sua consulta de *{especialidade}* pela OK Saúde foi agendada:
+
+📅 Data: {data}
+🕒 Horário: {hora}
+👨‍⚕️ Profissional: {profissional}
+
+Guarde o link da sua consulta:
+🔗 {link}
+
+Próximo passo: próximo ao dia da consulta vamos pedir a sua confirmação de presença. Qualquer dúvida, estamos à disposição!`,
+m2:`Olá, {nome}! Tudo bem?
+
+Passando para lembrar da sua consulta de *{especialidade}* com {profissional}:
+📅 {data} às {hora}
+
+Para mantermos o seu horário reservado, *responda CONFIRMO* a esta mensagem.
+
+⚠️ Se não recebermos sua confirmação até {prazo}, o agendamento será cancelado para liberar o horário a outro paciente. Se preferir reagendar, é só nos avisar.`,
+m3:`Olá, {nome}.
+
+Como não recebemos a confirmação da sua consulta de *{especialidade}* ({data} às {hora}), o agendamento foi *cancelado* para liberar o horário.
+
+Se ainda tiver interesse na consulta, é só responder esta mensagem que providenciamos um novo agendamento. Estamos à disposição!`,
+m4:`Bom dia, {nome}! ☀️
+
+Hoje é o dia da sua consulta de *{especialidade}* com {profissional}, às *{hora}*.
+
+Acesse pelo link no horário:
+🔗 {link}
+
+Dica: entre alguns minutos antes, em um local silencioso, com boa internet e com câmera e microfone liberados. Até já!`};
+function fillMsg(key,r){const d=new Date(Date.parse(r.dt)-((RULES.find(x=>x.fx==="cancel")||{h:48}).h)*36e5);
+ const nome=(r.nome.split(" ")[0]||"").toLowerCase().replace(/^./,c=>c.toUpperCase());
+ const v={nome,especialidade:r.esp,data:fmt(r.dt).slice(0,10),hora:r.dt.slice(11,16),profissional:r.prof,link:r.link||"(link indisponível)",prazo:`${pad(d.getDate())}/${pad(d.getMonth()+1)} às ${pad(d.getHours())}:${pad(d.getMinutes())}`};
+ return (MSG[key]||"").replace(/\{(\w+)\}/g,(m,k)=>v[k]??m)}
+function toast(s){let e=$("toast");if(!e){e=document.createElement("div");e.id="toast";document.body.appendChild(e)}e.textContent=s;e.className="toast on";clearTimeout(toast.t);toast.t=setTimeout(()=>e.className="toast",2200)}
+function copyMsg(id,key){const r=D.find(x=>x.id===id),txt=fillMsg(key,r);
+ (navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(()=>toast("Mensagem copiada: cole no WhatsApp"),()=>prompt("Copie a mensagem:",txt))}
+const RKEY="okSaudeRegras_v2",IKEY="okSaudeUltimaBase_v1";
 let RULES=(()=>{try{const s=localStorage.getItem(RKEY);if(s)return JSON.parse(s)}catch(e){}return JSON.parse(JSON.stringify(DEFR))})();
 const POST={id:"post",txt:"Horário já passou: dar baixa (Realizada ou Não compareceu)",post:true};
 const condOk=(x,r)=>x.cond==="todas"||(x.cond==="conf"?r.status==="Confirmada":r.status!=="Confirmada");
 const hrs=r=>(Date.parse(r.dt)-Date.now())/36e5;
+const isDue=(x,r,h)=>{if(!x.on||!condOk(x,r)||(r.done&&r.done[x.id]))return false;
+ if(x.kind==="criar")return !r.criado||(Date.now()-Date.parse(r.criado))/36e5<=x.h;
+ if(x.kind==="dia")return h>=0&&r.dt.slice(0,10)===TODAY;
+ return h<=x.h};
 function act(r){if(!open(r))return null;const h=hrs(r);if(h<0)return POST;
- const due=RULES.filter(x=>x.on&&h<=x.h&&condOk(x,r)&&!(r.done&&r.done[x.id])).sort((a,b)=>a.h-b.h);return due[0]||null}
-function nextRule(r){if(!open(r))return null;const h=hrs(r);if(h<0)return null;
- const n=RULES.filter(x=>x.on&&h>x.h&&condOk(x,r)&&!(r.done&&r.done[x.id])).sort((a,b)=>(h-a.h)-(h-b.h))[0];return n?{x:n,wait:(h-n.h)*36e5}:null}
+ const rs=RULES.filter(x=>isDue(x,r,h));
+ return rs.find(x=>x.kind==="criar")||rs.sort((a,b)=>(a.kind==="dia"?-1:a.h)-(b.kind==="dia"?-1:b.h))[0]||null}
+function nextRule(r){if(!open(r))return null;const h=hrs(r);if(h<0)return null;let best=null;
+ RULES.forEach(x=>{if(!x.on||x.kind==="criar"||!condOk(x,r)||(r.done&&r.done[x.id]))return;let wait;
+  if(x.kind==="dia"){if(r.dt.slice(0,10)===TODAY)return;wait=Date.parse(r.dt.slice(0,10)+"T00:00")-Date.now()}else{if(h<=x.h)return;wait=(h-x.h)*36e5}
+  if(wait>0&&(!best||wait<best.wait))best={x,wait}});return best}
 const dur=ms=>{const m=Math.max(0,Math.floor(ms/6e4)),d=Math.floor(m/1440),h=Math.floor(m%1440/60);return d?`${d}d ${h}h`:h?`${h}h ${m%60}min`:`${m}min`};
 function cd(r){if(!open(r))return null;const ms=Date.parse(r.dt)-Date.now();
  const dd=Math.round((Date.parse(r.dt.slice(0,10)+"T00:00")-Date.parse(TODAY+"T00:00"))/864e5);
@@ -115,7 +181,7 @@ function cd(r){if(!open(r))return null;const ms=Date.parse(r.dt)-Date.now();
  return{t:dd+" dias",s:"em "+dur(ms),c:""}}
 function acaoCell(r){const a=act(r);
  if(a){const btn=a.post?`<button class="btn mini" onclick="setSt('${r.id}','Realizada')">Realizada</button> <button class="btn mini d" onclick="setSt('${r.id}','Não compareceu')">Não compareceu</button>`
-  :`<button class="btn mini p" onclick="doAct('${r.id}','${a.id}')">${a.fx==="cancel"?"Cancelar consulta":"Feito"}</button>`;
+  :`${a.msg?`<button class="btn mini" onclick="copyMsg('${r.id}','${a.msg}')">Copiar mensagem</button> `:""}<button class="btn mini p" onclick="doAct('${r.id}','${a.id}')">${a.fx==="cancel"?"Cancelar consulta":"Feito"}</button>`;
   return `<div class="ac ${a.post?"post":a.fx==="cancel"?"cx":"due"}"><b>${esc(a.txt)}</b>${btn}</div>`}
  if(!open(r))return "—";const n=nextRule(r);
  return `<div class="ac"><b style="color:#2e8b57">Aguardar</b>${n?`<span class="nx">Próxima: ${esc(n.x.txt)} em ${dur(n.wait)}</span>`:""}</div>`}
@@ -171,7 +237,7 @@ function charts(){
  const byDay={};D.forEach(r=>{const k=r.dt.slice(0,10);byDay[k]=(byDay[k]||0)+1});const dk=Object.keys(byDay).sort();
  mk("c1","bar",dk.map(fmtD),dk.map(k=>byDay[k]),dk.map(k=>k===TODAY?"#E6A100":"#FFC400"),{scales:{y:{beginAtZero:true,ticks:{precision:0}}}});
  const be={};D.forEach(r=>be[r.esp]=(be[r.esp]||0)+1);const ek=Object.keys(be).sort((a,b)=>be[b]-be[a]);
- mk("c2","bar",ek,ek.map(k=>be[k]),"#1B2A4A",{indexAxis:"y",scales:{x:{beginAtZero:true,ticks:{precision:0}}}});
+ mk("c2","bar",ek,ek.map(k=>be[k]),"#1B2A4A",{indexAxis:"y",scales:{x:{beginAtZero:true,ticks:{precision:0}},y:{ticks:{autoSkip:false,font:{size:10}}}}});
  const bs={};D.forEach(r=>bs[r.status]=(bs[r.status]||0)+1);const sk=Object.keys(bs);
  mk("c3","doughnut",sk,sk.map(k=>bs[k]),sk.map(k=>STS[k]));
 }
@@ -189,23 +255,24 @@ function openForm(id){
  <div style="display:flex;gap:8px;justify-content:space-between;margin-top:14px"><div>${id?`<button class="btn d" onclick="del('${id}')">Excluir</button>`:""}</div>
  <div><button class="btn" onclick="closeM()">Cancelar</button> <button class="btn p" onclick="saveF('${id||""}')">Salvar</button></div></div>`;
  $("m").classList.add("on")}
-function ruleRow(x){return `<div class="rl" data-id="${x.id}"><div class="row"><label><input type="checkbox" class="r_on" ${x.on?"checked":""}> Ativa</label> Quando faltar até <input type="number" min="0" step="0.5" class="r_h" value="${x.h}"> horas</div>
+function ruleRow(x){const k=x.kind||"horas";return `<div class="rl" data-id="${x.id}" data-msg="${x.msg||""}"><div class="row"><label><input type="checkbox" class="r_on" ${x.on?"checked":""}> Ativa</label>
+ <select class="r_k"><option value="criar" ${k==="criar"?"selected":""}>Ao agendar (até N h após a criação)</option><option value="horas" ${k==="horas"?"selected":""}>Faltando até N h</option><option value="dia" ${k==="dia"?"selected":""}>No dia da consulta</option></select> N = <input type="number" min="0" step="0.5" class="r_h" value="${x.h}"> h</div>
  <div class="row"><input class="r_t" style="flex:1" value="${esc(x.txt)}"></div>
  <div class="row"><select class="r_c"><option value="todas" ${x.cond==="todas"?"selected":""}>Todas as consultas</option><option value="naoconf" ${x.cond==="naoconf"?"selected":""}>Só não confirmadas</option><option value="conf" ${x.cond==="conf"?"selected":""}>Só confirmadas</option></select>
  <select class="r_f"><option value="" ${!x.fx?"selected":""}>Apenas lembrar</option><option value="cancel" ${x.fx==="cancel"?"selected":""}>Cancela a consulta ao executar</option></select>
  <button class="btn mini d" onclick="this.closest('.rl').remove()">Remover</button></div></div>`}
-function collectRules(){return [...document.querySelectorAll("#rl .rl")].map(e=>({id:e.dataset.id,on:e.querySelector(".r_on").checked,h:parseFloat(e.querySelector(".r_h").value)||0,txt:e.querySelector(".r_t").value.trim(),cond:e.querySelector(".r_c").value,fx:e.querySelector(".r_f").value})).filter(x=>x.txt)}
+function collectRules(){return [...document.querySelectorAll("#rl .rl")].map(e=>({id:e.dataset.id,msg:e.dataset.msg||"",on:e.querySelector(".r_on").checked,kind:e.querySelector(".r_k").value,h:parseFloat(e.querySelector(".r_h").value)||0,txt:e.querySelector(".r_t").value.trim(),cond:e.querySelector(".r_c").value,fx:e.querySelector(".r_f").value})).filter(x=>x.txt)}
 function openRules(list){const L=list||RULES;$("mb").innerHTML=`<h3 style="margin:0;color:#1B2A4A">Regras de ação</h3>
- <p style="color:#666;font-size:12px;margin:4px 0">Definem o "O que fazer" de cada paciente conforme as horas que faltam para a consulta. Vale a regra mais próxima do horário que já tenha vencido e ainda não tenha sido marcada como feita. Após o horário, o painel pede a baixa (Realizada / Não compareceu).</p>
+ <p style="color:#666;font-size:12px;margin:4px 0">Definem o "O que fazer" de cada paciente conforme o momento da consulta (ao agendar, horas antes ou no dia). Cada regra com mensagem tem o botão “Copiar mensagem” já preenchida com os dados do paciente. Vale a regra mais próxima do horário que já tenha vencido e ainda não tenha sido marcada como feita. Após o horário, o painel pede a baixa (Realizada / Não compareceu).</p>
  <div id="rl">${L.map(ruleRow).join("")}</div>
- <button class="btn mini" style="margin-top:8px" onclick="const c=collectRules();c.push({id:'x'+Date.now(),on:true,h:12,txt:'Nova ação',cond:'todas',fx:''});openRules(c)">+ Adicionar regra</button>
+ <button class="btn mini" style="margin-top:8px" onclick="const c=collectRules();c.push({id:'x'+Date.now(),on:true,kind:'horas',h:12,txt:'Nova ação',cond:'todas',fx:'',msg:''});openRules(c)">+ Adicionar regra</button>
  <div style="display:flex;gap:8px;justify-content:space-between;margin-top:14px"><button class="btn" onclick="openRules(JSON.parse(JSON.stringify(DEFR)))">Restaurar padrão</button>
  <div><button class="btn" onclick="closeM()">Cancelar</button> <button class="btn p" onclick="RULES=collectRules();try{localStorage.setItem(RKEY,JSON.stringify(RULES))}catch(e){};closeM();render()">Salvar</button></div></div>`;$("m").classList.add("on")}
 function closeM(){$("m").classList.remove("on")}
 function saveF(id){
  const o={nome:$("f_nome").value.trim(),cpf:$("f_cpf").value.replace(/\D/g,""),esp:$("f_esp").value.trim(),prof:$("f_prof").value.trim(),dt:$("f_dt").value,status:$("f_st").value,link:$("f_link").value.trim(),obs:$("f_obs").value.trim()};
  if(!o.nome||!o.dt||!o.esp){alert("Informe paciente, especialidade e data/hora.");return}
- if(id){const e=D.find(x=>x.id===id);if(e.dt!==o.dt)e.done={};Object.assign(e,o)}else D.push({id:"n"+Date.now(),manual:true,...o});
+ if(id){const e=D.find(x=>x.id===id);if(e.dt!==o.dt)e.done={};Object.assign(e,o)}else D.push({id:"n"+Date.now(),manual:true,criado:iso(new Date())+"T"+pad(new Date().getHours())+":"+pad(new Date().getMinutes()),...o});
  save();closeM();render()}
 function del(id){if(confirm("Excluir este agendamento?")){D=D.filter(x=>x.id!==id);save();closeM();render()}}
 function resetBase(){if(confirm("Descartar todas as alterações e voltar à base original?")){D=JSON.parse(JSON.stringify(SEED));save();render()}}
@@ -215,30 +282,30 @@ function exportCsv(){const h=["Nome","CPF","Status","Especialidade","Profissiona
  dl("agendamentos_oksaude.csv","﻿"+[h.join(";")].concat(filtered().map(r=>[r.nome,r.cpf,r.status,r.esp,r.prof,fmt(r.dt),r.obs,r.link].map(q).join(";"))).join("\n"),"text/csv")}
 function backup(){dl("backup_agendamentos_"+TODAY+".json",JSON.stringify(D),"application/json")}
 function toIso(s){const m=String(s).match(/(\d{2})\/(\d{2})\/(\d{4})\s+(\d{2}):(\d{2})/);return m?`${m[3]}-${m[2]}-${m[1]}T${m[4]}:${m[5]}`:""}
-const PKEY="okSaudeRelatorio_v1";
+let PEND=null;
 async function loadFile(f){if(!f)return;
  let rows;try{const wb=XLSX.read(await f.arrayBuffer(),{type:"array",raw:true});rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:"",raw:false})}catch(err){alert("Não foi possível ler o arquivo.");return}
- const rep={at:Date.now(),file:f.name,n:0,add:[],mov:[],st:[],lnk:[],aus:[],same:0};const seen=new Set();
- rows.forEach(x=>{const dt=toIso(x["Horário agendado"]);if(!dt||!x["Nome"])return;rep.n++;
+ const ok=rows.filter(x=>toIso(x["Horário agendado"])&&x["Nome"]);
+ if(!ok.length){alert("Nenhuma linha válida encontrada. Confira se é a planilha de agendamentos (colunas Nome, CPF, Status, Especialidade, Profissional, Horário agendado, Link do paciente).");return}
+ PEND={name:f.name,rows:ok};showPend()}
+function showPend(){const el=$("rep");if(!PEND){el.innerHTML="";return}
+ el.innerHTML=`<div class="pend"><span>📄 <b>${esc(PEND.name)}</b> — ${PEND.rows.length} agendamento(s) na planilha</span> <button class="btn p mini" onclick="confirmLoad()">OK</button> <button class="btn mini" onclick="PEND=null;showPend()">Cancelar</button></div>`}
+function confirmLoad(){if(!PEND)return;const seen=new Set(),rows=PEND.rows;
+ rows.forEach(x=>{const dt=toIso(x["Horário agendado"]);
   const cpf=String(x["CPF"]).replace(/\D/g,"").padStart(11,"0"),link=x["Link do paciente"]||"";
   const st=STS[x["Status"]]?x["Status"]:"Agendada";
   const ex=D.find(r=>(link&&r.link===link)||(r.cpf===cpf&&r.dt===dt));
-  if(ex){seen.add(ex.id);ex.ausente=false;let ch=false;
-   if(ex.dt!==dt){rep.mov.push(`${ex.nome}: ${fmt(ex.dt)} → ${fmt(dt)}`);ex.dt=dt;ex.done={};ch=true}
-   if(link&&ex.link!==link){ex.link=link;rep.lnk.push(ex.nome);ch=true}
+  if(ex){seen.add(ex.id);ex.ausente=false;
+   if(ex.dt!==dt){ex.dt=dt;ex.done={}}
+   if(link&&ex.link!==link)ex.link=link;
+   if(!ex.criado)ex.criado=toIso(x["Criado em"]);
    if(x["Especialidade"])ex.esp=x["Especialidade"];if(x["Profissional"])ex.prof=x["Profissional"];
-   if(ex.status==="Agendada"&&st!=="Agendada"){rep.st.push(`${ex.nome}: Agendada → ${st}`);ex.status=st;ch=true}
-   if(!ch)rep.same++}
+   if(ex.status==="Agendada"&&st!=="Agendada")ex.status=st}
   else{const id="i"+Date.now()+Math.random().toString(36).slice(2,6);seen.add(id);
-   D.push({id,nome:x["Nome"],cpf,esp:x["Especialidade"],prof:x["Profissional"],dt,status:st,link,obs:""});rep.add.push(`${x["Nome"]} · ${x["Especialidade"]} · ${fmt(dt)}`)}});
- if(!rep.n){alert("Nenhuma linha válida encontrada. Confira se é a planilha de agendamentos (colunas Nome, CPF, Status, Especialidade, Profissional, Horário agendado, Link do paciente).");return}
- D.forEach(r=>{if(!seen.has(r.id)&&!r.manual&&open(r)&&r.dt.slice(0,10)>=TODAY){r.ausente=true;rep.aus.push(`${r.nome} · ${fmt(r.dt)}`)}});
- try{localStorage.setItem(IKEY,JSON.stringify({at:rep.at,add:rep.add.length,upd:rep.n-rep.add.length,aus:rep.aus.length}));localStorage.setItem(PKEY,JSON.stringify(rep))}catch(_){}
- save();render();renderRep();$("up").scrollIntoView({behavior:"smooth"})}
-function renderRep(){let r=null;try{r=JSON.parse(localStorage.getItem(PKEY))}catch(e){}const el=$("rep");if(!r){el.innerHTML="";return}
- const sec=(t,a,o)=>a.length?`<details ${o?"open":""} style="margin-top:4px"><summary><b>${t}: ${a.length}</b></summary><ul style="margin:4px 0 4px 18px;padding:0">${a.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></details>`:`<div class="nx" style="margin-top:4px">${t}: 0</div>`;
- el.innerHTML=`<div style="margin-top:10px;border-top:1px solid var(--bd);padding-top:8px"><b>Atualizações da última carga</b> <span class="nx">(${new Date(r.at).toLocaleString("pt-BR",{dateStyle:"short",timeStyle:"short"})} · ${esc(r.file)} · ${r.n} linhas)</span>`
- +sec("Novos agendamentos",r.add,1)+sec("Horário alterado",r.mov,1)+sec("Status alterado",r.st,1)+sec("Link atualizado",r.lnk,0)+sec("Fora da planilha (verificar no Rapidoc)",r.aus,1)+`<div class="nx" style="margin-top:4px">Sem alteração: ${r.same}</div></div>`}
+   D.push({id,nome:x["Nome"],cpf,esp:x["Especialidade"],prof:x["Profissional"],dt,status:st,link,obs:"",criado:toIso(x["Criado em"])})}});
+ let aus=0;D.forEach(r=>{if(!seen.has(r.id)&&!r.manual&&open(r)&&r.dt.slice(0,10)>=TODAY){r.ausente=true;aus++}});
+ try{localStorage.setItem(IKEY,JSON.stringify({at:Date.now(),n:rows.length,aus}))}catch(_){}
+ PEND=null;save();render();showPend()}
 $("imp").onchange=async e=>{await loadFile(e.target.files[0]);e.target.value=""};
 const up=$("up");["dragenter","dragover"].forEach(v=>up.addEventListener(v,e=>{e.preventDefault();up.style.background="#fff8e1"}));
 ["dragleave","drop"].forEach(v=>up.addEventListener(v,e=>{e.preventDefault();up.style.background=""}));
@@ -246,5 +313,5 @@ up.addEventListener("drop",e=>loadFile(e.dataTransfer.files[0]));
 $("m").onclick=e=>{if(e.target.id==="m")closeM()};
 ["q","fs","fe","fp","fd","fa","cpfv"].forEach(i=>$(i).addEventListener("input",render));
 setInterval(()=>{if(!$("m").classList.contains("on")&&document.activeElement.tagName!=="SELECT"&&document.activeElement.tagName!=="INPUT")render()},60000);
-render();renderRep();
+render();showPend();
 </script></body></html>
