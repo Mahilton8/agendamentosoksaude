@@ -211,6 +211,12 @@ m3:`Olá, {nome}.
 Como não recebemos a confirmação da sua consulta de *{especialidade}* ({data} às {hora}), o agendamento foi *cancelado* para liberar o horário.
 
 Se ainda tiver interesse na consulta, é só responder esta mensagem que providenciamos um novo agendamento. Estamos à disposição!`,
+m5:`Olá, {nome}! Tudo bem?
+
+Sua consulta de *{especialidade}* com {profissional} está agendada para:
+📅 {data} às {hora}
+
+Para confirmar o seu agendamento, *responda CONFIRMO* a esta mensagem. Se não puder comparecer, é só nos avisar que reagendamos.`,
 m4:`Bom dia, {nome}! ☀️
 
 Hoje é o dia da sua consulta de *{especialidade}* com {profissional}, às *{hora}*.
@@ -254,7 +260,7 @@ function acaoCell(r){const a=act(r);
   :`${a.msg?`<button class="btn mini" onclick="copyMsg('${r.id}','${a.msg}')">Copiar mensagem</button> `:""}<button class="btn mini p" onclick="doAct('${r.id}','${a.id}')">${a.fx==="cancel"?"Cancelar consulta":"Feito"}</button>`;
   return `<div class="ac ${a.post?"post":a.fx==="cancel"?"cx":"due"}"><b>${esc(a.txt)}</b>${btn}</div>`}
  if(!open(r))return "—";const n=nextRule(r);
- return `<div class="ac"><b style="color:#2e8b57">Aguardar</b>${n?`<span class="nx">Próxima: ${esc(n.x.txt)} em ${dur(n.wait)}</span>`:""}</div>`}
+ return `<div class="ac"><b style="color:#2e8b57">Aguardar</b>${n?`<span class="nx">Próxima: ${esc(n.x.txt)} em ${dur(n.wait)}</span>`:""}${r.status!=="Confirmada"?`<button class="btn mini" title="Copia a mensagem pedindo a confirmação do agendamento" onclick="copyMsg('${r.id}','m5')">Copiar mensagem de confirmação</button>`:""}</div>`}
 function doAct(id,rid){const r=D.find(x=>x.id===id),x=RULES.find(y=>y.id===rid);if(!x)return;
  if(x.fx==="cancel"&&!confirm("Cancelar a consulta de "+r.nome+"?"))return;
  r.done=r.done||{};r.done[rid]=new Date().toISOString();if(x.fx==="cancel")r.status="Cancelada";save();render()}
