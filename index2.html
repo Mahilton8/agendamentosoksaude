@@ -43,7 +43,7 @@ main{flex:1;min-height:0;display:flex;flex-direction:column;width:100%;max-width
 #up{flex:none;padding:6px 10px;position:relative;margin:0!important;border:1px dashed var(--yd)!important}
 .uprow{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}.uprow input{padding:3px 6px;font-size:12px}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1B2A4A;color:#fff;padding:8px 16px;border-radius:99px;font-size:13px;opacity:0;pointer-events:none;transition:.2s;z-index:20}.toast.on{opacity:1}.pend{display:flex;gap:8px;align-items:center;margin-top:4px;font-size:12px}.repd summary{cursor:pointer;font-size:12px;margin-top:3px;color:#444}.repp{position:absolute;left:0;right:0;top:100%;z-index:6;background:#fff;border:1px solid var(--bd);border-radius:0 0 10px 10px;padding:8px 12px;max-height:55vh;overflow:auto;box-shadow:0 8px 20px #0003}
-.kpis{display:flex!important;gap:6px;flex:none}.kpi{flex:1;min-width:0;padding:4px 8px;border-radius:8px;border-left-width:3px}.kpi b{font-size:17px;line-height:1.1}.kpi span{font-size:10.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.kpis{display:flex!important;gap:6px;flex:none}.kpi{flex:1;min-width:0;padding:2px 8px;border-radius:8px;border-left-width:3px}.kpi b{font-size:15px;line-height:1.1}.kpi span{font-size:10.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
 .alert{flex:none;margin:0!important;padding:3px 10px;font-size:12px}
 .filters{flex:none;margin:0!important;gap:6px}.filters input,.filters select{padding:4px 7px;font-size:12px}.filters label{font-size:12px;white-space:nowrap}.filters select{max-width:200px}.filters .btn{padding:4px 10px}
 .tw{flex:1;min-height:110px;overflow:auto}table{min-width:0;font-size:12px}th{position:sticky;top:0;z-index:2;padding:6px 6px}td{padding:3px 6px}
@@ -51,7 +51,7 @@ td:nth-child(4){max-width:165px;overflow:hidden;text-overflow:ellipsis;white-spa
 .ac{min-width:175px;max-width:270px}.ac b{font-size:11.5px;margin-bottom:2px;line-height:1.2}.cdn b{font-size:13px;display:inline}.cdn small{display:block;font-size:11px}
 .st{padding:2px 6px;font-size:11px}.mini{padding:2px 6px;font-size:11px}
 #cnt{flex:none;margin:0!important;font-size:11px}
-.grid{flex:none;margin:0!important;height:clamp(130px,23vh,210px);gap:8px}.grid .card{padding:6px 10px;display:flex;flex-direction:column;min-height:0}.grid .card h3{margin:0 0 2px;font-size:12px}.grid .chart{flex:1;height:auto;min-height:0}
+.grid{flex:none;margin:0!important;height:clamp(130px,22vh,190px);gap:8px}.grid .card{padding:6px 10px;display:flex;flex-direction:column;min-height:0}.grid .card h3{margin:0 0 2px;font-size:12px}.grid .chart{flex:1;height:auto;min-height:0}
 footer{flex:none;padding:2px 12px;font-size:10.5px}
 @media(max-width:900px){body{height:auto;overflow:auto;display:block}main{display:block}.tw{max-height:70vh}.grid{height:auto}.grid .chart{height:200px}.kpis{flex-wrap:wrap}.kpi{flex:1 1 90px}}
 .tabs{display:flex;gap:4px;flex:none;margin:0}.tab{border:1px solid var(--bd);border-bottom:3px solid transparent;background:#fff;color:var(--navy);padding:5px 14px;border-radius:8px 8px 0 0;font-weight:700;font-size:12.5px;cursor:pointer}.tab.on{background:var(--y);border-bottom-color:var(--yd)}.tn{display:inline-block;background:var(--red);color:#fff;border-radius:99px;padding:0 7px;font-size:11px;margin-left:4px}.tn:empty{display:none}
@@ -59,6 +59,97 @@ footer{flex:none;padding:2px 12px;font-size:10.5px}
 body[data-tab=resumo] #resumo{display:block}
 body[data-tab=resumo] .kpis,body[data-tab=resumo] .alert,body[data-tab=resumo] .filters,body[data-tab=resumo] .tw,body[data-tab=resumo] #cnt,body[data-tab=resumo] .grid{display:none!important}
 .rs h3{margin:18px 0 6px;font-size:16px}.rs table{border-collapse:collapse;width:100%;font-size:13px;min-width:0}.rs th{position:static;background:#1B2A4A;color:#fff;padding:6px;text-align:left}.rs td{padding:5px 6px;border-bottom:1px solid #e4e2da}
+@media(min-width:901px){.grid{grid-template-columns:1fr 1.7fr!important}}
+.hmw{display:grid;gap:1px;font-size:9px;min-height:0;overflow:auto;min-width:0;max-width:100%}.grid .card{min-width:0}.grid{min-width:0}.hmw .hl{color:#666;display:flex;align-items:center;justify-content:center}.hmw .hy{justify-content:flex-start}
+.hc{display:flex;align-items:center;justify-content:center;border-radius:3px;color:#1B2A4A;font-weight:700;min-width:0;background:#f0eee8}
+body.nograf .grid{display:none!important}
+
+/* ===== celular ===== */
+@media(max-width:700px){
+html,body{height:auto}body{display:block;overflow:auto;font-size:14px}
+header{padding:8px 12px;display:block}header h1{font-size:15px}header small{font-size:10.5px;margin-top:2px}
+main{display:block;padding:8px 10px;max-width:100%}main>*{margin-bottom:8px!important}
+#up{padding:8px 10px}.uprow{display:block}.uprow>div:first-child{margin-bottom:6px}.uprow .nx{display:block}
+.uprow>div:last-child{display:flex!important;gap:8px;align-items:center}.uprow input[type=file]{flex:1;min-width:0;font-size:12px}
+.pend{flex-wrap:wrap}
+.tabs{margin-bottom:0!important}.tab{flex:1;padding:8px 6px;font-size:13px}
+.kpis{display:flex!important;flex-wrap:nowrap!important;overflow-x:auto;gap:6px;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+.kpi{flex:0 0 112px!important;padding:5px 8px}.kpi b{font-size:18px}.kpi span{font-size:11px}
+.alert{font-size:12px;padding:6px 10px}
+.filters{display:flex;flex-wrap:wrap;gap:6px}.filters input,.filters select{font-size:16px;padding:8px}
+.filters #q{flex:1 1 100%!important;min-width:0!important}.filters select{flex:1 1 calc(50% - 6px);max-width:none;min-width:0}.filters .btn{flex:1}.filters label{flex:1 1 100%;font-size:13px}
+.tw{max-height:none;overflow:visible;border:0;background:transparent;min-height:0}
+table,thead,tbody{display:block;min-width:0;width:100%}thead{display:none}
+tr{display:grid!important;grid-template-columns:1fr 1fr;gap:6px 12px;padding:10px 12px 12px;margin:0 0 10px;border:1px solid var(--bd);border-radius:12px;background:#fff;height:auto!important}
+tr.atraso{border-left:4px solid var(--red)}tr.hoje,tr.due{background:#fffbe8}
+td{display:block!important;border:0!important;padding:0!important;max-width:none!important;min-width:0!important;white-space:normal!important;overflow:visible!important;background:transparent!important;box-shadow:none!important}
+td::before{display:block;font-size:10px;font-weight:700;color:#8a8f98;text-transform:uppercase;letter-spacing:.03em;margin-bottom:1px}
+td:nth-child(1)::before{content:"Horário"}td:nth-child(2)::before{content:"Faltam"}td:nth-child(3)::before{content:"O que fazer"}td:nth-child(5)::before{content:"Especialidade"}td:nth-child(6)::before{content:"Profissional"}td:nth-child(7)::before{content:"Status"}td:nth-child(8)::before{content:"CPF"}td:nth-child(9)::before{content:"Observação"}
+td:nth-child(4){grid-column:1/-1;order:-2;font-size:15px;font-weight:700;color:var(--navy)}
+td:nth-child(1){order:-1}td:nth-child(2){order:-1}
+td:nth-child(3){grid-column:1/-1;order:0;background:#faf7ea!important;border-radius:8px;padding:7px 9px!important}
+td:nth-child(9){grid-column:1/-1}td:nth-child(9):empty{display:none!important}
+td:nth-child(10){grid-column:1/-1;display:flex!important;gap:8px}td:nth-child(10) .btn{flex:1;padding:9px;font-size:13px}
+.ac{min-width:0;max-width:none}.ac b,.ac .nx{display:block;-webkit-line-clamp:unset}.ac .btn{padding:7px 10px;font-size:12px}
+.st{font-size:13px;padding:6px 10px}
+#cnt{margin:0!important}
+.grid{display:block!important;height:auto!important}.grid .card{margin-bottom:8px;min-height:0}.grid .chart{height:230px}.grid .card .hmw{height:340px}
+#resumo{overflow:visible;border-radius:10px}
+.rs h3{font-size:14px}.rs table{display:table;font-size:11.5px}.rs thead{display:table-header-group}.rs tbody{display:table-row-group}.rs tr{display:table-row!important;border:0;padding:0;margin:0;background:transparent}.rs td,.rs th{display:table-cell!important;padding:4px 4px!important;border-bottom:1px solid #e4e2da!important}.rs td::before{content:none!important}.rs th:nth-child(4),.rs td:nth-child(4){display:none!important}
+.rs>div{padding-left:10px!important;padding-right:10px!important}
+.rs td:nth-child(n){background:transparent!important;border-radius:0!important;padding:4px!important;font-size:11.5px!important;font-weight:400!important;color:#333!important;order:0!important}
+footer{padding:8px 10px;font-size:10.5px}
+.box{padding:14px;max-height:90vh}.box input,.box select,.box textarea{font-size:16px}
+}
+.sti{display:flex;align-items:center;gap:6px;font-size:12px;padding:3px 0;border-bottom:1px solid #eee}.sti i{width:12px;height:12px;border-radius:3px;flex:none}.sti small{color:#888}.sti .btn{margin-left:auto}.stl{max-height:200px;overflow:auto}
+#dash{display:none;flex:1;min-height:0}
+body[data-tab=dashboard] #dash{display:block;overflow:auto}
+body[data-tab=dashboard] .alert,body[data-tab=dashboard] .filters,body[data-tab=dashboard] .tw,body[data-tab=dashboard] #cnt{display:none!important}
+body[data-tab=resumo] #dash{display:none!important}
+#dash .grid{height:100%!important;margin:0!important}#dash .grid .card{padding:12px 14px}#dash .grid h3{font-size:14px}
+@media(max-width:900px){#dash .grid{height:auto!important}}
+#ns{display:none;flex:1;min-height:0;flex-direction:column;gap:8px}
+body[data-tab=noshow] #ns{display:flex}
+body[data-tab=noshow] #kpis,body[data-tab=noshow] .alert,body[data-tab=noshow] .filters,body[data-tab=noshow] .tw,body[data-tab=noshow] #cnt,body[data-tab=noshow] #dash{display:none!important}
+.nsup{flex:none;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between;background:#fff;border:2px dashed var(--y);border-radius:10px;padding:8px 12px;font-size:13px}
+.nsup small{color:#666}.nsfl{flex:none;display:flex;flex-wrap:wrap;gap:6px;align-items:center}.nsfl input[type=text]{flex:1;min-width:140px}.nsfl select,.nsfl input{padding:4px 7px;font-size:12px}
+.nsl{flex:1;min-height:0;overflow:auto;background:#fff;border:1px solid var(--bd);border-radius:10px}
+.nsh,.nsr{display:grid;grid-template-columns:minmax(170px,2fr) 120px minmax(120px,1.2fr) 120px 120px minmax(220px,2.4fr);gap:10px;align-items:center;padding:8px 12px}
+.nsh{position:sticky;top:0;z-index:2;background:var(--navy);color:#fff;font-size:12px;font-weight:700}
+.nsr{border-top:1px solid var(--bd);font-size:13px}.nsr .n b{display:block}.nsr .n small{color:#888}
+.nsr .bar{height:10px;background:#eceae3;border-radius:99px;overflow:hidden}.nsr .bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#E6A100,#FFC400)}
+.nsr.ok .bar i{background:#2e8b57}.nsr .dsp{display:flex;flex-direction:column;gap:3px}.nsr .dsp b{font-size:13px;color:#1B2A4A}.nsr.ok .dsp b{color:#2e8b57}.nsr .dsp b.hot{color:#c0392b}.nsr .dsp small{color:#666;font-size:11px}
+.nsvazio{padding:28px 14px;text-align:center;color:#777}
+@media(max-width:900px){#ns{display:none}body[data-tab=noshow] #ns{display:block}.nsl{overflow:visible;border:0;background:transparent}.nsh{display:none}
+ .nsr{grid-template-columns:1fr 1fr;gap:6px 10px;background:#fff;border:1px solid var(--bd);border-radius:10px;margin-bottom:8px;padding:10px 12px}
+ .nsr .n,.nsr .dsp{grid-column:1/-1}.nsr [data-l]::before{content:attr(data-l) ": ";font-size:11px;color:#888}.nsr .n b{font-size:15px}.nsup{display:block}.nsup input[type=file]{width:100%;margin-top:6px}}
+#co{display:none;flex:1;min-height:0;flex-direction:column}
+body[data-tab=consultas] #co{display:flex}
+body[data-tab=consultas] #kpis,body[data-tab=consultas] .alert,body[data-tab=consultas] .filters,body[data-tab=consultas] .tw,body[data-tab=consultas] #cnt,body[data-tab=consultas] #dash{display:none!important}
+@media(max-width:900px){#co{display:none}body[data-tab=consultas] #co{display:block}#co>*{margin-bottom:10px}}
+#co{overflow:auto;gap:12px}#co>*{flex:none}
+#tm{display:none;flex:1;min-height:0;flex-direction:column}
+body[data-tab=tempo] #tm{display:flex}
+body[data-tab=tempo] #kpis,body[data-tab=tempo] .alert,body[data-tab=tempo] .filters,body[data-tab=tempo] .tw,body[data-tab=tempo] #cnt,body[data-tab=tempo] #dash{display:none!important}
+@media(max-width:900px){#tm{display:none}body[data-tab=tempo] #tm{display:block}#tm>*{margin-bottom:10px}}
+#tm{overflow:auto;gap:12px}#tm>*{flex:none}
+.rph{background:#1B2A4A;color:#fff;padding:14px 20px;border-radius:10px;border-bottom:4px solid #FFC400}.rph h1{margin:2px 0 0;font-size:19px}.rph small{opacity:.8;font-size:11px;letter-spacing:.3px}
+.rpb{background:#fff;border:1px solid #DfE2E8;border-radius:10px;padding:14px 16px;margin-bottom:12px}.rpb h2{color:#1B2A4A;font-size:16px;margin:0 0 8px}.rpn{color:#666;font-size:12px}
+.rpk{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}.rpk>div{border:1px solid #DfE2E8;border-left:4px solid #1B2A4A;border-radius:4px;padding:8px 10px;background:#FAFBFC}.rpk small{display:block;font-size:10px;text-transform:uppercase;color:#666}.rpk b{font-size:22px;color:#1B2A4A}.rpk span{display:block;font-size:11px;color:#666}
+.rpk .ok{border-left-color:#0E8A6B}.rpk .bad{border-left-color:#C8442B}.rpk .warn{border-left-color:#E6A100}
+.rpt{width:100%;border-collapse:collapse;font-size:12.5px}.rpt th{background:#1B2A4A;color:#fff;text-align:left;padding:6px 8px;position:sticky;top:0}.rpt td{padding:5px 8px;border-bottom:1px solid #E6E8EC;vertical-align:top}.rpt td.n,.rpt th.n{text-align:right}.rpt th.s{cursor:pointer;user-select:none}.rpt td.g1{background:#F4F6FA}.rpt tr.cl{cursor:pointer}.rpt tr.cl:hover td{background:#FFF9E8}
+.rptw{overflow:auto;max-height:520px;border:1px solid #E6E8EC;border-radius:4px}
+.rpg2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.rpcv{position:relative;height:300px}
+.rpfind{border-left:4px solid #E6A100;background:#FFF9E8;padding:8px 12px;margin:6px 0;border-radius:3px}
+.rptag{display:inline-block;padding:1px 7px;border-radius:9px;font-size:11px;color:#fff;background:#C8442B}.rptag.y{background:#E6A100}.rptag.b{background:#2F5DA8}.rptag.g{background:#0E8A6B}
+.rpbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:6px 0 8px}.rpbar select,.rpbar input[type=search]{padding:5px 7px;border:1px solid #ccc;border-radius:4px;font-size:12px}.rpbar input[type=search]{width:260px;max-width:100%}
+.rpbtn{background:#1B2A4A;color:#fff;border:0;border-radius:5px;padding:7px 12px;font-size:12px;cursor:pointer}
+.rpseg{display:inline-flex;border:1px solid #C9CED8;border-radius:6px;overflow:hidden}.rpseg button{border:0;background:#fff;padding:6px 12px;font-size:12px;cursor:pointer;color:#1B2A4A}.rpseg button.on{background:#1B2A4A;color:#fff}
+.hmt{border-collapse:separate;border-spacing:2px;font-size:11px}.hmt td,.hmt th{text-align:center;padding:0;min-width:30px;height:30px;border-radius:4px}.hmt th{color:#1B2A4A;font-weight:700;background:none;min-width:34px}.hmt td.l{text-align:right;padding-right:6px;font-weight:700;color:#1B2A4A;background:none;min-width:40px}
+@media(max-width:900px){.rpg2{grid-template-columns:1fr}.rph h1{font-size:16px}}
+#hmtip{display:none;position:fixed;z-index:30;background:#1B2A4A;color:#fff;border-radius:8px;padding:8px 10px;font-size:12px;max-width:300px;box-shadow:0 6px 20px #0004;pointer-events:none}
+#hmtip .tph{font-weight:700;color:#FFC400;margin-bottom:5px}#hmtip .tpi{padding:5px 0;border-top:1px solid #ffffff30;display:flex;flex-direction:column;gap:1px}#hmtip .tpi b{font-size:13px}#hmtip .tpi span{color:#dfe5f2}#hmtip .tpi i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px}
+.hc[data-i]{cursor:pointer}
 </style></head><body>
 <header><div><h1>Painel de Agendamentos — OK Saúde</h1><small id="sub">Telemedicina · Rapidoc</small></div>
 <div id="hdrbtns" style="display:none;gap:6px;flex-wrap:wrap">
@@ -72,9 +163,9 @@ body[data-tab=resumo] .kpis,body[data-tab=resumo] .alert,body[data-tab=resumo] .
 <main>
 <section class="card" id="up">
 <div class="uprow"><div><b>Carregar planilha de agendamentos</b> <span class="nx">arraste o arquivo (.xls, .xlsx, .csv) aqui ou escolha ao lado e clique em OK</span></div>
-<div style="display:flex;gap:8px;align-items:center"><input type="file" id="imp" accept=".xls,.xlsx,.csv"><button class="btn mini d" style="padding:5px 10px" onclick="zerar()">Zerar dados</button></div></div>
+<div style="display:flex;gap:8px;align-items:center"><input type="file" id="imp" accept=".xls,.xlsx,.csv"><button class="btn mini p" style="padding:5px 10px" onclick="sincronizar()" title="Aplica a planilha selecionada (se houver) ou sincroniza com a nuvem">⟳ Sincronizar</button><button class="btn mini d" style="padding:5px 10px" onclick="zerar()">Zerar dados</button></div></div>
 <div id="rep"></div></section>
-<div class="tabs"><button id="t_agenda" class="tab on" onclick="setTab('agenda')">Agendamentos</button><button id="t_resumo" class="tab" onclick="setTab('resumo')">Resumo <span id="t_n" class="tn"></span></button></div>
+<div class="tabs"><button id="t_agenda" class="tab on" onclick="setTab('agenda')">Agendamentos</button><button id="t_resumo" class="tab" onclick="setTab('resumo')">Resumo <span id="t_n" class="tn"></span></button><button id="t_dash" class="tab" onclick="setTab('dashboard')">Dashboard</button><button id="t_ns" class="tab" onclick="setTab('noshow')">No Show <span id="t_nsn" class="tn"></span></button><button id="t_co" class="tab" onclick="setTab('consultas')">Acompanhamento consultas</button><button id="t_tm" class="tab" onclick="setTab('tempo')">Tempo médio de atendimento</button></div>
 <div id="resumo"></div>
 <div class="kpis" id="kpis"></div>
 <div class="alert" id="alert"></div>
@@ -87,38 +178,177 @@ body[data-tab=resumo] .kpis,body[data-tab=resumo] .alert,body[data-tab=resumo] .
 <label style="align-self:center"><input type="checkbox" id="cpfv"> mostrar CPF completo</label>
 </div>
 <div class="tw"><table><thead><tr id="th"></tr></thead><tbody id="tb"></tbody></table></div>
-<div id="cnt" style="margin:6px 2px;color:#666;font-size:12px"></div>
-<div class="grid">
-<div class="card"><h3>Consultas por dia</h3><div class="chart"><canvas id="c1"></canvas></div></div>
+<div style="display:flex;justify-content:space-between;align-items:center;flex:none"><div id="cnt" style="margin:0;color:#666;font-size:12px"></div></div>
+<div id="dash"><div class="grid">
 <div class="card"><h3>Por especialidade</h3><div class="chart"><canvas id="c2"></canvas></div></div>
-<div class="card"><h3>Por status</h3><div class="chart"><canvas id="c3"></canvas></div></div>
+<div class="card"><h3>Mapa de calor: data × horário <span class="nx" id="hmleg"></span></h3><div class="chart hmw" id="hm"></div></div>
+</div></div>
+<div id="ns">
+<div class="nsup"><span><b>Carregar arquivo de No Show</b> <small>.xls, .xlsx ou .csv · o paciente só pode marcar nova consulta 30 dias após o no show</small></span>
+<span style="display:flex;gap:8px;align-items:center"><input type="file" id="nsf" accept=".xls,.xlsx,.csv"><button class="btn mini d" style="padding:5px 10px" onclick="zerarNS()">Limpar lista</button></span></div>
+<div id="nsmsg"></div>
+<div class="kpis" id="nsk"></div>
+<div class="nsfl"><input type="text" id="nsq" placeholder="Buscar paciente, CPF ou especialidade…"><select id="nss"><option value="">Todos</option><option value="7">Liberam em 7 dias</option></select><label style="white-space:nowrap;font-size:12px"><input type="checkbox" id="nscpf"> mostrar CPF completo</label></div>
+<div class="nsl"><div class="nsh"><div>Paciente</div><div>CPF</div><div>Especialidade</div><div>Data do no show</div><div>Libera em</div><div>Disponibilidade para nova consulta</div></div><div id="nsb"></div></div>
+</div>
+<div id="co">
+<div class="nsup"><span><b>Carregar histórico de consultas</b> <small>.xls, .xlsx ou .csv · colunas: Nome, CPF, Data/hora, Especialidade, Profissional, Tipo, Status, Empresa · novos arquivos são somados (sem duplicar)</small></span>
+<span style="display:flex;gap:8px;align-items:center"><input type="file" id="cof" accept=".xls,.xlsx,.csv"><button class="btn mini d" style="padding:5px 10px" onclick="zerarCO()">Limpar histórico</button></span></div>
+<div class="nsup" style="border-color:#2F5DA8"><span><b>Base de cadastro OK Saúde</b> <small>.xls, .xlsx ou .csv · o painel procura o CPF de cada consulta na base e vincula o usuário à empresa</small><br><small id="co_cadi"></small></span>
+<span style="display:flex;gap:8px;align-items:center"><input type="file" id="cadf" accept=".xls,.xlsx,.csv"><button class="btn mini d" style="padding:5px 10px" onclick="zerarCAD()">Remover cadastro</button></span></div>
+<div id="comsg"></div>
+<div id="co_empty" class="rpb" style="text-align:center;color:#777;padding:28px 14px">Nenhum histórico carregado. Use o botão acima para carregar o arquivo de histórico de consultas.</div>
+<div id="co_body" style="display:none">
+<div class="rph"><small id="co_cap"></small><h1>Consultas realizadas: usuários por consulta e intervalo entre consultas</h1></div>
+<div class="rpb"><div class="rpbar"><label class="rpn">Mês <select id="co_mes"></select></label><label class="rpn"><input type="checkbox" id="cocpf"> mostrar CPF completo</label></div>
+<h2>Sumário executivo</h2><div class="rpk" id="co_k"></div>
+<p class="rpn" style="margin-top:8px">Considera as consultas com status <b>Finalizada</b> do arquivo carregado. Como o arquivo traz apenas o horário de início, o intervalo é medido <b>entre os inícios</b> de duas consultas do mesmo CPF.</p></div>
+<div class="rpb"><h2>1. Quantos usuários fizeram 1, 2, 3 ou mais consultas</h2><div class="rpg2"><div class="rptw" style="max-height:none"><table class="rpt" id="co_t1"></table></div><div class="rpcv"><canvas id="co_c1"></canvas></div></div></div>
+<div class="rpb"><h2>2. Ranking de consultas por usuário</h2>
+<div class="rpbar"><select id="co_rkF"><option value="2">Usuários com 2+ consultas</option><option value="10">Top 10</option><option value="0">Todos os usuários</option></select><input type="search" id="co_rkQ" placeholder="Buscar usuário ou CPF"><span class="rpn" id="co_rkC"></span></div>
+<div class="rptw" style="max-height:480px"><table class="rpt" id="co_rkT"></table></div>
+<p class="rpn" style="margin-top:6px">Posições empatadas dividem o mesmo número (ex.: 1º com 5 usuários, o próximo é o 6º). Clique em um usuário para ver as consultas dele no detalhamento (seção 6).</p></div>
+<div class="rpb"><h2>3. Consultas por usuário e intervalo entre elas</h2>
+<p class="rpn">Cada linha é um usuário com 2 ou mais consultas, agrupado por quantidade. Cada marcador é uma consulta (data e hora de início); o rótulo sobre o trecho mostra o tempo entre o início de uma consulta e o início da seguinte. Passe o mouse sobre um marcador para ver profissional e especialidade.</p>
+<div id="co_lg"></div><div id="co_c2w" style="position:relative;overflow-x:auto"></div></div>
+<div class="rpb"><h2>4. Distribuição dos intervalos entre consultas</h2><div class="rpg2"><div class="rpcv"><canvas id="co_c3"></canvas></div><div id="co_h3"></div></div></div>
+<div class="rpb"><h2>5. Mapa de calor das consultas</h2>
+<div class="rpbar"><span class="rpseg" id="co_hmV"><button data-v="w" class="on">Dia da semana × hora</button><button data-v="c">Calendário do mês</button></span>
+<label class="rpn">Tipo <select id="co_hmT"><option value="a">todas as especialidades</option><option value="g">clínico geral</option><option value="e">especialistas</option></select></label></div>
+<div id="co_hm" style="overflow-x:auto"></div><div id="co_hmn" class="rpn" style="margin-top:6px"></div></div>
+<div class="rpb" id="co_det"><h2>6. Detalhamento por usuário e consulta</h2>
+<p class="rpn">Uma linha por consulta, agrupada por usuário. "Desde a anterior" conta entre os inícios das duas consultas. Clique no cabeçalho para ordenar.</p>
+<div class="rpbar"><input type="search" id="co_q" placeholder="Filtrar por nome, CPF ou profissional"><select id="co_fl"><option value="2">Usuários com 2+ consultas</option><option value="a">Somente com alerta</option><option value="0">Todos os usuários</option></select><select id="co_fe"></select><button id="co_csv" class="rpbtn">Baixar CSV</button><span class="rpn" id="co_cnt"></span></div>
+<div class="rptw" style="max-height:640px"><table class="rpt" id="co_t5"></table></div>
+<div class="rpn" style="margin-top:6px">Alertas: <span class="rptag">Retorno ≤1h</span> consulta iniciada até 60 min após a anterior; <span class="rptag y">Retorno ≤24h</span> entre 1 e 24 h; <span class="rptag b">Outro profissional</span> profissional diferente do da consulta anterior.</div></div>
+<div class="rpb"><h2>7. Consultas por empresa</h2><p class="rpn" id="co_en"></p><div class="rptw" style="max-height:420px"><table class="rpt" id="co_t7"></table></div></div>
+<p class="rpn">Fonte: histórico de consultas (Rapidoc) carregado neste painel. Contém dados pessoais (LGPD): não compartilhe em endereço aberto.</p>
+</div>
+</div>
+<div id="tm">
+<div class="nsup"><span><b>Carregar planilha de tempo médio de atendimento (espera na fila)</b> <small>.xls, .xlsx ou .csv · colunas: Nome, CPF, Entrada na fila, Início do atendimento, Final do atendimento, Espera (min), Status · novos arquivos são somados (sem duplicar)</small><br><small id="tm_cadi"></small></span>
+<span style="display:flex;gap:8px;align-items:center"><input type="file" id="tmf" accept=".xls,.xlsx,.csv"><button class="btn mini d" style="padding:5px 10px" onclick="zerarTM()">Limpar dados</button></span></div>
+<div id="tmmsg"></div>
+<div id="tm_empty" class="rpb" style="text-align:center;color:#777;padding:28px 14px">Nenhuma planilha carregada. Use o botão acima para carregar a planilha de tempo médio. As empresas vêm da mesma base de cadastro da aba Acompanhamento consultas.</div>
+<div id="tm_body" style="display:none">
+<div class="rph"><small id="tm_cap"></small><h1>Tempo médio de atendimento: espera na fila e duração</h1></div>
+<div class="rpb"><div class="rpbar"><label class="rpn">Mês <select id="tm_mes"></select></label><label class="rpn">Empresa <select id="tm_emp"></select></label><label class="rpn">Status <select id="tm_st"><option value="">todos</option><option value="o">Ocorreu</option><option value="n">Não ocorreu</option></select></label><label class="rpn"><input type="checkbox" id="tmcpf"> mostrar CPF completo</label></div>
+<h2>Sumário executivo</h2><div class="rpk" id="tm_k"></div><p class="rpn" id="tm_n" style="margin-top:8px"></p></div>
+<div class="rpb"><h2>1. Evolução diária: espera na fila e duração do atendimento</h2><div class="rpcv"><canvas id="tm_c1"></canvas></div></div>
+<div class="rpb"><h2>2. Espera por dia da semana e por hora de entrada na fila</h2><div class="rpg2"><div class="rptw" style="max-height:none"><table class="rpt" id="tm_t1"></table></div><div class="rpcv"><canvas id="tm_c2"></canvas></div></div></div>
+<div class="rpb"><h2>3. Distribuição da espera por faixa de tempo</h2><div class="rpg2"><div class="rptw" style="max-height:none"><table class="rpt" id="tm_t2"></table></div><div class="rpcv"><canvas id="tm_c3"></canvas></div></div></div>
+<div class="rpb"><h2>4. Tempo médio por empresa</h2><p class="rpn" id="tm_en"></p><div class="rptw" style="max-height:420px"><table class="rpt" id="tm_t3"></table></div></div>
+<div class="rpb"><h2>5. Detalhamento dos atendimentos</h2>
+<div class="rpbar"><input type="search" id="tm_q" placeholder="Filtrar por nome, CPF ou empresa"><span class="rpn" id="tm_cnt"></span><button class="rpbtn" id="tm_csv">Baixar CSV</button></div>
+<div class="rptw" style="max-height:560px"><table class="rpt" id="tm_t4"></table></div></div>
+</div>
 </div>
 </main>
-<footer>Contém dados pessoais (LGPD): compartilhe com cuidado. · <a href="#" onclick="openSync();return false" id="syncst">☁ Sincronização: não configurada</a></footer>
-<div class="modal" id="m"><div class="box" id="mb"></div></div>
+<footer>Contém dados pessoais (LGPD): compartilhe com cuidado. · <a href="#" onclick="openStatus(null);return false">Gerenciar status</a> · <a href="#" onclick="openBackups();return false">Backups</a> · <a href="#" onclick="openRec();return false">Recuperar dados</a> · <a href="#" onclick="openSync();return false" id="syncst">☁ Sincronização: não configurada</a></footer>
+<div id="hmtip"></div><div class="modal" id="m"><div class="box" id="mb"></div></div>
 <script>
-const STS={"Agendada":"#2f6fb5","Confirmada":"#1f9d8b","Realizada":"#2e8b57","Não compareceu":"#c0392b","Cancelada":"#8a8f98","Reagendada":"#E6A100"};
+const STS0={"Agendada":"#2f6fb5","Mensagem enviada":"#8e5bb5","Confirmada":"#1f9d8b","Realizada":"#2e8b57","Não compareceu":"#c0392b","Cancelada":"#8a8f98","Reagendada":"#E6A100"};
+const OPEN0=["Agendada","Mensagem enviada","Confirmada","Reagendada"],CKEY="okSaudeStatus_v1";
+let CUST=(()=>{try{const a=JSON.parse(localStorage.getItem(CKEY));return Array.isArray(a)?a:[]}catch(e){return[]}})(),STS={};
+function buildSts(){STS={};Object.keys(STS0).forEach(k=>STS[k]=STS0[k]);CUST.forEach(s=>{if(s&&s.n&&!STS[s.n])STS[s.n]=s.c||"#6c5ce7"})}
+buildSts();
 const SEED=[];
 const KEY="okSaudeAgendamentos_v1";
 let D=load(),sort={k:"dt",d:1};
 function load(){try{const s=localStorage.getItem(KEY);if(s)return JSON.parse(s)}catch(e){}return JSON.parse(JSON.stringify(SEED))}
 const UKEY="okSaudeAtualizadoEm_v1",SKEY="okSaudeSync_v1";
 function upd(){try{return +localStorage.getItem(UKEY)||0}catch(e){return 0}}
-function touch(){try{localStorage.setItem(UKEY,String(Date.now()))}catch(e){}}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(D))}catch(e){}touch();schedulePush()}
+function touch(){try{localStorage.setItem(UKEY,String(Date.now()))}catch(e){}setDirty(true)}
+const DKEY="okSaudeDirty_v1";
+function dirty(){try{return localStorage.getItem(DKEY)==="1"}catch(e){return false}}
+function setDirty(v){try{v?localStorage.setItem(DKEY,"1"):localStorage.removeItem(DKEY)}catch(e){}}
+function js(r){return JSON.stringify(r,(k,v)=>k==="_t"?undefined:v)}
+let SNAP={};function snap(){SNAP={};D.forEach(r=>SNAP[r.id]=js(r))}snap();
+function stamp(){const n=Date.now();D.forEach(r=>{const o=js(r);if(SNAP[r.id]!==o){r._t=n;SNAP[r.id]=o}})}
+function toCloud(r){const o={...r};delete o._t;o.done={...(r.done||{}),__t:r._t||0,__h:r.hist||[]};delete o.hist;return o}
+function fromCloud(r){const o={...r},d={...(o.done||{})};o._t=+d.__t||0;o.hist=Array.isArray(d.__h)?d.__h:[];delete d.__t;delete d.__h;o.done=d;return o}
+function save(){stamp();try{localStorage.setItem(KEY,JSON.stringify(D))}catch(e){}touch();schedulePush()}
 function saveRules(){try{localStorage.setItem(RKEY,JSON.stringify(RULES))}catch(e){}touch();schedulePush()}
 /* ---- sincronização com Google Sheets (Apps Script) ---- */
 function syncCfg(){try{return JSON.parse(localStorage.getItem(SKEY))}catch(e){return null}}
 function syncMsg(s){const e=document.getElementById("syncst");if(e)e.textContent="☁ Sincronização: "+s}
 let pushT=null;
-function schedulePush(){if(!syncCfg())return;clearTimeout(pushT);pushT=setTimeout(push,1500)}
-async function push(){const c=syncCfg();if(!c)return;syncMsg("enviando…");
- try{const r=await fetch(c.url,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({k:c.key,updatedAt:upd()||Date.now(),data:D,rules:RULES})});const j=await r.json();
-  if(!j.ok)throw new Error(j.erro||"erro");syncMsg("ok · "+new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"}))}catch(e){syncMsg("falhou (dados seguem salvos neste navegador)")}}
-async function pull(){const c=syncCfg();if(!c)return;syncMsg("sincronizando…");
- try{const r=await fetch(c.url+(c.url.includes("?")?"&":"?")+"k="+encodeURIComponent(c.key));const j=await r.json();if(!j.ok)throw new Error(j.erro||"erro");
-  if(j.updatedAt>upd()&&(j.data||[]).length){D=j.data;if(j.rules&&j.rules.length)RULES=j.rules;try{localStorage.setItem(KEY,JSON.stringify(D));localStorage.setItem(RKEY,JSON.stringify(RULES));localStorage.setItem(UKEY,String(j.updatedAt))}catch(e){}render();syncMsg("ok · dados da nuvem carregados")}
-  else if(D.length||j.updatedAt===0){await push()}else syncMsg("ok")}catch(e){syncMsg("falhou (usando dados deste navegador)")}}
+function schedulePush(){if(!syncCfg())return;clearTimeout(pushT);pushT=setTimeout(()=>{pushT=null;push()},1500)}
+let NSCLR=false;
+async function push(){const c=syncCfg();if(!c)return;syncMsg("enviando…");const sent=upd();
+ try{const r=await fetch(c.url,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({k:c.key,updatedAt:upd()||Date.now(),data:D.map(toCloud),rules:RULES,sts:CUST,cons:(CONS.length||COCLR)?CONS:undefined,tma:(TMA.length||TMCLR)?TMA:undefined,ns:(NS.length||NSCLR)?NS:undefined})});const j=await r.json();
+  if(!j.ok)throw new Error(j.erro||"erro");NSCLR=false;COCLR=false;TMCLR=false;try{localStorage.removeItem("okSaudeZer")}catch(e){}if(upd()===sent)setDirty(false);syncMsg("ok · "+new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"}));await verifyNS(c)}catch(e){syncMsg("falhou (dados seguem salvos neste navegador)")}}
+const BKEY="okSaudeBackups_v1";
+function backups(){try{const a=JSON.parse(localStorage.getItem(BKEY));return Array.isArray(a)?a:[]}catch(e){return[]}}
+function snapBk(why){if(!D.length&&!NS.length&&!CONS.length&&!TMA.length)return;const L=backups();if(L[0]&&JSON.stringify(L[0].D)===JSON.stringify(D)&&JSON.stringify(L[0].NS)===JSON.stringify(NS)&&JSON.stringify(L[0].CO||[])===JSON.stringify(CONS)&&JSON.stringify(L[0].TM||[])===JSON.stringify(TMA))return;const s={at:Date.now(),why,n:D.length,ns:NS.length,D:JSON.parse(JSON.stringify(D)),NS:JSON.parse(JSON.stringify(NS)),CO:JSON.parse(JSON.stringify(CONS)),TM:JSON.parse(JSON.stringify(TMA)),C:JSON.parse(JSON.stringify(CUST)),R:JSON.parse(JSON.stringify(RULES))};L.unshift(s);
+ while(L.length){try{localStorage.setItem(BKEY,JSON.stringify(L.slice(0,10)));return}catch(e){L.pop()}}}
+function restoreB(i){const s=backups()[i];if(!s||!confirm("Restaurar o backup de "+new Date(s.at).toLocaleString("pt-BR")+"? O estado atual será guardado como backup antes."))return;snapBk("Antes de restaurar");D=s.D;NS=s.NS||[];if(s.CO)CONS=s.CO;if(s.TM)TMA=s.TM;CUST=s.C||[];if(s.R&&s.R.length)RULES=s.R;buildSts();D.forEach(r=>r._t=Date.now());savePers();snap();touch();schedulePush();render();renderNS();closeM();toast("Backup restaurado")}
+function dlBackup(){const o={app:"okSaude",at:new Date().toISOString(),D,NS,CO:CONS,TM:TMA,C:CUST,R:RULES};dl("backup_painel_oksaude_"+iso(new Date())+".json",JSON.stringify(o),"application/json")}
+function restFile(f){if(!f)return;const fr=new FileReader();fr.onload=()=>{try{const o=JSON.parse(fr.result);if(!Array.isArray(o.D))throw 0;if(!confirm("Restaurar "+o.D.length+" agendamento(s) deste arquivo? O estado atual será guardado como backup antes."))return;snapBk("Antes de restaurar arquivo");D=o.D;NS=o.NS||[];if(o.CO)CONS=o.CO;if(o.TM)TMA=o.TM;CUST=o.C||[];if(o.R&&o.R.length)RULES=o.R;buildSts();D.forEach(r=>r._t=Date.now());savePers();snap();touch();schedulePush();render();renderNS();closeM();toast("Backup restaurado")}catch(e){alert("Arquivo de backup inválido.")}};fr.readAsText(f)}
+
+const recInfo=s=>{const d=Object.keys(s.done||{}).filter(k=>k[0]!=="_");return (s.status&&s.status!=="Agendada")||!!s.obs||d.length>0||(s.hist||[]).length>0};
+const recBlank=r=>r.status==="Agendada"&&!r.obs&&!Object.keys(r.done||{}).filter(k=>k[0]!=="_").length&&!(r.hist||[]).length;
+function recNorm(x){const o={...x};if(typeof o.done==="string"){try{o.done=JSON.parse(o.done||"{}")}catch(e){o.done={}}}o.done=o.done&&typeof o.done==="object"?{...o.done}:{};if(Array.isArray(o.done.__h)&&!o.hist)o.hist=o.done.__h;delete o.done.__h;delete o.done.__t;o.hist=Array.isArray(o.hist)?o.hist:[];o.nome=String(o.nome||"");o.dt=String(o.dt||"");o.esp=String(o.esp||"");o.link=String(o.link||"");o.status=String(o.status||"");o.obs=String(o.obs||"");return o}
+function recApply(srcs){const S=srcs.map(recNorm).filter(recInfo),st={n:0,s:0,o:0,a:0,h:0};if(!S.length)return st;
+ D.forEach(r=>{const nn=nrm(r.nome),m=S.find(s=>s.id===r.id)||S.find(s=>r.link&&s.link===r.link)||S.find(s=>nrm(s.nome)===nn&&s.dt.slice(0,16)===r.dt.slice(0,16))||S.find(s=>nrm(s.nome)===nn&&s.esp===r.esp)||S.find(s=>nrm(s.nome)===nn);
+  if(!m)return;let ch=false;
+  if(recBlank(r)){if(m.status&&m.status!=="Agendada"){r.status=m.status;st.s++;ch=true}if(m.obs){r.obs=m.obs;st.o++;ch=true}if(Object.keys(m.done).length&&m.dt.slice(0,16)===r.dt.slice(0,16)){r.done={...m.done};st.a++;ch=true}}
+  else if(!r.obs&&m.obs){r.obs=m.obs;st.o++;ch=true}
+  if(m.hist.length){const hs=new Map();(r.hist||[]).concat(m.hist).forEach(h=>hs.set(h.k+"|"+h.at,h));if(hs.size>(r.hist||[]).length){r.hist=[...hs.values()];st.h++;ch=true}}
+  if(ch)st.n++});
+ return st}
+function recMsg(st){return st.n?`✔ ${st.n} agendamento(s) recuperado(s): status ${st.s} · observações ${st.o} · ações marcadas ${st.a} · histórico de mensagens ${st.h}.`:"Nada novo encontrado nesta fonte."}
+async function recAuto(){const out=$("rec_out");out.textContent="Procurando…";snapBk("Antes de recuperar dados");let src=[];
+ backups().forEach(b=>{if(b.D)src=src.concat(b.D)});src=src.concat(arq());
+ try{const c=syncCfg();if(c){const r=await fetch(c.url+(c.url.includes("?")?"&":"?")+"k="+encodeURIComponent(c.key)+"&_="+Date.now());const j=await r.json();if(j.ok)src=src.concat((j.data||[]).map(fromCloud))}}catch(e){}
+ const st=recApply(src);if(st.n){save();render()}out.textContent=recMsg(st)+" (fontes: "+backups().length+" backup(s) deste aparelho"+(syncCfg()?" e a nuvem":"")+")"}
+async function recFile(f){if(!f)return;const out=$("rec_out");let src=[];
+ try{if(/\.json$/i.test(f.name)){const o=JSON.parse(await f.text());src=Array.isArray(o)?o:(o.D||[])}
+  else{const wb=XLSX.read(await f.arrayBuffer(),{type:"array",raw:true}),ws=wb.Sheets.Agendamentos||wb.Sheets[wb.SheetNames[0]];src=XLSX.utils.sheet_to_json(ws,{defval:""})}}catch(e){out.textContent="Não foi possível ler o arquivo.";return}
+ src=src.filter(x=>x&&(x.nome||x.Nome)).map(x=>({...x,nome:x.nome||x.Nome}));
+ if(!src.length){out.textContent="O arquivo não tem agendamentos no formato esperado (colunas id, nome, dt, status, obs, done…).";return}
+ snapBk("Antes de recuperar de arquivo");const st=recApply(src);if(st.n){save();render()}out.textContent=recMsg(st)+" (arquivo com "+src.length+" linha(s))"}
+function openRec(){$("mb").innerHTML=`<h3 style="margin:0;color:#1B2A4A">Recuperar status, observações e histórico</h3>
+ <p style="color:#555;font-size:13px;margin:6px 0">Procura dados já alimentados e reaplica nos agendamentos <b>sem sobrescrever o que já foi preenchido</b>: só preenche agendamentos que estão "em branco" (status Agendada, sem observação, sem ações e sem histórico) e soma o histórico de mensagens.</p>
+ <div style="display:flex;flex-direction:column;gap:10px;margin:10px 0"><div><button class="btn p" onclick="recAuto()">Buscar nos backups deste aparelho e na nuvem</button></div>
+ <div style="font-size:13px"><b>Ou a partir de um arquivo</b> <small style="color:#666">(.json de backup antigo ou novo, ou a aba Agendamentos da planilha Google exportada em .xlsx/.csv, inclusive de uma versão antiga pelo Histórico de versões)</small><br><input type="file" accept=".json,.xlsx,.xls,.csv" onchange="recFile(this.files[0]);this.value=''" style="margin-top:6px"></div></div>
+ <div id="rec_out" style="font-size:13px;min-height:20px;color:#1B2A4A"></div><div style="text-align:right;margin-top:8px"><button class="btn" onclick="closeM()">Fechar</button></div>`;$("m").classList.add("on")}
+function openBackups(){const L=backups();$("mb").innerHTML=`<h3 style="margin:0;color:#1B2A4A">Backups de segurança</h3><p style="color:#666;font-size:12px;margin:4px 0">Cópia automática guardada neste aparelho antes de qualquer ação que substitua dados (atualizar base, zerar, trazer dados da nuvem). Últimos 10.</p>
+ <div style="max-height:260px;overflow:auto;margin:8px 0">${L.length?L.map((s,i)=>`<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #eee;font-size:13px"><span>${new Date(s.at).toLocaleString("pt-BR")} · ${esc(s.why)}<br><small style="color:#666">${s.n} agendamento(s) · ${s.ns} no show</small></span><button class="btn" onclick="restoreB(${i})">Restaurar</button></div>`).join(""):"<p>Nenhum backup ainda.</p>"}</div>
+ <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:space-between"><div><button class="btn" onclick="dlBackup()">⬇ Baixar backup (.json)</button> <label class="btn" style="cursor:pointer">⬆ Restaurar de arquivo<input type="file" accept=".json" style="display:none" onchange="restFile(this.files[0])"></label></div><button class="btn" onclick="closeM()">Fechar</button></div>`;$("m").classList.add("on")}
+let NSWARN="",CWARN="";
+async function verifyNS(c){if(!NS.length&&!CONS.length&&!TMA.length){NSWARN="";CWARN="";TWARN="";return}
+ try{const r=await fetch(c.url+(c.url.includes("?")?"&":"?")+"k="+encodeURIComponent(c.key)+"&_="+Date.now());const j=await r.json();const n=Array.isArray(j.ns)?j.ns.length:-1;
+  NSWARN=n<NS.length?(n<0?"A nuvem não devolveu a lista de No Show: o Apps Script implantado está desatualizado.":"A nuvem guardou só "+n+" de "+NS.length+" registros de No Show."):"";
+  const cn=Array.isArray(j.cons)?j.cons.length:-1;CWARN=cn<CONS.length?(cn<0?"A nuvem não devolveu o histórico de consultas: o Apps Script implantado está desatualizado.":"A nuvem guardou só "+cn+" de "+CONS.length+" consultas."):"";
+  const tn=Array.isArray(j.tma)?j.tma.length:-1;TWARN=tn<TMA.length?(tn<0?"A nuvem não devolveu os dados de tempo de atendimento: o Apps Script implantado está desatualizado.":"A nuvem guardou só "+tn+" de "+TMA.length+" atendimentos."):"";
+  if(NSWARN)syncMsg("⚠ No Show NÃO gravado na nuvem");else if(CWARN)syncMsg("⚠ Histórico de consultas NÃO gravado na nuvem");else if(TWARN)syncMsg("⚠ Tempo de atendimento NÃO gravado na nuvem")}catch(e){}
+ if($("nsb"))renderNS();if($("co_body"))renderCO();if($("tm_body"))renderTM()}
+let PULLING=false;
+function savePers(){try{localStorage.setItem(KEY,JSON.stringify(D));localStorage.setItem(RKEY,JSON.stringify(RULES));localStorage.setItem(NSKEY,JSON.stringify(NS));localStorage.setItem(CKEY,JSON.stringify(CUST));localStorage.setItem(COKEY,JSON.stringify(CONS));localStorage.setItem(TMKEY,JSON.stringify(TMA))}catch(e){}}
+async function pull(quiet){const c=syncCfg();if(!c||PULLING)return;PULLING=true;try{if(!localStorage.getItem("okSaudeMigSync1")){localStorage.setItem("okSaudeMigSync1","1");if(D.length||NS.length||CONS.length)setDirty(true)}}catch(e){}if(!quiet)syncMsg("sincronizando…");
+ try{const r=await fetch(c.url+(c.url.includes("?")?"&":"?")+"k="+encodeURIComponent(c.key)+"&_="+Date.now());const j=await r.json();if(!j.ok)throw new Error(j.erro||"erro");
+  const ru=+j.updatedAt||0,lu=upd(),rd=(j.data||[]).map(fromCloud),rco=Array.isArray(j.cons)?j.cons:null,rtm=Array.isArray(j.tma)?j.tma:null,uni=(r,l)=>{const s=new Set(r.map(x=>x.id));return r.concat(l.filter(x=>!s.has(x.id)))},rns=Array.isArray(j.ns)?j.ns:null,rsts=Array.isArray(j.sts)?j.sts:null;
+  if(dirty()&&ru>lu&&(rd.length||(rns&&rns.length)||(rco&&rco.length))){
+   const m={},sd={};SEED.forEach(r=>sd[r.id]=js(r));rd.forEach(x=>m[x.id]=x);D.forEach(x=>{const y=m[x.id],xt=x._t||0,yt=y?(y._t||0):0;if(!y||xt>yt||(xt===yt&&(xt>0||sd[x.id]!==js(x))))m[x.id]=x;if(y){const hs=new Map();(y.hist||[]).concat(x.hist||[]).forEach(h=>hs.set(h.k+"|"+h.at,h));m[x.id]={...m[x.id],hist:[...hs.values()]}}});D=Object.values(m);
+   if(rns){const s=new Set(NS.map(x=>x.id));NS=NS.concat(rns.filter(x=>!s.has(x.id)))}
+   if(rsts){const s=new Set(CUST.map(x=>x.n));CUST=CUST.concat(rsts.filter(x=>!s.has(x.n)));buildSts()}
+   if(rco)CONS=uni(rco,CONS);if(rtm)TMA=uni(rtm,TMA);
+   savePers();snap();touch();render();renderNS();await push();return}
+  const zer=(()=>{try{return localStorage.getItem("okSaudeZer")==="1"}catch(e){return false}})(),stale=!D.length&&rd.length>0&&!zer;
+  if((ru>lu&&(ru>0)&&!dirty())||stale){snapBk("Antes de trazer dados da nuvem");D=rd;if(rns){const s=new Set(rns.map(x=>x.id));NS=rns.concat(NS.filter(x=>!s.has(x.id)))}if(rco)CONS=uni(rco,CONS);if(rtm)TMA=uni(rtm,TMA);if(j.rules&&j.rules.length)RULES=j.rules;if(rsts){CUST=rsts;buildSts()}savePers();try{localStorage.setItem(UKEY,String(ru));if(stale)setDirty(false)}catch(e){}savePers();snap();render();renderNS();syncMsg("ok · atualizado da nuvem "+new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"}));renderCO();if(NS.length>(rns?rns.length:0)||CONS.length>(rco?rco.length:0)||TMA.length>(rtm?rtm.length:0)){touch();await push()}return}
+  if(!NS.length&&rns&&rns.length){NS=rns;try{localStorage.setItem(NSKEY,JSON.stringify(NS))}catch(e){}renderNS()}
+  if(!CONS.length&&rco&&rco.length){CONS=rco;try{localStorage.setItem(COKEY,JSON.stringify(CONS))}catch(e){}renderCO()}
+  if(!TMA.length&&rtm&&rtm.length){TMA=rtm;try{localStorage.setItem(TMKEY,JSON.stringify(TMA))}catch(e){}renderCO()}
+  if(dirty()||ru<lu||ru===0&&(D.length||NS.length)||NS.length>(rns?rns.length:0)||CONS.length>(rco?rco.length:0)||TMA.length>(rtm?rtm.length:0)){await push()}else syncMsg("ok · "+new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"}))
+ }catch(e){syncMsg("falhou (usando dados deste navegador)")}finally{PULLING=false}}
+function editing(){const a=document.activeElement;return (a&&/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName))||$("m").classList.contains("on")}
+function autoPull(){if(!syncCfg()||document.hidden||pushT||editing())return;pull(true)}
+setInterval(autoPull,30000);document.addEventListener("visibilitychange",()=>{if(!document.hidden)autoPull()});window.addEventListener("focus",autoPull);
+async function sincronizar(){
+ if(PEND){await confirmLoad();toast("Base atualizada");return}
+ if(!syncCfg()){openSync();return}
+ toast("Sincronizando…");await pull();render();const s=document.getElementById("syncst");toast((s?s.textContent:"").replace("☁ ","")||"Concluído")}
 function openSync(){const c=syncCfg()||{url:"",key:""};$("mb").innerHTML=`<h3 style="margin:0;color:#1B2A4A">Sincronização (Google Sheets)</h3>
  <p style="color:#666;font-size:12px;margin:4px 0">Guarda os dados numa planilha Google e permite o relatório diário das 08h. Cole o endereço do Apps Script (termina em /exec) e a chave definida no script.</p>
  <label>URL do Apps Script</label><input id="s_url" value="${esc(c.url)}" placeholder="https://script.google.com/macros/s/.../exec">
@@ -132,7 +362,8 @@ let TODAY=iso(new Date());
 const fmt=s=>s?`${s.slice(8,10)}/${s.slice(5,7)}/${s.slice(0,4)} ${s.slice(11,16)}`:"";
 const fmtD=s=>`${s.slice(8,10)}/${s.slice(5,7)}`;
 const addDays=(n)=>{const d=new Date();d.setDate(d.getDate()+n);return iso(d)};
-const open=r=>["Agendada","Confirmada","Reagendada"].includes(r.status);
+const open=r=>OPEN0.includes(r.status)||CUST.some(s=>s.n===r.status&&s.o);
+const stOpts=cur=>Object.keys(STS).map(s=>`<option ${s===cur?"selected":""}>${esc(s)}</option>`).join("")+`<option value="__novo__">＋ Novo status…</option>`;
 const late=r=>open(r)&&r.dt.slice(0,16)<new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,16);
 const mask=c=>{c=String(c).replace(/\D/g,"").padStart(11,"0");return "***."+c.slice(3,6)+"."+c.slice(6,9)+"-**"};
 const fcpf=c=>{c=String(c).replace(/\D/g,"").padStart(11,"0");return `${c.slice(0,3)}.${c.slice(3,6)}.${c.slice(6,9)}-${c.slice(9)}`};
@@ -141,52 +372,106 @@ function fill(sel,label,arr){const v=sel.value;sel.innerHTML=`<option value="">$
 function uniq(k){return [...new Set(D.map(r=>r[k]))].sort((a,b)=>a.localeCompare(b,"pt"))}
 const DEFR=[
 {id:"r0",on:true,kind:"criar",h:48,txt:"Ao agendar: enviar a confirmação do agendamento com o link do paciente",cond:"todas",fx:"",msg:"m1"},
-{id:"r1",on:true,kind:"horas",h:72,txt:"72h: lembrar da consulta e pedir que responda CONFIRMO",cond:"naoconf",fx:"",msg:"m2"},
-{id:"r2",on:true,kind:"horas",h:48,txt:"48h sem resposta: cancelar o agendamento e avisar o paciente",cond:"naoconf",fx:"cancel",msg:"m3"},
+{id:"r1",on:true,kind:"horas",h:96,txt:"96h: lembrar da consulta e pedir que responda CONFIRMO",cond:"naoconf",fx:"",msg:"m2"},
+{id:"r2",on:true,kind:"horas",h:72,txt:"72h sem resposta: cancelar o agendamento e avisar o paciente",cond:"naoconf",fx:"cancel",msg:"m3"},
 {id:"r3",on:true,kind:"dia",h:0,txt:"Hoje: lembrar o horário da consulta e reenviar o link",cond:"conf",fx:"",msg:"m4"}];
 const MSG={
-m1:`Olá, {nome}! 👋
+ini:`Olá, {nome}! Tudo bem? 👋
+Temos uma ótima notícia! 😃
 
-Sua consulta de *{especialidade}* pela OK Saúde foi agendada:
+Sua consulta de {especialidade}, com {profissional}, está agendada!
 
 📅 Data: {data}
-🕒 Horário: {hora}
-👨‍⚕️ Profissional: {profissional}
+⏰ Horário: {hora}
 
-Guarde o link da sua consulta:
-🔗 {link}
+🔗 Link da consulta:
+{link}
 
-Próximo passo: próximo ao dia da consulta vamos pedir a sua confirmação de presença. Qualquer dúvida, estamos à disposição!`,
-m2:`Olá, {nome}! Tudo bem?
+Agradecemos pela confiança em nossos serviços! Será um prazer acompanhá-lo nesse atendimento.
 
-Passando para lembrar da sua consulta de *{especialidade}* com {profissional}:
-📅 {data} às {hora}
+Em breve, entraremos em contato para confirmar sua presença.
 
-Para mantermos o seu horário reservado, *responda CONFIRMO* a esta mensagem.
+Equipe de Atendimento - Ok Saúde 💙`,
+conf:`Olá, {nome}! Tudo bem? 👋
 
-⚠️ Se não recebermos sua confirmação até {prazo}, o agendamento será cancelado para liberar o horário a outro paciente. Se preferir reagendar, é só nos avisar.`,
+Estamos entrando em contato para confirmar sua consulta de {especialidade}, com {profissional}.
+
+📅 Data: {data}
+⏰ Horário: {hora}
+
+🔗 Link de acesso à consulta:
+{link}
+
+Para confirmar sua presença, responda a esta mensagem com a palavra CONFIRMO.
+
+⏳ Prazo limite para confirmação: {prazoConf} ({horasLim} horas antes da consulta).
+
+⚠️ A ausência de confirmação dentro desse prazo poderá acarretar o cancelamento automático do agendamento.
+
+Caso não possa comparecer, pedimos que nos avise com a maior antecedência possível, para que possamos disponibilizar o horário para outro paciente.
+
+Contamos com sua colaboração! ☺️
+
+Equipe de Atendimento - Ok Saúde 💙`,
+lemb:`Olá, {nome}! Tudo bem? 👋
+
+Passando para lembrar que sua consulta de {especialidade}, com {profissional}, está próxima!
+
+📅 Data: {data}
+⏰ Horário: {hora}
+
+💙 O profissional estará em sala aguardando por você no dia e horário agendados.
+
+Equipe de Atendimento - Ok Saúde 💙`,
+nsc:`Olá, {nome}! Tudo bem? 👋
+
+Identificamos que houve uma ausência em seu último atendimento agendado, o que impossibilitou a realização desse novo agendamento.
+
+Por esse motivo, conforme nossa política de utilização dos serviços, novos agendamentos com médicos especialistas ficarão temporariamente indisponíveis pelo período de 30 dias.
+
+📅 Você poderá retomar seus agendamentos com especialistas a partir de {liberacao}.
+
+🚨Importante: Durante esse período, o atendimento com o médico Clínico Geral continuará disponível normalmente, 24 horas por dia.
+
+Agradecemos sua compreensão e esperamos recebê-lo novamente em breve!
+
+Equipe de Atendimento - Ok Saúde 💙`,
 m3:`Olá, {nome}.
 
 Como não recebemos a confirmação da sua consulta de *{especialidade}* ({data} às {hora}), o agendamento foi *cancelado* para liberar o horário.
 
-Se ainda tiver interesse na consulta, é só responder esta mensagem que providenciamos um novo agendamento. Estamos à disposição!`,
-m4:`Bom dia, {nome}! ☀️
-
-Hoje é o dia da sua consulta de *{especialidade}* com {profissional}, às *{hora}*.
-
-Acesse pelo link no horário:
-🔗 {link}
-
-Dica: entre alguns minutos antes, em um local silencioso, com boa internet e com câmera e microfone liberados. Até já!`};
-function fillMsg(key,r){const d=new Date(Date.parse(r.dt)-((RULES.find(x=>x.fx==="cancel")||{h:48}).h)*36e5);
+Se ainda tiver interesse na consulta, é só responder esta mensagem que providenciamos um novo agendamento. Estamos à disposição!`};
+MSG.m1=MSG.ini;MSG.m2=MSG.conf;MSG.m5=MSG.conf;MSG.m4=MSG.lemb;
+const MLAB={ini:"Mensagem inicial",m1:"Mensagem inicial",conf:"Mensagem de confirmação",m2:"Mensagem de confirmação",m5:"Mensagem de confirmação",lemb:"Mensagem de lembrete",m4:"Mensagem de lembrete",nsc:"Cancelamento por No Show",m3:"Cancelamento (sem confirmação)"};
+function fillMsg(key,r,ex){const d=new Date(Date.parse(r.dt)-((RULES.find(x=>x.fx==="cancel")||{h:72}).h)*36e5);
  const nome=(r.nome.split(" ")[0]||"").toLowerCase().replace(/^./,c=>c.toUpperCase());
- const v={nome,especialidade:r.esp,data:fmt(r.dt).slice(0,10),hora:r.dt.slice(11,16),profissional:r.prof,link:r.link||"(link indisponível)",prazo:`${pad(d.getDate())}/${pad(d.getMonth()+1)} às ${pad(d.getHours())}:${pad(d.getMinutes())}`};
+ const v={nome,especialidade:r.esp,data:fmt(r.dt).slice(0,10),hora:r.dt.slice(11,13)+"h"+r.dt.slice(14,16),profissional:r.prof,link:r.link||"(link indisponível)",prazo:d.getTime()<Date.now()?"o quanto antes":`até ${pad(d.getDate())}/${pad(d.getMonth()+1)} às ${pad(d.getHours())}:${pad(d.getMinutes())}`,prazoConf:`${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()}, às ${pad(d.getHours())}h${pad(d.getMinutes())}`,horasLim:(RULES.find(x=>x.fx==="cancel")||{h:72}).h,...(ex||{}),limite:d.getTime()<Date.now()?"o quanto antes":`até ${(RULES.find(x=>x.fx==="cancel")||{h:72}).h}h antes da consulta (${pad(d.getDate())}/${pad(d.getMonth()+1)} às ${pad(d.getHours())}:${pad(d.getMinutes())})`};
  return (MSG[key]||"").replace(/\{(\w+)\}/g,(m,k)=>v[k]??m)}
 function toast(s){let e=$("toast");if(!e){e=document.createElement("div");e.id="toast";document.body.appendChild(e)}e.textContent=s;e.className="toast on";clearTimeout(toast.t);toast.t=setTimeout(()=>e.className="toast",2200)}
-function copyMsg(id,key){const r=D.find(x=>x.id===id),txt=fillMsg(key,r);
- (navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(()=>toast("Mensagem copiada: cole no WhatsApp"),()=>prompt("Copie a mensagem:",txt))}
+const nrm=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/\s+/g," ").trim();
+function nscLib(r){const cp=String(r.cpf||"").replace(/\D/g,"").padStart(11,"0"),nn=nrm(r.nome);
+ const g=(typeof nsGroups==="function"?nsGroups():[]).find(x=>(String(x.cpf||"").replace(/\D/g,"").padStart(11,"0")===cp&&cp!=="00000000000")||nrm(x.nome)===nn);
+ let rel=g?g.rel:null;
+ if(!rel){const s=prompt("Este paciente não está na lista de No Show. Informe a data do no show (dd/mm/aaaa) para calcular a liberação em 30 dias:","");if(!s)return null;const m=s.match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);if(!m){alert("Data inválida.");return null}rel=new Date(+m[3],+m[2]-1,+m[1]);rel.setDate(rel.getDate()+30)}
+ return `${pad(rel.getDate())}/${pad(rel.getMonth()+1)}/${rel.getFullYear()}`}
+function copyMsg(id,key){const r=D.find(x=>x.id===id);let ex=null;
+ if(key==="nsc"){const l=nscLib(r);if(!l)return;ex={liberacao:l}}
+ const txt=fillMsg(key,r,ex);
+ r.hist=(r.hist||[]).concat([{k:key,at:Date.now()}]);save();render();
+ (navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(()=>toast((MLAB[key]||"Mensagem")+" copiada · registrada no histórico"),()=>prompt("Copie a mensagem:",txt))}
+const fdh=ms=>{const d=new Date(ms);return `${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`};
+function openHist(id){const r=D.find(x=>x.id===id),h=(r.hist||[]).slice().sort((a,b)=>b.at-a.at);
+ $("mb").innerHTML=`<h3 style="margin:0;color:#1B2A4A">Histórico de mensagens</h3><p style="color:#666;font-size:12px;margin:4px 0">${esc(r.nome)} · ${esc(r.esp)} · ${fmt(r.dt)}</p>
+ <div style="max-height:300px;overflow:auto;margin:8px 0">${h.length?h.map(x=>`<div style="padding:6px 0;border-bottom:1px solid #eee;font-size:13px"><b>${esc(MLAB[x.k]||x.k)}</b><br><small style="color:#666">${fdh(x.at)}</small></div>`).join(""):"<p>Nenhuma mensagem copiada ainda.</p>"}</div>
+ <div style="text-align:right"><button class="btn" onclick="closeM()">Fechar</button></div>`;$("m").classList.add("on")}
+function msgBar(r){const n=(r.hist||[]).length,l=(r.hist||[]).slice().sort((a,b)=>b.at-a.at)[0];
+ return `<div style="display:flex;flex-wrap:wrap;gap:3px;margin-top:4px;max-width:230px"><button class="btn mini" onclick="copyMsg('${r.id}','ini')">Inicial</button><button class="btn mini" onclick="copyMsg('${r.id}','conf')">Confirmação</button><button class="btn mini" onclick="copyMsg('${r.id}','lemb')">Lembrete</button><button class="btn mini d" onclick="copyMsg('${r.id}','nsc')">Cancel. No Show</button><button class="btn mini" onclick="openHist('${r.id}')">🕘 Histórico${n?" ("+n+")":""}</button></div>${l?`<div style="font-size:10px;color:#666;margin-top:2px">Última: ${esc((MLAB[l.k]||l.k).replace("Mensagem de ","").replace("Mensagem ",""))} ${fdh(l.at).slice(0,16)}</div>`:""}`}
 const RKEY="okSaudeRegras_v2",IKEY="okSaudeUltimaBase_v1";
 let RULES=(()=>{try{const s=localStorage.getItem(RKEY);if(s)return JSON.parse(s)}catch(e){}return JSON.parse(JSON.stringify(DEFR))})();
+(function(){try{if(localStorage.getItem("okSaudeMig72"))return;localStorage.setItem("okSaudeMig72","1")}catch(e){return}
+ const r2=RULES.find(x=>x.id==="r2"&&x.fx==="cancel"&&x.h===48),r1=RULES.find(x=>x.id==="r1"&&x.h===72);
+ if(r2){r2.h=72;r2.txt="72h sem resposta: cancelar o agendamento e avisar o paciente";if(r1){r1.h=96;r1.txt="96h: lembrar da consulta e pedir que responda CONFIRMO"}
+  try{localStorage.setItem(RKEY,JSON.stringify(RULES))}catch(e){}}})();
 const POST={id:"post",txt:"Horário já passou: dar baixa (Realizada ou Não compareceu)",post:true};
 const condOk=(x,r)=>x.cond==="todas"||(x.cond==="conf"?r.status==="Confirmada":r.status!=="Confirmada");
 const hrs=r=>(Date.parse(r.dt)-Date.now())/36e5;
@@ -212,8 +497,8 @@ function acaoCell(r){const a=act(r);
  if(a){const btn=a.post?`<button class="btn mini" onclick="setSt('${r.id}','Realizada')">Realizada</button> <button class="btn mini d" onclick="setSt('${r.id}','Não compareceu')">Não compareceu</button>`
   :`${a.msg?`<button class="btn mini" onclick="copyMsg('${r.id}','${a.msg}')">Copiar mensagem</button> `:""}<button class="btn mini p" onclick="doAct('${r.id}','${a.id}')">${a.fx==="cancel"?"Cancelar consulta":"Feito"}</button>`;
   return `<div class="ac ${a.post?"post":a.fx==="cancel"?"cx":"due"}"><b>${esc(a.txt)}</b>${btn}</div>`}
- if(!open(r))return "—";const n=nextRule(r);
- return `<div class="ac"><b style="color:#2e8b57">Aguardar</b>${n?`<span class="nx">Próxima: ${esc(n.x.txt)} em ${dur(n.wait)}</span>`:""}</div>`}
+ if(!open(r))return r.status==="Cancelada"?`<div class="ac"><b style="color:#8a8f98">Cancelada</b><button class="btn mini" title="Copia a mensagem avisando o cancelamento" onclick="copyMsg('${r.id}','m3')">Copiar mensagem de cancelamento</button></div>`:"—";const n=nextRule(r);
+ return `<div class="ac"><b style="color:#2e8b57">Aguardar</b>${n?`<span class="nx">Próxima: ${esc(n.x.txt)} em ${dur(n.wait)}</span>`:""}${r.status!=="Confirmada"?`<button class="btn mini" title="Copia a mensagem pedindo a confirmação do agendamento" onclick="copyMsg('${r.id}','m5')">Copiar mensagem de confirmação</button>`:""}</div>`}
 function doAct(id,rid){const r=D.find(x=>x.id===id),x=RULES.find(y=>y.id===rid);if(!x)return;
  if(x.fx==="cancel"&&!confirm("Cancelar a consulta de "+r.nome+"?"))return;
  r.done=r.done||{};r.done[rid]=new Date().toISOString();if(x.fx==="cancel")r.status="Cancelada";save();render()}
@@ -222,7 +507,7 @@ function filtered(){
  const q=$("q").value.toLowerCase(),s=$("fs").value,e=$("fe").value,p=$("fp").value,d=$("fd").value;
  return D.filter(r=>{
   if(q&&!(r.nome+" "+r.cpf+" "+r.prof+" "+r.esp+" "+(r.obs||"")).toLowerCase().includes(q))return false;
-  if(s&&r.status!==s)return false;if(e&&r.esp!==e)return false;if(p&&r.prof!==p)return false;
+  if(s==="aconf"){if(r.status!=="Agendada"&&r.status!=="Mensagem enviada")return false}else if(s&&r.status!==s)return false;if(e&&r.esp!==e)return false;if(p&&r.prof!==p)return false;
   const day=r.dt.slice(0,10);
   if(d==="hoje"&&day!==TODAY)return false;if(d==="amanha"&&day!==addDays(1))return false;
   if(d==="7"&&!(day>=TODAY&&day<=addDays(7)))return false;if(d==="atraso"&&!late(r))return false;
@@ -233,32 +518,50 @@ const COLS=[["dt","Horário"],["falta","Faltam"],["acao","O que fazer"],["nome",
 let ch={};
 function render(){
  TODAY=iso(new Date());
- fill($("fs"),"Todos os status",Object.keys(STS));fill($("fe"),"Todas as especialidades",uniq("esp"));fill($("fp"),"Todos os profissionais",uniq("prof"));
+ {const v0=$("fs").value;fill($("fs"),"Todos os status",Object.keys(STS));$("fs").insertAdjacentHTML("beforeend",'<option value="aconf">A confirmar (agendada + msg. enviada)</option>');if(v0==="aconf")$("fs").value=v0}fill($("fe"),"Todas as especialidades",uniq("esp"));fill($("fp"),"Todos os profissionais",uniq("prof"));
  $("th").innerHTML=COLS.map(([k,l])=>`<th ${k?`onclick="sortBy('${k}')"`:""}>${l}${sort.k===k?(sort.d>0?" ▲":" ▼"):""}</th>`).join("");
  const L=filtered(),show=$("cpfv").checked;
  $("tb").innerHTML=L.map(r=>{const c=cd(r);return `<tr class="${r.dt.slice(0,10)===TODAY?"hoje":""} ${late(r)?"atraso":""} ${act(r)&&!act(r).post?"due":""}">
  <td style="white-space:nowrap"><b>${fmt(r.dt)}</b></td><td class="cdn ${c?c.c:""}">${c?`<b>${c.t}</b><small>${c.s}</small>`:"—"}</td><td>${acaoCell(r)}</td>
  <td>${esc(r.nome)}${r.ausente?`<br><span class="aus" title="Não veio na última planilha: possível cancelamento ou reagendamento no Rapidoc. Verifique.">⚠ fora da última base</span>`:""}</td><td>${esc(r.esp)}</td><td>${esc(r.prof)}</td>
- <td><select class="st" style="background:${STS[r.status]}" onchange="setSt('${r.id}',this.value)">${Object.keys(STS).map(s=>`<option ${s===r.status?"selected":""}>${s}</option>`).join("")}</select></td>
+ <td><select class="st" style="background:${STS[r.status]}" onchange="setSt('${r.id}',this.value)">${stOpts(r.status)}</select></td>
  <td style="white-space:nowrap">${show?fcpf(r.cpf):mask(r.cpf)}</td><td style="min-width:130px">${esc(r.obs)}</td>
- <td style="white-space:nowrap"><button class="btn mini" onclick="cp('${r.id}')">Copiar link</button> <button class="btn mini" onclick="openForm('${r.id}')">Editar</button></td></tr>`}).join("")||`<tr><td colspan="10" style="text-align:center;padding:20px">Nenhum agendamento encontrado.</td></tr>`;
+ <td><button class="btn mini" onclick="openForm('${r.id}')">Editar</button>${msgBar(r)}</td></tr>`}).join("")||`<tr><td colspan="10" style="text-align:center;padding:20px">Nenhum agendamento encontrado.</td></tr>`;
  let li=null;try{li=JSON.parse(localStorage.getItem(IKEY))}catch(e){}
  $("sub").textContent="Telemedicina · Rapidoc · data-base: hoje "+fmt(TODAY+"T00:00").slice(0,10)+" · "+(li?"base atualizada em "+new Date(li.at).toLocaleString("pt-BR",{dateStyle:"short",timeStyle:"short"}):(D.length?"base: planilha original":"nenhuma base carregada"));
  $("cnt").textContent=`${L.length} de ${D.length} agendamentos`;
  // KPIs
  const t=D.length,hj=D.filter(r=>r.dt.slice(0,10)===TODAY).length,s7=D.filter(r=>open(r)&&r.dt.slice(0,10)>=TODAY&&r.dt.slice(0,10)<=addDays(7)).length;
- const pend=D.filter(r=>r.status==="Agendada"&&r.dt.slice(0,10)>=TODAY).length,at=D.filter(late).length;
+ const pend=D.filter(r=>(r.status==="Agendada"||r.status==="Mensagem enviada")&&r.dt.slice(0,10)>=TODAY).length,at=D.filter(late).length;
  const real=D.filter(r=>r.status==="Realizada").length,nc=D.filter(r=>r.status==="Não compareceu").length,canc=D.filter(r=>r.status==="Cancelada").length;
  const tx=(real+nc)?Math.round(nc/(real+nc)*100)+"%":"—";
  const ap=D.filter(r=>act(r)&&!act(r).post).length,cx=D.filter(r=>{const a=act(r);return a&&a.fx==="cancel"}).length;
- const K=[["Total",t,"",""],["Hoje",hj,"fd","hoje"],["Próx. 7 dias",s7,"fd","7"],["Ações a executar",ap,"fa","pend",ap?"w":""],["Para cancelar",cx,"fa","pend",cx?"w":""],["A confirmar",pend,"fs","Agendada"],["Passadas sem baixa",at,"fd","atraso",at?"w":""],["Realizadas",real,"fs","Realizada"],["Taxa de falta",tx,"fs","Não compareceu"],["Canceladas",canc,"fs","Cancelada"]];
+ const K=[["Total",t,"",""],["Hoje",hj,"fd","hoje"],["Próx. 7 dias",s7,"fd","7"],["Ações a executar",ap,"fa","pend",ap?"w":""],["Para cancelar",cx,"fa","pend",cx?"w":""],["A confirmar",pend,"fs","aconf"],["Passadas sem baixa",at,"fd","atraso",at?"w":""],["Realizadas",real,"fs","Realizada"],["Taxa de falta",tx,"fs","Não compareceu"],["Canceladas",canc,"fs","Cancelada"]];
  $("kpis").innerHTML=K.map(k=>`<div class="kpi ${k[4]||""}" onclick="kf('${k[2]}','${k[3]}')"><b>${k[1]}</b><span>${k[0]}</span></div>`).join("");
  const al=$("alert");al.style.display=at?"block":"none";al.innerHTML=`⚠ <b>${at}</b> agendamento(s) com horário vencido ainda sem baixa. <a href="#" onclick="kf('fd','atraso');return false">Ver e atualizar status</a>`;
-  charts();renderResumo();
+  if(document.body.dataset.tab==="dashboard")charts();heatmap();renderResumo();renderNS();
 }
-function setTab(k){document.body.dataset.tab=k;$("t_agenda").classList.toggle("on",k==="agenda");$("t_resumo").classList.toggle("on",k==="resumo");try{if(k==="agenda")charts()}catch(e){}}
+let HMD=[];
+function heatmap(){const el=$("hm");if(!el)return;HMD=[];const tp0=$("hmtip");if(tp0)tp0.style.display="none";const rows=D.filter(r=>r.status!=="Cancelada"&&r.dt);
+ const DS=["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"],map={};let hs=rows.map(r=>+r.dt.slice(11,13)),mx=0;
+ rows.forEach(r=>{const d=r.dt.slice(0,10),h=+r.dt.slice(11,13);((map[d]=map[d]||{})[h]=map[d][h]||[]).push(r)});
+ const days=Object.keys(map).sort();let a=Math.min(8,...hs),z=Math.max(18,...hs);if(!rows.length){a=8;z=18}
+ days.forEach(d=>Object.values(map[d]).forEach(l=>mx=Math.max(mx,l.length)));
+ const N=days.length,H=z-a+1;el.style.gridTemplateColumns=`56px repeat(${H},minmax(0,1fr))`;el.style.gridTemplateRows=`14px repeat(${Math.max(N,1)},minmax(10px,1fr))`;
+ const wd=d=>DS[new Date(+d.slice(0,4),+d.slice(5,7)-1,+d.slice(8,10)).getDay()];
+ let h='<div class="hl"></div>';
+ for(let i=a;i<=z;i++)h+=`<div class="hl">${String(i).padStart(2,"0")}h</div>`;
+ days.forEach(d=>{h+=`<div class="hl hy" style="white-space:nowrap;${d===TODAY?"font-weight:700;color:#1B2A4A;":""}">${d.slice(8,10)}/${d.slice(5,7)} ${wd(d)}${d===TODAY?" •":""}</div>`;
+  for(let i=a;i<=z;i++){const hh=String(i).padStart(2,"0")+"h",l=(map[d]||{})[i]||[],v=l.length;
+   h+=v?`<div class="hc" style="background:rgba(230,161,0,${(.25+.75*v/mx).toFixed(2)});${v/mx>.7?"color:#fff;":""}" data-i="${HMD.push({t:`${wd(d)} ${d.slice(8,10)}/${d.slice(5,7)} às ${hh}`,l:l.slice().sort((a,b)=>a.dt<b.dt?-1:1)})-1}">${v}</div>`:`<div class="hc"></div>`}});
+ el.innerHTML=h;$("hmleg").textContent=rows.length?`· escuro = mais (máx. ${mx})`:"· sem dados"}
+function hmTip(e){const tp=$("hmtip"),c=e.target.closest&&e.target.closest(".hc[data-i]");if(!c){tp.style.display="none";return}
+ const o=HMD[+c.dataset.i];if(!o)return;
+ tp.innerHTML=`<div class="tph">${esc(o.t)} · ${o.l.length} consulta(s)</div>`+o.l.map(r=>`<div class="tpi"><b>${esc(r.nome)}</b><span>${esc(r.esp)} · ${esc(r.prof)}</span><span><i style="background:${STS[r.status]||"#888"}"></i>${esc(r.status)} · ${r.dt.slice(11,16)}</span></div>`).join("");
+ tp.style.display="block";const w=tp.offsetWidth,h=tp.offsetHeight;let x=e.clientX+14,y=e.clientY+14;if(x+w>innerWidth-8)x=e.clientX-w-14;if(y+h>innerHeight-8)y=innerHeight-h-8;tp.style.left=Math.max(8,x)+"px";tp.style.top=Math.max(8,y)+"px"}
+function setTab(k){document.body.dataset.tab=k;$("t_co").classList.toggle("on",k==="consultas");$("t_tm").classList.toggle("on",k==="tempo");try{if(k==="tempo")renderTM()}catch(e){}try{if(k==="consultas")renderCO()}catch(e){}$("t_ns").classList.toggle("on",k==="noshow");try{if(k==="noshow")renderNS()}catch(e){}$("t_agenda").classList.toggle("on",k==="agenda");$("t_resumo").classList.toggle("on",k==="resumo");$("t_dash").classList.toggle("on",k==="dashboard");try{if(k==="dashboard"){charts();heatmap()}}catch(e){}}
 function zerar(){if(!confirm("Zerar TODOS os dados do painel (agendamentos, status e ações marcadas)?\n\nSe a sincronização estiver ativa, a base na nuvem também será zerada. Depois, carregue a nova planilha."))return;
- D=[];PEND=null;try{localStorage.removeItem(IKEY)}catch(e){}save();render();showPend();toast("Dados zerados. Carregue a nova planilha.")}
+ snapBk("Antes de zerar");try{localStorage.setItem("okSaudeZer","1")}catch(e){}D=[];PEND=null;try{localStorage.removeItem(IKEY)}catch(e){}save();render();showPend();toast("Dados zerados. Carregue a nova planilha.")}
 function renderResumo(){
  const rows=D.filter(open),groups={},order=[],hoje=[];
  rows.forEach(r=>{if(r.dt.slice(0,10)===TODAY)hoje.push(r);const a=act(r);if(!a)return;if(!groups[a.id]){groups[a.id]={a,rows:[]};order.push(a.id)}groups[a.id].rows.push({r,h:hrs(r)})});
@@ -277,16 +580,12 @@ function renderResumo(){
 function kf(id,v){if(!id)return;setTab('agenda');clearF(true);$(id).value=v;render();$("tb").scrollIntoView({behavior:"smooth"})}
 function clearF(nr){["q","fs","fe","fp","fd","fa"].forEach(i=>$(i).value="");if(!nr)render()}
 function sortBy(k){sort=sort.k===k?{k,d:-sort.d}:{k,d:1};render()}
-function setSt(id,s){const r=D.find(x=>x.id===id);r.status=s;save();render()}
+function setSt(id,s){if(s==="__novo__"){openStatus(id);return}const r=D.find(x=>x.id===id);r.status=s;save();render()}
 function cp(id){const r=D.find(x=>x.id===id);navigator.clipboard?.writeText(r.link||"").then(()=>alert("Link do paciente copiado."),()=>prompt("Copie o link:",r.link))}
 function mk(id,type,labels,data,colors,opt={}){ch[id]?.destroy();ch[id]=new Chart($(id),{type,data:{labels,datasets:[{data,backgroundColor:colors,borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:type==="doughnut",position:"right"}},...opt}})}
 function charts(){
- const byDay={};D.forEach(r=>{const k=r.dt.slice(0,10);byDay[k]=(byDay[k]||0)+1});const dk=Object.keys(byDay).sort();
- mk("c1","bar",dk.map(fmtD),dk.map(k=>byDay[k]),dk.map(k=>k===TODAY?"#E6A100":"#FFC400"),{scales:{y:{beginAtZero:true,ticks:{precision:0}}}});
  const be={};D.forEach(r=>be[r.esp]=(be[r.esp]||0)+1);const ek=Object.keys(be).sort((a,b)=>be[b]-be[a]);
  mk("c2","bar",ek,ek.map(k=>be[k]),"#1B2A4A",{indexAxis:"y",scales:{x:{beginAtZero:true,ticks:{precision:0}},y:{ticks:{autoSkip:false,font:{size:10}}}}});
- const bs={};D.forEach(r=>bs[r.status]=(bs[r.status]||0)+1);const sk=Object.keys(bs);
- mk("c3","doughnut",sk,sk.map(k=>bs[k]),sk.map(k=>STS[k]));
 }
 function openForm(id){
  const r=id?D.find(x=>x.id===id):{nome:"",cpf:"",esp:"",prof:"",dt:TODAY+"T08:00",status:"Agendada",obs:"",link:""};
@@ -316,6 +615,287 @@ function openRules(list){const L=list||RULES;$("mb").innerHTML=`<h3 style="margi
  <div style="display:flex;gap:8px;justify-content:space-between;margin-top:14px"><button class="btn" onclick="openRules(JSON.parse(JSON.stringify(DEFR)))">Restaurar padrão</button>
  <div><button class="btn" onclick="closeM()">Cancelar</button> <button class="btn p" onclick="RULES=collectRules();saveRules();closeM();render()">Salvar</button></div></div>`;$("m").classList.add("on")}
 function closeM(){$("m").classList.remove("on")}
+/* ===== No Show ===== */
+const NSKEY="okSaudeNoShow_v1",NS_DIAS=30;
+let NS=(()=>{try{const a=JSON.parse(localStorage.getItem(NSKEY));return Array.isArray(a)?a:[]}catch(e){return[]}})(),NSR=null;
+function saveNS(){try{localStorage.setItem(NSKEY,JSON.stringify(NS))}catch(e){}touch();schedulePush()}
+const nsNorm=s=>String(s==null?"":s).normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/\s+/g," ").trim();
+const nsTc=s=>nsNorm(s)===""?"":String(s).toLowerCase().replace(/\s+/g," ").trim().split(" ").map((w,i)=>i&&["de","da","do","das","dos","e"].includes(w)?w:w.charAt(0).toUpperCase()+w.slice(1)).join(" ");
+function nsDt(v){v=String(v==null?"":v).trim();if(!v)return"";let m,Y,M,D2,h=0,mi=0;
+ if(m=v.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})(?:[ T,]+(\d{1,2}):(\d{2}))?/)){D2=+m[1];M=+m[2];Y=+m[3];h=+(m[4]||0);mi=+(m[5]||0)}
+ else if(m=v.match(/^(\d{4})-(\d{2})-(\d{2})(?:[ T]+(\d{1,2}):(\d{2}))?/)){Y=+m[1];M=+m[2];D2=+m[3];h=+(m[4]||0);mi=+(m[5]||0)}
+ else if(/^\d{5}(\.\d+)?$/.test(v)){const d=new Date(Math.round((+v-25569)*864e5));Y=d.getUTCFullYear();M=d.getUTCMonth()+1;D2=d.getUTCDate();h=d.getUTCHours();mi=d.getUTCMinutes()}
+ else return"";
+ if(M<1||M>12||D2<1||D2>31)return"";return `${Y}-${pad(M)}-${pad(D2)}T${pad(h)}:${pad(mi)}`}
+const nsKey=x=>(x.cpf&&String(x.cpf).length>=11)?String(x.cpf):nsNorm(x.nome);
+async function loadNS(f){if(!f)return;
+ let A;try{const wb=XLSX.read(await f.arrayBuffer(),{type:"array",raw:true});A=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1,raw:false,defval:""})}catch(e){alert("Não foi possível ler o arquivo.");return}
+ const isN=h=>/^(nome|paciente|nome do paciente|beneficiario|nome do beneficiario|usuario)$/.test(h)||h.includes("paciente")||h.includes("nome");
+ const hi=A.findIndex((r,i)=>i<15&&r.some(c=>isN(nsNorm(c))));
+ if(hi<0){alert("Não encontrei a coluna com o nome do paciente. Confira se o arquivo tem um cabeçalho com Nome (ou Paciente), CPF e a data do no show.");return}
+ const H=A[hi].map(nsNorm),body=A.slice(hi+1).filter(r=>r.some(c=>String(c).trim()));
+ let cN=H.findIndex(h=>/^(nome|paciente|nome do paciente|beneficiario|nome do beneficiario|usuario)$/.test(h));if(cN<0)cN=H.findIndex(h=>h.includes("paciente"));if(cN<0)cN=H.findIndex(h=>h.includes("nome"));
+ const cC=H.findIndex(h=>h.includes("cpf")),cE=H.findIndex(h=>h.includes("especialidade"));
+ let cD=H.findIndex(h=>/no.?show|falta|nao compareceu/.test(h));if(cD<0)cD=H.findIndex(h=>/horario agendado|data da consulta|data/.test(h));
+ if(cD<0){const s=body.slice(0,20);cD=H.findIndex((_,j)=>j!==cN&&s.length&&s.filter(r=>nsDt(r[j])).length>=Math.ceil(s.length/2))}
+ if(cD<0){alert("Não encontrei a coluna com a data do no show. Colunas lidas: "+A[hi].filter(c=>String(c).trim()).join(", "));return}
+ let add=0,dup=0,ign=0;const seen=new Set(NS.map(x=>nsKey(x)+"|"+x.dt.slice(0,10)));
+ body.forEach(r=>{const nome=nsTc(r[cN]),dt=nsDt(r[cD]);if(!nome||!dt){ign++;return}
+  const dg=cC>=0?String(r[cC]).replace(/\D/g,""):"",cpf=dg?dg.padStart(11,"0"):"";
+  const x={id:"n"+Date.now()+"_"+add+"_"+dup,nome,cpf,dt,esp:cE>=0?String(r[cE]).replace(/\s+/g," ").trim():""},k=nsKey(x)+"|"+dt.slice(0,10);
+  if(seen.has(k)){const ex=NS.find(y=>nsKey(y)+"|"+y.dt.slice(0,10)===k);if(ex&&!ex.esp&&x.esp)ex.esp=x.esp;dup++;return}seen.add(k);NS.push(x);add++});
+ NSR={add,dup,ign,name:f.name};saveNS();renderNS()}
+function nsGroups(){const g={};NS.forEach(x=>{(g[nsKey(x)]=g[nsKey(x)]||[]).push(x)});const now=Date.now();
+ return Object.keys(g).map(k=>{const l=g[k].slice().sort((a,b)=>a.dt<b.dt?1:-1),u=l[0];
+  const at=new Date(+u.dt.slice(0,4),+u.dt.slice(5,7)-1,+u.dt.slice(8,10),+u.dt.slice(11,13),+u.dt.slice(14,16));const rel=new Date(at);rel.setDate(rel.getDate()+NS_DIAS);
+  return {k,nome:u.nome,cpf:u.cpf,esp:(l.find(y=>y.esp)||{}).esp||"",dt:u.dt,n:l.length,at,rel,ms:rel-now,pct:Math.max(0,Math.min(100,(now-at)/(rel-at)*100))}})}
+function nsTxt(ms){if(ms<=0){const d=Math.floor(-ms/864e5);return{t:d>=1?`Liberado há ${d} dia${d>1?"s":""}`:"Liberado hoje",c:"ok"}}
+ if(ms>=48*36e5)return{t:`Faltam ${Math.ceil(ms/864e5)} dias`,c:""};
+ if(ms<36e5)return{t:`Faltam ${Math.max(1,Math.ceil(ms/6e4))} min`,c:"hot"};return{t:`Faltam ${Math.ceil(ms/36e5)}h`,c:"hot"}}
+const nsF=d=>{const s=`${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()}`;return (d.getHours()||d.getMinutes())?s+` ${pad(d.getHours())}:${pad(d.getMinutes())}`:s};
+function renderNS(){if(!$("nsb"))return;
+ const ALL=nsGroups(),G=ALL.filter(g=>g.ms>0),oc=ALL.length-G.length,q=nsNorm($("nsq").value),qd=$("nsq").value.replace(/\D/g,""),s=$("nss").value,show=$("nscpf").checked;
+ const bl=G.length,s7=G.filter(g=>g.ms>0&&g.ms<=7*864e5).length;
+ $("t_nsn").textContent=bl?bl:"";$("t_nsn").style.display=bl?"":"none";
+ $("nsk").innerHTML=[["Bloqueados (em carência)",bl,bl?"w":""],["Liberam em 7 dias",s7,""],["Liberados e removidos da lista",oc,""]].map(k=>`<div class="kpi ${k[2]}" style="cursor:default"><b>${k[1]}</b><span>${k[0]}</span></div>`).join("");
+ $("nsmsg").innerHTML=(NSWARN?`<div class="pend" style="background:#fdecea;border-color:#c0392b"><span>⚠ <b>${esc(NSWARN)}</b> Os dados seguem salvos neste aparelho, mas não aparecerão em outros. Reimplante o Apps Script (Code_seguro.gs) como nova versão.</span></div>`:"")+(NSR?`<div class="pend" style="background:#eef7f1;border-color:#2e8b57"><span>✔ <b>${esc(NSR.name)}</b>: <b>${NSR.add}</b> no show(s) adicionado(s) · ${NSR.dup} já constava(m)${NSR.ign?` · ${NSR.ign} linha(s) ignorada(s) (sem nome ou sem data)`:""}.</span> <button class="btn mini" onclick="NSR=null;renderNS()">Fechar</button></div>`:"");
+ let L=G.filter(g=>{if(q&&!(nsNorm(g.nome).includes(q)||nsNorm(g.esp).includes(q)||(qd&&g.cpf.includes(qd))))return false;
+  if(s==="7"&&!(g.ms>0&&g.ms<=7*864e5))return false;return true});
+ L.sort((a,b)=>(a.ms>0)===(b.ms>0)?(a.ms>0?a.ms-b.ms:b.ms-a.ms):(a.ms>0?-1:1));
+ $("nsb").innerHTML=L.map(g=>{const x=nsTxt(g.ms);return `<div class="nsr ${g.ms<=0?"ok":""}"><div class="n"><b>${esc(g.nome)}</b>${g.n>1?`<small>${g.n} no shows registrados</small>`:""}</div>
+ <div data-l="CPF">${g.cpf?(show?fcpf(g.cpf):mask(g.cpf)):"—"}</div><div data-l="Especialidade">${esc(g.esp)||"—"}</div><div data-l="No show">${nsF(g.at)}</div><div data-l="Libera em">${nsF(g.rel)}</div>
+ <div class="dsp"><b class="${x.c}">${g.ms<=0?"✔ ":"⏳ "}${x.t}</b><div class="bar"><i style="width:${g.pct.toFixed(1)}%"></i></div><small>${g.ms>0?Math.min(99,Math.floor(g.pct)):100}% da carência de ${NS_DIAS} dias cumprida</small></div>
+ </div>`}).join("")||`<div class="nsvazio">${G.length?"Nenhum paciente encontrado com esse filtro.":NS.length?"Nenhum paciente em carência: todos os no shows registrados já cumpriram os 30 dias e saíram da lista.":"Nenhum no show carregado. Use o campo acima para carregar o arquivo."}</div>`}
+function zerarNS(){if(!NS.length||!confirm("Limpar TODA a lista de no show? Se a sincronização estiver ativa, a lista na nuvem também será limpa."))return;snapBk("Antes de limpar No Show");NS=[];NSR=null;NSCLR=true;saveNS();renderNS()}
+$("nsf").onchange=async e=>{await loadNS(e.target.files[0]);e.target.value=""};
+const COKEY="okSaudeConsultas_v1";
+const TMKEY="okSaudeTempo_v1";
+let TMA=(()=>{try{const a=JSON.parse(localStorage.getItem(TMKEY));return Array.isArray(a)?a:[]}catch(e){return[]}})(),TMR=null,TMCLR=false,TWARN="";
+let CONS=(()=>{try{const a=JSON.parse(localStorage.getItem(COKEY));return Array.isArray(a)?a:[]}catch(e){return[]}})(),COR=null,COCLR=false,COESP="";
+function saveCO(){try{localStorage.setItem(COKEY,JSON.stringify(CONS))}catch(e){}touch();schedulePush()}
+const coIso=s=>{s=String(s||"").trim();let m=s.match(/(\d{1,2})\/(\d{1,2})\/(\d{4})(?:[ T]+(\d{1,2}):(\d{2})(?::(\d{2}))?)?/);if(m)return `${m[3]}-${pad(+m[2])}-${pad(+m[1])}T${pad(+(m[4]||0))}:${m[5]||"00"}:${m[6]||"00"}`;
+ m=s.match(/(\d{4})-(\d{2})-(\d{2})(?:[ T]+(\d{1,2}):(\d{2})(?::(\d{2}))?)?/);return m?`${m[1]}-${m[2]}-${m[3]}T${pad(+(m[4]||0))}:${m[5]||"00"}:${m[6]||"00"}`:""};
+async function loadCO(f){if(!f)return;
+ let A;try{const wb=XLSX.read(await f.arrayBuffer(),{type:"array",raw:true,cellDates:false});A=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1,raw:false,defval:""})}catch(e){alert("Não foi possível ler o arquivo.");return}
+ const N=s=>nrm(s),hi=A.findIndex((r,i)=>i<15&&r.some(c=>N(c)==="nome")&&r.some(c=>N(c).startsWith("data")));
+ if(hi<0){alert("Não encontrei o cabeçalho do histórico (Nome, CPF, Data/hora, Especialidade, Profissional, Tipo, Status, Empresa).");return}
+ const H=A[hi].map(N),ix=(a,d)=>{const i=H.findIndex(h=>a.some(x=>h===x||h.startsWith(x)));return i>=0?i:d};
+ const c={nome:ix(["nome"],0),cpf:ix(["cpf"],1),dt:ix(["data"],2),esp:ix(["especialidade"],3),prof:ix(["profissional"],4),tipo:ix(["tipo"],5),st:ix(["status"],6),emp:ix(["empresa"],7)};
+ const map=new Map(CONS.map(x=>[x.id,x]));let add=0,dup=0,ign=0;
+ A.slice(hi+1).filter(r=>r.some(v=>String(v).trim())).forEach(r=>{const nome=String(r[c.nome]).replace(/\s+/g," ").trim(),dt=coIso(r[c.dt]),cpf=String(r[c.cpf]).replace(/\D/g,"").padStart(11,"0").slice(-11);
+  if(!nome||!dt){ign++;return}
+  const x={id:cpf+"|"+dt,nome,cpf,dt,esp:String(r[c.esp]).trim(),prof:String(r[c.prof]).replace(/\s+/g," ").trim(),tipo:String(r[c.tipo]).trim(),status:String(r[c.st]).trim(),emp:String(r[c.emp]).trim()};
+  if(map.has(x.id)){dup++}else add++;map.set(x.id,x)});
+ CONS=[...map.values()];applyCAD();COR={add,dup,ign,name:f.name};saveCO();renderCO()}
+function zerarCO(){if(!CONS.length||!confirm("Limpar TODO o histórico de consultas? Uma cópia de segurança fica guardada neste aparelho."))return;snapBk("Antes de limpar histórico de consultas");CONS=[];COR=null;COCLR=true;saveCO();renderCO()}
+const CADKEY="okSaudeCadastro_v1",CADIKEY="okSaudeCadastroInfo_v1";
+let CAD=(()=>{try{const o=JSON.parse(localStorage.getItem(CADKEY));return o&&typeof o==="object"?o:{}}catch(e){return{}}})(),CADI=(()=>{try{return JSON.parse(localStorage.getItem(CADIKEY))}catch(e){return null}})(),CADR=null;
+function applyCAD(){let n=0;CONS.forEach(x=>{const e=CAD[x.cpf];if(e&&x.emp!==e){x.emp=e;n++}});return n}
+async function loadCAD(f){if(!f)return;let A;try{const wb=XLSX.read(await f.arrayBuffer(),{type:"array",raw:true});A=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1,raw:false,defval:""})}catch(e){alert("Não foi possível ler o arquivo.");return}
+ const N=s=>nrm(s),hi=A.findIndex((r,i)=>i<20&&r.some(c=>/cpf/.test(N(c))));if(hi<0){alert("Não encontrei a coluna CPF no cabeçalho do arquivo de cadastro.");return}
+ const H=A[hi].map(N),cc=H.findIndex(h=>/cpf/.test(h));let ce=H.findIndex(h=>/^empresa|empresa$|^cliente|razao|convenio|^grupo|organiza|^contratante/.test(h));if(ce<0)ce=H.findIndex(h=>/empresa|cliente|razao|convenio|grupo|plano/.test(h));
+ if(ce<0){alert("Não encontrei a coluna da empresa. Colunas do arquivo: "+A[hi].filter(Boolean).join(", "));return}
+ const map={};let n=0;A.slice(hi+1).forEach(r=>{const c=String(r[cc]).replace(/\D/g,"");const e=String(r[ce]).replace(/\s+/g," ").trim();if(!c||!e)return;map[c.padStart(11,"0").slice(-11)]=e;n++});
+ if(!n){alert("Nenhum CPF com empresa encontrado no arquivo.");return}
+ snapBk("Antes de vincular empresas");CAD=map;CADI={name:f.name,at:Date.now(),n:Object.keys(map).length};try{localStorage.setItem(CADKEY,JSON.stringify(CAD));localStorage.setItem(CADIKEY,JSON.stringify(CADI))}catch(e){alert("Cadastro muito grande para guardar neste aparelho; os vínculos feitos agora serão mantidos nas consultas.")}
+ const ct=applyTM(),ch=applyCAD(),us=[...new Set(CONS.map(x=>x.cpf))],ok=us.filter(c=>CAD[c]).length;CADR={ch,ok,tot:us.length,name:f.name};if(ct)saveTM();if(ch)saveCO();renderCO()}
+function zerarCAD(){if(!CADI||!confirm("Remover a base de cadastro deste aparelho? As empresas já vinculadas às consultas são mantidas."))return;CAD={};CADI=null;try{localStorage.removeItem(CADKEY);localStorage.removeItem(CADIKEY)}catch(e){}CADR=null;renderCO()}
+let COMES="",COHV="w",COS={k:"def",d:1};
+const coFg=m=>m==null?"—":m<60?Math.round(m)+" min":m<1440?(m/60).toFixed(1).replace(".",",")+" h":(m/1440).toFixed(1).replace(".",",")+" d";
+const coTc=s=>String(s||"").toLowerCase().replace(/(^|\s)(\S)/g,(m,a,b)=>a+b.toUpperCase()).replace(/\s(De|Da|Do|Das|Dos|E)(?=\s)/g,x=>x.toLowerCase());
+const coCl=g=>g<=60?"#C8442B":g<=1440?"#E6A100":g<=10080?"#2F5DA8":"#8A93A6";
+const coCls=g=>g<=60?"Até 1 hora":g<=1440?"1 a 24 horas":g<=10080?"1 a 7 dias":"Mais de 7 dias";
+const DOW=["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"],MESES=["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
+let COU=[],COM={y:0,m:0,days:0,t0:0};
+function coBuild(){const ms=[...new Set(CONS.map(x=>x.dt.slice(0,7)))].sort().reverse();
+ if(!ms.includes(COMES))COMES=ms[0]||"";
+ $("co_mes").innerHTML=ms.map(m=>`<option value="${m}" ${m===COMES?"selected":""}>${MESES[+m.slice(5,7)-1]}/${m.slice(0,4)}</option>`).join("");
+ if(!COMES){COU=[];return []}
+ const y=+COMES.slice(0,4),mo=+COMES.slice(5,7);COM={y,m:mo,days:new Date(y,mo,0).getDate(),t0:new Date(y,mo-1,1).getTime()};
+ const C=CONS.filter(x=>x.dt.slice(0,7)===COMES),U={};
+ C.forEach(x=>{(U[x.cpf]=U[x.cpf]||{cpf:x.cpf,nome:coTc(x.nome),emp:x.emp||"",c:[]}).c.push({...x,ms:Date.parse(x.dt)})});
+ COU=Object.values(U);COU.forEach(u=>{u.c.sort((a,b)=>a.ms-b.ms);u.emp=[...u.c].reverse().map(c=>c.emp).find(Boolean)||"";u.n=u.c.length;u.c.forEach((c,i)=>{c.gap=i?(c.ms-u.c[i-1].ms)/6e4:null;c.mp=i?c.prof!==u.c[i-1].prof:null;c.x=(c.ms-COM.t0)/864e5})});
+ COU.sort((a,b)=>b.n-a.n||a.c[0].ms-b.c[0].ms);return C}
+const coCpf=c=>$("cocpf").checked?fcpf(c):mask(c);
+function coMk(id,cfg){ch[id]?.destroy();ch[id]=new Chart($(id),cfg)}
+function renderCO(){if(!$("co_body"))return;
+ $("comsg").innerHTML=(CWARN?`<div class="pend" style="background:#fdecea;border-color:#c0392b"><span>⚠ <b>${esc(CWARN)}</b> Os dados seguem salvos neste aparelho, mas não aparecerão em outros. Atualize o Apps Script (Code_seguro.gs) e reimplante como nova versão.</span></div>`:"")+(COR?`<div class="pend" style="background:#eef7f1;border-color:#2e8b57"><span>✔ <b>${esc(COR.name)}</b>: <b>${COR.add}</b> consulta(s) nova(s) · ${COR.dup} já constava(m)${COR.ign?` · ${COR.ign} linha(s) ignorada(s)`:""}.</span> <button class="btn mini" onclick="COR=null;renderCO()">Fechar</button></div>`:"");
+ $("co_cadi").textContent=CADI?`Cadastro carregado: ${CADI.name} · ${CADI.n} CPF(s) · ${new Date(CADI.at).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})}`:"Nenhum cadastro carregado.";
+ $("comsg").innerHTML+=(CADR?`<div class="pend" style="background:#eef3fb;border-color:#2F5DA8"><span>🔗 <b>${esc(CADR.name)}</b>: <b>${CADR.ok}</b> de ${CADR.tot} usuário(s) vinculado(s) a uma empresa${CADR.tot-CADR.ok?` · ${CADR.tot-CADR.ok} sem correspondência no cadastro`:""}.</span> <button class="btn mini" onclick="CADR=null;renderCO()">Fechar</button></div>`:"");
+ const C=coBuild();$("co_empty").style.display=C.length?"none":"";$("co_body").style.display=C.length?"":"none";if(!C.length)return;
+ const dts=C.map(x=>x.dt).sort(),mm=new Date(COM.y,COM.m-1,1);
+ $("co_cap").textContent=`OK SAÚDE · RAPIDOC · CONSULTAS POR PERÍODO (${fmtD(dts[0])} a ${fmtD(dts[dts.length-1])}/${COM.y}) · ${CONS.length} consulta(s) no histórico carregado`;
+ const gaps=[];COU.forEach(u=>u.c.forEach(c=>{if(c.gap!=null)gaps.push(c.gap)}));gaps.sort((a,b)=>a-b);
+ const med=gaps.length?(gaps.length%2?gaps[(gaps.length-1)/2]:(gaps[gaps.length/2-1]+gaps[gaps.length/2])/2):null,multi=COU.filter(u=>u.n>1).length,r1=gaps.filter(g=>g<=60).length,ag=C.filter(x=>x.tipo==="Agendada").length;
+ $("co_k").innerHTML=[["","Consultas realizadas",C.length,`${ag} agendadas · ${C.length-ag} fila (pronto atendimento)`],["ok","Usuários atendidos",COU.length,(C.length/COU.length).toFixed(2).replace(".",",")+" consultas por usuário"],["warn","Com 2+ consultas",multi,(multi/COU.length*100).toFixed(0)+"% dos usuários"],["bad","Retorno em até 1 hora",r1,"mesmo CPF, consulta seguinte"],["","Mediana do intervalo",med==null?"—":coFg(med),"entre consultas do mesmo usuário"],["ok","Vinculados a empresa",COU.filter(u=>u.emp).length+" de "+COU.length,"pelo CPF, na base de cadastro"]].map(k=>`<div class="${k[0]}"><small>${k[1]}</small><b>${k[2]}</b><span>${k[3]}</span></div>`).join("");
+ // 1
+ const cnt={};COU.forEach(u=>cnt[u.n]=(cnt[u.n]||0)+1);const ns=Object.keys(cnt).map(Number).sort((a,b)=>a-b);
+ $("co_t1").innerHTML=`<thead><tr><th>Consultas no mês</th><th class="n">Usuários</th><th class="n">% dos usuários</th><th class="n">Consultas geradas</th></tr></thead><tbody>`+ns.map(n=>`<tr><td>${n} consulta${n>1?"s":""}</td><td class="n">${cnt[n]}</td><td class="n">${(cnt[n]/COU.length*100).toFixed(1).replace(".",",")}%</td><td class="n">${n*cnt[n]}</td></tr>`).join("")+`<tr style="font-weight:bold;background:#F1F2F5"><td>Total</td><td class="n">${COU.length}</td><td class="n">100%</td><td class="n">${C.length}</td></tr></tbody>`;
+ const pal=["#C8442B","#E6A100","#2F5DA8","#0E8A6B","#8A93A6","#1B2A4A"],cf={responsive:true,maintainAspectRatio:false,animation:false};
+ coMk("co_c1",{type:"bar",data:{labels:ns.map(n=>n+(n>1?" consultas":" consulta")),datasets:[{data:ns.map(n=>cnt[n]),backgroundColor:ns.map((n,i)=>pal[i%6])}]},options:{...cf,plugins:{legend:{display:false},title:{display:true,text:"Usuários por quantidade de consultas"}},scales:{y:{beginAtZero:true,ticks:{precision:0},title:{display:true,text:"usuários"}}}}});
+ coRank();coTimeline();coEmp();
+ // 4
+ const hb=[0,0,0,0];gaps.forEach(g=>hb[g<=60?0:g<=1440?1:g<=10080?2:3]++);const tg=gaps.length;
+ coMk("co_c3",{type:"bar",data:{labels:["Até 1 hora","1 a 24 horas","1 a 7 dias","Mais de 7 dias"],datasets:[{data:hb,backgroundColor:["#C8442B","#E6A100","#2F5DA8","#8A93A6"]}]},options:{...cf,plugins:{legend:{display:false},title:{display:true,text:"Intervalos entre consultas do mesmo usuário"}},scales:{y:{beginAtZero:true,ticks:{precision:0},title:{display:true,text:"intervalos"}}}}});
+ $("co_h3").innerHTML=tg?`<p>Foram <b>${tg}</b> intervalos (consulta seguinte do mesmo usuário). <b>${hb[0]}</b> ocorreram em até 1 hora e <b>${hb[1]}</b> entre 1 e 24 horas: ${hb[0]+hb[1]} retornos no mesmo dia ou no dia seguinte.</p><p class="rpn">Retorno em poucos minutos costuma indicar queda de conexão, troca de profissional ou nova consulta aberta pelo mesmo problema; vale verificar se cada uma foi cobrada como consulta avulsa.</p>`:`<p class="rpn">Nenhum usuário teve mais de uma consulta neste mês.</p>`;
+ coHeat();coDet()}
+function coRank(){const f=+$("co_rkF").value,q=nrm($("co_rkQ").value),qd=$("co_rkQ").value.replace(/\D/g,"");
+ let L=COU.map(u=>({u,r:1+COU.filter(x=>x.n>u.n).length}));
+ if(f===2)L=L.filter(x=>x.u.n>1);if(q||qd)L=L.filter(x=>nrm(x.u.nome).includes(q)||nrm(x.u.emp).includes(q)||(qd&&x.u.cpf.includes(qd)));if(f===10)L=L.slice(0,10);
+ $("co_rkC").textContent=L.length+" usuário(s)";
+ $("co_rkT").innerHTML=`<thead><tr><th class="n">Posição</th><th>Usuário</th><th>CPF</th><th>Empresa</th><th class="n">Consultas</th><th>Especialidades</th><th>Última consulta</th></tr></thead><tbody>`+L.map(x=>{const u=x.u,l=u.c[u.n-1];return `<tr class="cl" data-c="${u.cpf}"><td class="n">${x.r}º</td><td><b>${esc(u.nome)}</b></td><td>${coCpf(u.cpf)}</td><td>${esc(u.emp)||"—"}</td><td class="n"><b>${u.n}</b></td><td>${esc([...new Set(u.c.map(c=>c.esp))].join(", "))}</td><td>${fmt(l.dt)}</td></tr>`}).join("")+"</tbody>";
+ $("co_rkT").querySelectorAll("tr.cl").forEach(tr=>tr.onclick=()=>{const u=COU.find(x=>x.cpf===tr.dataset.c);$("co_q").value=u.nome;$("co_fl").value="0";COS={k:"def",d:1};coDet();$("co_det").scrollIntoView({behavior:"smooth"})})}
+function coTimeline(){const U2=COU.filter(u=>u.n>1),w=$("co_c2w");w.innerHTML="";
+ const lg=[["#C8442B","Até 1 hora"],["#E6A100","1 a 24 horas"],["#2F5DA8","1 a 7 dias"],["#8A93A6","Mais de 7 dias"]];
+ $("co_lg").innerHTML='<div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center;font-size:12px;margin:2px 0 8px"><b style="color:#1B2A4A">Intervalo:</b>'+lg.map(c=>`<span><span style="display:inline-block;width:22px;height:4px;border-radius:2px;background:${c[0]};vertical-align:middle;margin-right:5px"></span>${c[1]}</span>`).join("")+'<span style="margin-left:8px"><b style="color:#1B2A4A">Marcador:</b> ● clínico geral &nbsp;◆ especialista</span><span><span style="display:inline-block;width:14px;height:12px;background:#EEF0F4;border:1px solid #DDE0E6;vertical-align:middle;margin-right:4px"></span>fim de semana</span></div>';
+ if(!U2.length){w.innerHTML='<p class="rpn">Nenhum usuário com 2 ou mais consultas neste mês.</p>';return}
+ const NSV="http://www.w3.org/2000/svg",W=1120,LX=236,RX=W-24,PW=RX-LX,RH=44,GH=28,TOP=40,days=COM.days,px=x=>LX+x/days*PW;
+ const gl=[...new Set(U2.map(u=>u.n))].sort((a,b)=>b-a).map(n=>({n,L:U2.filter(u=>u.n===n)}));
+ let H=TOP;gl.forEach(g=>{g.y0=H;H+=GH;g.L.forEach(u=>{u.y=H+RH/2;H+=RH})});H+=34;
+ const el=(n,at,p)=>{const e=document.createElementNS(NSV,n);for(const k in at)e.setAttribute(k,at[k]);if(p)p.appendChild(e);return e};
+ const svg=el("svg",{viewBox:`0 0 ${W} ${H}`,width:"100%",style:"min-width:860px;font-family:Arial,Helvetica,sans-serif"}),gb=el("g",{},svg),wd=["D","S","T","Q","Q","S","S"],dow=d=>new Date(COM.y,COM.m-1,d+1).getDay();
+ for(let d=0;d<days;d++){if(dow(d)===0||dow(d)===6)el("rect",{x:px(d),y:TOP-6,width:PW/days,height:H-TOP-28,fill:"#EEF0F4"},gb)}
+ for(let d=0;d<=days;d++)el("line",{x1:px(d),x2:px(d),y1:TOP-6,y2:H-34,stroke:"#E3E6EB","stroke-width":d%7===0?1:.6},gb);
+ const axis=y=>{for(let d=0;d<days;d++){const t=el("text",{x:px(d+.5),y,"text-anchor":"middle","font-size":10,fill:(dow(d)===0||dow(d)===6)?"#8A93A6":"#1B2A4A","font-weight":600},svg);t.textContent=d+1;const q=el("text",{x:px(d+.5),y:y+11,"text-anchor":"middle","font-size":8,fill:"#8A93A6"},svg);q.textContent=wd[dow(d)]}};
+ axis(18);el("text",{x:18,y:22,"font-size":10.5,"font-weight":700,fill:"#1B2A4A"},svg).textContent=`Dia de ${MESES[COM.m-1]}/${COM.y}`;
+ gl.forEach(g=>{el("rect",{x:8,y:g.y0+2,width:W-16,height:GH-4,rx:4,fill:"#1B2A4A"},svg);el("text",{x:18,y:g.y0+GH/2+4,"font-size":11.5,"font-weight":700,fill:"#fff"},svg).textContent=`${g.n} consultas · ${g.L.length} usuário${g.L.length>1?"s":""}`;
+  g.L.forEach((u,i)=>{if(i%2===0)el("rect",{x:8,y:u.y-RH/2,width:W-16,height:RH,fill:"#1B2A4A","fill-opacity":.035},svg);el("line",{x1:LX,x2:RX,y1:u.y,y2:u.y,stroke:"#D5D9E0","stroke-width":.6,"stroke-dasharray":"2 3"},svg)})});
+ const tip=document.createElement("div");tip.style.cssText="position:absolute;pointer-events:none;background:#1B2A4A;color:#fff;font-size:11.5px;line-height:1.4;padding:7px 10px;border-radius:5px;display:none;z-index:5;max-width:280px;box-shadow:0 3px 10px rgba(0,0,0,.25)";w.appendChild(tip);
+ gl.forEach(g=>g.L.forEach(u=>{
+  el("text",{x:18,y:u.y-2,"font-size":11.5,"font-weight":600,fill:"#1B2A4A"},svg).textContent=u.nome.length>27?u.nome.slice(0,26)+"…":u.nome;
+  el("text",{x:18,y:u.y+11,"font-size":9.5,fill:"#707889"},svg).textContent=u.emp?(u.emp.length>34?u.emp.slice(0,33)+"…":u.emp):mask(u.cpf);
+  const pills=[],used={line:[],up:[],dn:[]},free=(b,x1,x2)=>used[b].every(r=>x2<r[0]-3||x1>r[1]+3);
+  u.c.forEach((c,k)=>{if(!k)return;const p=u.c[k-1];
+   el("line",{x1:px(p.x),x2:px(c.x),y1:u.y,y2:u.y,stroke:coCl(c.gap),"stroke-width":c.gap<=60?4:3,"stroke-linecap":"round","stroke-opacity":.9},svg);
+   const txt=coFg(c.gap),tw=txt.length*5.6+12,cx0=(px(p.x)+px(c.x))/2,seg=Math.abs(px(c.x)-px(p.x)),clamp=cx=>Math.max(LX+tw/2-4,Math.min(W-10-tw/2,cx));
+   let band=null,cx=clamp(cx0);
+   if(seg>=tw+22&&free("line",cx-tw/2,cx+tw/2))band="line";
+   else{outer:for(const bd of["up","dn"]){for(let s=0;s<8;s++){const c2=clamp(cx0)-s*(tw+4);if(c2-tw/2<LX-4)break;if(free(bd,c2-tw/2,c2+tw/2)){band=bd;cx=c2;break outer}}}if(!band){band="dn";cx=clamp(cx0)}}
+   used[band].push([cx-tw/2,cx+tw/2]);pills.push({txt,w:tw,cx,y:band==="line"?u.y-6.5:band==="up"?u.y-22:u.y+9,c:coCl(c.gap)})});
+  u.c.forEach(c=>{const x=px(c.x),y=u.y,ge=c.esp==="Generalista";
+   const m=ge?el("circle",{cx:x,cy:y,r:5.5,fill:"#fff",stroke:"#1B2A4A","stroke-width":2.2},svg):el("path",{d:`M${x} ${y-7}L${x+7} ${y}L${x} ${y+7}L${x-7} ${y}Z`,fill:"#1B2A4A",stroke:"#fff","stroke-width":1.5},svg);
+   m.style.cursor="pointer";m.addEventListener("mousemove",e=>{const r=w.getBoundingClientRect();tip.style.display="block";tip.style.left=Math.min(e.clientX-r.left+14,r.width-290)+"px";tip.style.top=(e.clientY-r.top+14)+"px";
+    tip.innerHTML=`<b>${esc(u.nome)}</b><br>${fmt(c.dt)} · ${esc(c.esp)}<br>${esc(c.prof)}`+(c.gap!=null?`<br>Intervalo: <b>${coFg(c.gap)}</b> (${coCls(c.gap)})`:"<br>Primeira consulta do mês")});m.addEventListener("mouseleave",()=>tip.style.display="none")});
+  pills.forEach(q=>{el("rect",{x:q.cx-q.w/2,y:q.y,width:q.w,height:13,rx:6.5,fill:"#fff",stroke:q.c,"stroke-width":1},svg);el("text",{x:q.cx,y:q.y+9.6,"text-anchor":"middle","font-size":9.5,"font-weight":700,fill:q.c},svg).textContent=q.txt})}));
+ axis(H-18);w.insertBefore(svg,tip)}
+function coEmp(){const E={};COU.forEach(u=>{const k=u.emp||"(sem empresa)";const o=E[k]=E[k]||{k,c:0,u:0,m:0};o.c+=u.n;o.u++;if(u.n>1)o.m++});
+ const L=Object.values(E).sort((a,b)=>b.c-a.c),sem=E["(sem empresa)"];
+ $("co_en").innerHTML=CADI?(sem?`<b>${sem.u}</b> usuário(s) sem empresa: o CPF não consta na base de cadastro carregada.`:"Todos os usuários foram vinculados a uma empresa."):"Carregue a base de cadastro (acima) para vincular os usuários às empresas.";
+ $("co_t7").innerHTML='<thead><tr><th>Empresa</th><th class="n">Consultas</th><th class="n">Usuários</th><th class="n">Com 2+ consultas</th><th class="n">Consultas por usuário</th></tr></thead><tbody>'+L.map(o=>`<tr><td><b>${esc(o.k)}</b></td><td class="n">${o.c}</td><td class="n">${o.u}</td><td class="n">${o.m}</td><td class="n">${(o.c/o.u).toFixed(2).replace(".",",")}</td></tr>`).join("")+"</tbody>";
+ const fe=$("co_fe"),v=fe.value,names=L.map(o=>o.k).filter(k=>k!=="(sem empresa)");fe.innerHTML='<option value="">Todas as empresas</option>'+names.map(k=>`<option value="${esc(k)}">${esc(k)}</option>`).join("")+(sem?'<option value="__sem">(sem empresa)</option>':"");fe.value=[...fe.options].some(o=>o.value===v)?v:""}
+function coHeat(){const t=$("co_hmT").value,C=CONS.filter(x=>x.dt.slice(0,7)===COMES&&(t==="a"||(t==="g")===(x.esp==="Generalista"))),sc=(v,mx)=>v?[`rgba(230,161,0,${(.2+.8*v/mx).toFixed(2)})`,v/mx>.6?"#fff":"#1B2A4A"]:["#F4F6FA","#9AA3B5"];let h,msg;
+ if(COHV==="w"){const M=Array.from({length:7},()=>Array(24).fill(0));C.forEach(x=>{const d=new Date(x.dt);M[d.getDay()][d.getHours()]++});const mx=Math.max(1,...M.flat()),order=[1,2,3,4,5,6,0];
+  h='<table class="hmt"><tr><th></th>'+Array.from({length:24},(_,i)=>`<th>${i}h</th>`).join("")+"<th>Total</th></tr>"+order.map(d=>`<tr><td class="l">${DOW[d]}</td>`+M[d].map((v,i)=>{const[bg,fg]=sc(v,mx);return `<td style="background:${bg};color:${fg}" title="${DOW[d]} ${i}h: ${v} consulta(s)">${v||""}</td>`}).join("")+`<td style="font-weight:700;color:#1B2A4A">${M[d].reduce((a,b)=>a+b,0)}</td></tr>`).join("")+"</table>";
+  const pk=[];M.forEach((r,d)=>r.forEach((v,i)=>pk.push([v,d,i])));pk.sort((a,b)=>b[0]-a[0]);const dd=M.map((r,d)=>[r.reduce((a,b)=>a+b,0),d]).sort((a,b)=>b[0]-a[0])[0];
+  msg=pk[0][0]?`Pico: <b>${DOW[pk[0][1]]} às ${String(pk[0][2]).padStart(2,"0")}h</b> (${pk[0][0]} consultas). Dia da semana mais movimentado: <b>${DOW[dd[1]]}</b> (${dd[0]}). Horário de início da consulta.`:"Sem consultas para este filtro."}
+ else{const cn={};C.forEach(x=>{const d=+x.dt.slice(8,10);cn[d]=(cn[d]||0)+1});const mx=Math.max(1,...Object.values(cn),1),off=new Date(COM.y,COM.m-1,1).getDay();
+  h='<table class="hmt"><tr>'+DOW.map(d=>`<th>${d}</th>`).join("")+"</tr><tr>"+Array(off).fill("<td></td>").join("");let col=off;
+  for(let d=1;d<=COM.days;d++){if(col===7){h+="</tr><tr>";col=0}const v=cn[d]||0,[bg,fg]=sc(v,mx);h+=`<td style="background:${bg};color:${fg};height:44px;min-width:48px" title="${pad(d)}/${pad(COM.m)}: ${v} consulta(s)"><small style="display:block;font-size:9px;text-align:left;padding-left:4px">${d}</small><b>${v||""}</b></td>`;col++}
+  h+="</tr></table>";const top=Object.entries(cn).sort((a,b)=>b[1]-a[1])[0];msg=top?`Dia mais movimentado: <b>${pad(top[0])}/${pad(COM.m)}</b> (${top[1]} consultas). Total no período: <b>${C.length}</b>.`:"Sem consultas para este filtro."}
+ $("co_hm").innerHTML=h;$("co_hmn").innerHTML=msg}
+function coRows(){const q=nrm($("co_q").value),qd=$("co_q").value.replace(/\D/g,""),f=$("co_fl").value,fe=$("co_fe").value,rows=[];
+ const al=c=>{const a=[];if(c.gap!=null&&c.gap<=60)a.push(["Retorno ≤1h",""]);else if(c.gap!=null&&c.gap<=1440)a.push(["Retorno ≤24h","y"]);if(c.mp)a.push(["Outro profissional","b"]);return a};
+ COU.forEach((u,ui)=>{if(fe&&(fe==="__sem"?u.emp:u.emp!==fe))return;if(f==="2"&&u.n<2)return;if(f==="a"&&!u.c.some(c=>c.gap!=null&&c.gap<=1440))return;if(q&&!(nrm(u.nome+" "+u.emp+" "+u.c.map(c=>c.prof).join(" ")).includes(q)||(qd&&u.cpf.includes(qd))))return;u.c.forEach((c,i)=>rows.push({ui,u,c,i,al:al(c),gap:c.gap}))});return rows}
+function coDet(){let L=coRows();
+ if(COS.k!=="def"){const key={u:r=>r.u.nome.toLowerCase(),m:r=>r.u.emp.toLowerCase(),d:r=>r.c.ms,e:r=>r.c.esp,p:r=>r.c.prof,t:r=>r.c.tipo,g:r=>r.gap==null?-1:r.gap,al:r=>r.al.length}[COS.k];L=L.slice().sort((a,b)=>{const x=key(a),y=key(b);return (x>y?1:x<y?-1:0)*COS.d})}
+ const cols=[["u","Usuário"],["m","Empresa"],["d","Data/hora"],["e","Especialidade"],["p","Profissional"],["t","Tipo"],["g","Desde a anterior"],["al","Alertas"]];let prev=-1,gi=0;
+ $("co_t5").innerHTML="<thead><tr>"+cols.map(c=>`<th class="s" data-k="${c[0]}">${c[1]}${COS.k===c[0]?(COS.d>0?" ▲":" ▼"):""}</th>`).join("")+"</tr></thead><tbody>"+L.map(r=>{if(r.ui!==prev){gi++;prev=r.ui}const g=gi%2?"g1":"",first=r.i===0;
+  return `<tr><td class="${g}">${COS.k==="def"&&!first?'<span style="color:#B5BBC8">↳ '+(r.i+1)+"/"+r.u.n+"</span>":"<b>"+esc(r.u.nome)+'</b><br><span class="rpn">'+coCpf(r.u.cpf)+" · "+(r.i+1)+"/"+r.u.n+"</span>"}</td><td class="${g}">${first||COS.k!=="def"?esc(r.u.emp)||"—":""}</td><td class="${g}">${fmt(r.c.dt)}</td><td class="${g}">${esc(r.c.esp)}</td><td class="${g}">${esc(r.c.prof)}</td><td class="${g}">${esc(r.c.tipo)}</td><td class="${g}" style="color:${r.gap!=null&&r.gap<=60?"#C8442B":"#333"};font-weight:${r.gap!=null&&r.gap<=1440?700:400}">${coFg(r.gap)}</td><td class="${g}">${r.al.map(a=>`<span class="rptag ${a[1]}">${a[0]}</span>`).join(" ")||'<span class="rpn">—</span>'}</td></tr>`}).join("")+"</tbody>";
+ const us=new Set(L.map(r=>r.ui)).size;$("co_cnt").textContent=L.length+(L.length===1?" consulta":" consultas")+" de "+us+(us===1?" usuário":" usuários");
+ $("co_t5").querySelectorAll("th.s").forEach(th=>th.onclick=()=>{const k=th.dataset.k;COS.d=COS.k===k?-COS.d:1;COS.k=k;coDet()})}
+$("co_mes").onchange=e=>{COMES=e.target.value;renderCO()};
+["co_rkF","co_rkQ"].forEach(i=>$(i).addEventListener(i==="co_rkQ"?"input":"change",coRank));
+$("co_q").oninput=coDet;$("co_fl").onchange=()=>{COS={k:"def",d:1};coDet()};$("co_fe").onchange=()=>{COS={k:"def",d:1};coDet()};$("cadf").onchange=async e=>{await loadCAD(e.target.files[0]);e.target.value=""};$("co_hmT").onchange=coHeat;$("cocpf").onchange=renderCO;
+$("co_hmV").onclick=e=>{const b=e.target.closest("button");if(!b)return;COHV=b.dataset.v;[...$("co_hmV").children].forEach(x=>x.classList.toggle("on",x===b));coHeat()};
+$("co_csv").onclick=()=>{const q=v=>'"'+String(v==null?"":v).replace(/"/g,'""')+'"',L=coRows();dl("consultas_"+COMES+".csv","﻿"+[["Usuário","CPF","Empresa","Data/hora","Especialidade","Profissional","Tipo","Desde a anterior (min)","Alertas"].join(";")].concat(L.map(r=>[r.u.nome,coCpf(r.u.cpf),r.u.emp,fmt(r.c.dt),r.c.esp,r.c.prof,r.c.tipo,r.gap==null?"":Math.round(r.gap),r.al.map(a=>a[0]).join(" | ")].map(q).join(";"))).join("\n"),"text/csv")};
+$("cof").onchange=async e=>{await loadCO(e.target.files[0]);e.target.value=""};
+/* ===== Tempo médio de atendimento ===== */
+function saveTM(){try{localStorage.setItem(TMKEY,JSON.stringify(TMA))}catch(e){}touch();schedulePush()}
+function tmEmpMap(){const m={};CONS.forEach(x=>{if(x.emp&&x.cpf)m[x.cpf]=x.emp});return m}
+function applyTM(){const cm=tmEmpMap();let n=0;TMA.forEach(x=>{const e=(x.cpf&&(CAD[x.cpf]||cm[x.cpf]))||"";if(e&&x.emp!==e){x.emp=e;n++}});return n}
+async function loadTM(f){if(!f)return;let A;try{const wb=XLSX.read(await f.arrayBuffer(),{type:"array",raw:true,cellDates:false});A=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1,raw:false,defval:""})}catch(e){alert("Não foi possível ler o arquivo.");return}
+ const N=s=>nrm(s),hi=A.findIndex((r,i)=>i<15&&r.some(c=>N(c)==="nome")&&r.some(c=>/entrada|inicio/.test(N(c))));
+ if(hi<0){alert("Não encontrei o cabeçalho (Nome, CPF, Entrada na fila, Início do atendimento, Final do atendimento, Espera (min), Status).");return}
+ const H=A[hi].map(N),ix=re=>H.findIndex(h=>re.test(h));
+ const c={nome:ix(/^nome|^paciente|^usuario/),cpf:ix(/cpf/),ent:ix(/entrada/),ini:ix(/^inicio/),fim:ix(/^final|^fim|^termino/),esp:ix(/^espera/),st:ix(/^status/),emp:ix(/^empresa/)};
+ if(c.nome<0||(c.ent<0&&c.ini<0)){alert("Colunas encontradas: "+A[hi].filter(Boolean).join(", ")+". Preciso de Nome e Entrada na fila (ou Início do atendimento).");return}
+ const g=(r,i)=>i<0?"":r[i],ms=s=>s?Date.parse(s):NaN,cn={};CONS.forEach(x=>{if(x.cpf)cn[nrm(x.nome)]=x.cpf});
+ const map=new Map(TMA.map(x=>[x.id,x]));let add=0,dup=0,ign=0;
+ A.slice(hi+1).filter(r=>r.some(v=>String(v).trim())).forEach(r=>{const nome=String(g(r,c.nome)).replace(/\s+/g," ").trim();let cpf=String(g(r,c.cpf)).replace(/\D/g,"");if(!nome&&!cpf)return;
+  cpf=cpf?cpf.padStart(11,"0").slice(-11):(cn[nrm(nome)]||"");
+  const ent=coIso(g(r,c.ent)),ini=coIso(g(r,c.ini)),fim=coIso(g(r,c.fim)),base=ent||ini;if(!base){ign++;return}
+  let esp=parseFloat(String(g(r,c.esp)).replace(",","."));if(isNaN(esp)){esp=ent&&ini?(ms(ini)-ms(ent))/6e4:null}
+  let dur=ini&&fim?(ms(fim)-ms(ini))/6e4:null;if(dur!=null&&(isNaN(dur)||dur<0))dur=null;if(esp!=null&&(isNaN(esp)||esp<0))esp=null;
+  const x={id:(cpf||"n:"+nrm(nome))+"|"+base,nome,cpf,ent:base,ini,fim,esp:esp==null?null:Math.round(esp*10)/10,dur:dur==null?null:Math.round(dur*10)/10,st:String(g(r,c.st)).trim(),emp:String(g(r,c.emp)).trim()};
+  const old=map.get(x.id);if(old){dup++;if(!x.emp&&old.emp)x.emp=old.emp}else add++;map.set(x.id,x)});
+ TMA=[...map.values()];applyTM();TMR={add,dup,ign,name:f.name};saveTM();renderTM()}
+function zerarTM(){if(!TMA.length||!confirm("Limpar TODOS os dados de tempo médio de atendimento? Uma cópia de segurança fica guardada neste aparelho."))return;snapBk("Antes de limpar tempo de atendimento");TMA=[];TMR=null;TMCLR=true;saveTM();renderTM()}
+let TMES=null,TMEMP="",TMS={k:"d",d:-1};
+const tmAvg=a=>a.length?a.reduce((s,v)=>s+v,0)/a.length:null,tmMed=a=>{if(!a.length)return null;const s=[...a].sort((x,y)=>x-y),m=s.length>>1;return s.length%2?s[m]:(s[m-1]+s[m])/2},tmP=(a,p)=>{if(!a.length)return null;const s=[...a].sort((x,y)=>x-y);return s[Math.min(s.length-1,Math.ceil(p*s.length)-1)]};
+const tmF=v=>v==null?"—":v.toFixed(1).replace(".",",")+" min",tmPc=(n,t)=>t?Math.round(100*n/t)+"%":"—";
+const tmCl=v=>v==null?"":v<=10?"ok":v<=20?"warn":"bad";
+function tmRows(){const st=$("tm_st").value;return TMA.filter(x=>(!TMES||x.ent.slice(0,7)===TMES)&&(!TMEMP||(TMEMP==="__sem"?!x.emp:x.emp===TMEMP))&&(!st||(st==="o")===(x.st==="Ocorreu")))}
+function tmGrp(L,key){const o={};L.forEach(x=>{const k=key(x);(o[k]=o[k]||[]).push(x)});return o}
+function tmSt(L){const e=L.map(x=>x.esp).filter(v=>v!=null),d=L.filter(x=>x.st==="Ocorreu").map(x=>x.dur).filter(v=>v!=null);return {n:L.length,u:new Set(L.map(x=>x.cpf||x.nome)).size,ea:tmAvg(e),em:tmMed(e),e90:tmP(e,.9),e15:e.filter(v=>v>15).length,en:e.length,da:tmAvg(d),oc:L.filter(x=>x.st==="Ocorreu").length}}
+const tmCv=(id,cfg)=>{ch[id]?.destroy();ch[id]=new Chart($(id),cfg)},tmOp=(y)=>({responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:"bottom"}},scales:{y:{beginAtZero:true,title:{display:true,text:y}}}});
+function renderTM(){if(!$("tm_body"))return;
+ $("tmmsg").innerHTML=(TWARN?`<div class="pend" style="background:#fdecea;border-color:#c0392b"><span>⚠ <b>${esc(TWARN)}</b> Os dados seguem salvos neste aparelho, mas não aparecerão em outros. Atualize o Apps Script (Code_seguro.gs) e reimplante como nova versão.</span></div>`:"")+(TMR?`<div class="pend" style="background:#eef7f1;border-color:#2e8b57"><span>✔ <b>${esc(TMR.name)}</b>: <b>${TMR.add}</b> atendimento(s) novo(s) · ${TMR.dup} já constava(m)${TMR.ign?` · ${TMR.ign} linha(s) ignorada(s)`:""}.</span> <button class="btn mini" onclick="TMR=null;renderTM()">Fechar</button></div>`:"");
+ $("tm_cadi").textContent=CADI?`Vínculo com empresa: cadastro ${CADI.name} · ${CADI.n} CPF(s)`:"Para vincular as empresas, carregue a base de cadastro na aba Acompanhamento consultas.";
+ $("tm_empty").style.display=TMA.length?"none":"";$("tm_body").style.display=TMA.length?"":"none";if(!TMA.length)return;
+ const ms=[...new Set(TMA.map(x=>x.ent.slice(0,7)))].sort().reverse();if(TMES===null||(TMES&&!ms.includes(TMES)))TMES=ms[0]||"";
+ $("tm_mes").innerHTML='<option value="">Todos os meses</option>'+ms.map(m=>`<option value="${m}" ${m===TMES?"selected":""}>${MESES[+m.slice(5,7)-1]}/${m.slice(0,4)}</option>`).join("");
+ const emps=[...new Set(TMA.map(x=>x.emp).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"pt")),hasSem=TMA.some(x=>!x.emp);if(TMEMP&&TMEMP!=="__sem"&&!emps.includes(TMEMP))TMEMP="";
+ $("tm_emp").innerHTML='<option value="">Todas</option>'+emps.map(k=>`<option value="${esc(k)}" ${k===TMEMP?"selected":""}>${esc(k)}</option>`).join("")+(hasSem?`<option value="__sem" ${TMEMP==="__sem"?"selected":""}>(sem empresa)</option>`:"");
+ const L=tmRows(),S=tmSt(L),ds=L.map(x=>x.ent).sort();
+ $("tm_cap").textContent=`OK SAÚDE · RAPIDOC · TEMPO DE ATENDIMENTO${ds.length?` (${fmtD(ds[0])} a ${fmtD(ds[ds.length-1])}/${ds[ds.length-1].slice(0,4)})`:""} · ${TMA.length} atendimento(s) carregado(s)`;
+ $("tm_k").innerHTML=[["Atendimentos",S.n,""],["Usuários",S.u,""],["Espera média na fila",tmF(S.ea),tmCl(S.ea)],["Mediana da espera",tmF(S.em),tmCl(S.em)],["90% esperam até",tmF(S.e90),tmCl(S.e90)],["Esperaram mais de 15 min",tmPc(S.e15,S.en),S.en&&S.e15/S.en>.3?"bad":S.en&&S.e15/S.en>.15?"warn":"ok"],["Duração média da consulta",tmF(S.da),""],["Consultas que ocorreram",tmPc(S.oc,S.n),""]].map(k=>`<div class="${k[2]}"><small>${k[0]}</small><b>${k[1]}</b></div>`).join("");
+ $("tm_n").innerHTML="<b>Espera</b> = da entrada na fila ao início do atendimento (coluna Espera do arquivo). <b>Duração</b> = do início ao final do atendimento, calculada somente nas consultas com status <b>Ocorreu</b>. Faixas de cor: verde até 10 min, amarelo até 20 min, vermelho acima.";
+ const dd=tmGrp(L,x=>x.ent.slice(0,10)),dk=Object.keys(dd).sort();
+ tmCv("tm_c1",{type:"line",data:{labels:dk.map(k=>fmtD(k)),datasets:[{label:"Espera média (min)",data:dk.map(k=>+(tmAvg(dd[k].map(x=>x.esp).filter(v=>v!=null))||0).toFixed(1)),borderColor:"#E6A100",backgroundColor:"#E6A100",tension:.25},{label:"Duração média (min)",data:dk.map(k=>+(tmAvg(dd[k].filter(x=>x.st==="Ocorreu").map(x=>x.dur).filter(v=>v!=null))||0).toFixed(1)),borderColor:"#1B2A4A",backgroundColor:"#1B2A4A",tension:.25}]},options:tmOp("minutos")});
+ const wd=tmGrp(L,x=>new Date(x.ent).getDay());
+ $("tm_t1").innerHTML='<thead><tr><th>Dia da semana</th><th class="n">Atendimentos</th><th class="n">Espera média</th><th class="n">Mediana</th><th class="n">Duração média</th></tr></thead><tbody>'+[1,2,3,4,5,6,0].filter(d=>wd[d]).map(d=>{const s=tmSt(wd[d]);return `<tr><td><b>${DOW[d]}</b></td><td class="n">${s.n}</td><td class="n" style="font-weight:700;color:${s.ea>20?"#C8442B":s.ea>10?"#E6A100":"#0E8A6B"}">${tmF(s.ea)}</td><td class="n">${tmF(s.em)}</td><td class="n">${tmF(s.da)}</td></tr>`}).join("")+"</tbody>";
+ const hh=tmGrp(L,x=>+x.ent.slice(11,13)),hk=Object.keys(hh).map(Number).sort((a,b)=>a-b);
+ tmCv("tm_c2",{type:"bar",data:{labels:hk.map(h=>h+"h"),datasets:[{label:"Espera média por hora de entrada (min)",data:hk.map(h=>+(tmAvg(hh[h].map(x=>x.esp).filter(v=>v!=null))||0).toFixed(1)),backgroundColor:"#E6A100",borderRadius:4}]},options:tmOp("minutos")});
+ const FX=[["Até 5 min",0,5],["5 a 10 min",5,10],["10 a 15 min",10,15],["15 a 30 min",15,30],["30 a 60 min",30,60],["Mais de 60 min",60,1e9]],ev=L.map(x=>x.esp).filter(v=>v!=null),fc=FX.map(f=>ev.filter(v=>v>f[1]-(f[1]===0?1:0)&&v<=f[2]).length);
+ $("tm_t2").innerHTML='<thead><tr><th>Faixa de espera</th><th class="n">Atendimentos</th><th class="n">%</th></tr></thead><tbody>'+FX.map((f,i)=>`<tr><td><b>${f[0]}</b></td><td class="n">${fc[i]}</td><td class="n">${tmPc(fc[i],ev.length)}</td></tr>`).join("")+"</tbody>";
+ tmCv("tm_c3",{type:"bar",data:{labels:FX.map(f=>f[0]),datasets:[{label:"Atendimentos",data:fc,backgroundColor:["#0E8A6B","#0E8A6B","#E6A100","#E6A100","#C8442B","#C8442B"],borderRadius:4}]},options:{...tmOp("atendimentos"),plugins:{legend:{display:false}}}});
+ const eg=tmGrp(L,x=>x.emp||"(sem empresa)"),el=Object.keys(eg).map(k=>({k,...tmSt(eg[k])})).sort((a,b)=>b.n-a.n);const sem=L.filter(x=>!x.emp).length;
+ $("tm_en").innerHTML=CADI||TMA.some(x=>x.emp)?(sem?`<b>${sem}</b> atendimento(s) sem empresa: o CPF não consta na base de cadastro carregada.`:"Todos os atendimentos foram vinculados a uma empresa."):"Carregue a base de cadastro (aba Acompanhamento consultas) para vincular os usuários às empresas.";
+ $("tm_t3").innerHTML='<thead><tr><th>Empresa</th><th class="n">Atendimentos</th><th class="n">Usuários</th><th class="n">Espera média</th><th class="n">Mediana</th><th class="n">&gt;15 min</th><th class="n">Duração média</th></tr></thead><tbody>'+el.map(o=>`<tr><td><b>${esc(o.k)}</b></td><td class="n">${o.n}</td><td class="n">${o.u}</td><td class="n">${tmF(o.ea)}</td><td class="n">${tmF(o.em)}</td><td class="n">${tmPc(o.e15,o.en)}</td><td class="n">${tmF(o.da)}</td></tr>`).join("")+"</tbody>";
+ tmDet()}
+function tmDetRows(){const q=nrm($("tm_q").value),qd=$("tm_q").value.replace(/\D/g,"");let L=tmRows().filter(x=>!q||nrm(x.nome+" "+(x.emp||"")).includes(q)||(qd&&x.cpf.includes(qd)));
+ const key={u:x=>x.nome.toLowerCase(),m:x=>(x.emp||"").toLowerCase(),d:x=>x.ent,i:x=>x.ini,f:x=>x.fim,e:x=>x.esp==null?-1:x.esp,t:x=>x.dur==null?-1:x.dur,s:x=>x.st}[TMS.k];return L.slice().sort((a,b)=>{const x=key(a),y=key(b);return (x>y?1:x<y?-1:0)*TMS.d})}
+function tmDet(){const L=tmDetRows(),cols=[["u","Usuário"],["m","Empresa"],["d","Entrada na fila"],["i","Início"],["f","Final"],["e","Espera"],["t","Duração"],["s","Status"]],hm=s=>s?s.slice(11,16):"—";
+ $("tm_t4").innerHTML="<thead><tr>"+cols.map(c=>`<th class="s" data-k="${c[0]}">${c[1]}${TMS.k===c[0]?(TMS.d>0?" ▲":" ▼"):""}</th>`).join("")+"</tr></thead><tbody>"+L.slice(0,1500).map(x=>`<tr><td><b>${esc(x.nome)}</b><br><span class="rpn">${x.cpf?$("tmcpf").checked?fcpf(x.cpf):mask(x.cpf):"—"}</span></td><td>${esc(x.emp)||"—"}</td><td>${fmt(x.ent.slice(0,16))}</td><td>${hm(x.ini)}</td><td>${hm(x.fim)}</td><td style="font-weight:700;color:${x.esp>20?"#C8442B":x.esp>10?"#E6A100":"#0E8A6B"}">${tmF(x.esp)}</td><td>${tmF(x.dur)}</td><td>${x.st==="Ocorreu"?'<span class="rptag g">Ocorreu</span>':'<span class="rptag y">'+(esc(x.st)||"—")+"</span>"}</td></tr>`).join("")+"</tbody>";
+ $("tm_cnt").textContent=L.length+(L.length===1?" atendimento":" atendimentos");
+ $("tm_t4").querySelectorAll("th.s").forEach(th=>th.onclick=()=>{const k=th.dataset.k;TMS.d=TMS.k===k?-TMS.d:1;TMS.k=k;tmDet()})}
+$("tm_mes").onchange=e=>{TMES=e.target.value;renderTM()};$("tm_emp").onchange=e=>{TMEMP=e.target.value;renderTM()};$("tm_st").onchange=renderTM;$("tmcpf").onchange=tmDet;$("tm_q").oninput=tmDet;
+$("tmf").onchange=async e=>{await loadTM(e.target.files[0]);e.target.value=""};
+$("tm_csv").onclick=()=>{const q=v=>'"'+String(v==null?"":v).replace(/"/g,'""')+'"',L=tmDetRows(),n=v=>v==null?"":String(v).replace(".",",");dl("tempo_atendimento_"+(TMES||"todos")+".csv","﻿"+[["Usuário","CPF","Empresa","Entrada na fila","Início","Final","Espera (min)","Duração (min)","Status"].join(";")].concat(L.map(x=>[x.nome,x.cpf?($("tmcpf").checked?fcpf(x.cpf):mask(x.cpf)):"",x.emp,fmt(x.ent.slice(0,16)),x.ini?fmt(x.ini.slice(0,16)):"",x.fim?fmt(x.fim.slice(0,16)):"",n(x.esp),n(x.dur),x.st].map(q).join(";"))).join("\n"),"text/csv")};
+{const o=renderCO;renderCO=function(){o();try{renderTM()}catch(e){}}}
+
+
+
+["nsq","nss","nscpf"].forEach(i=>$(i).addEventListener("input",renderNS));
+function saveCust(){try{localStorage.setItem(CKEY,JSON.stringify(CUST))}catch(e){}buildSts();touch();schedulePush()}
+function openStatus(id){
+ const used=s=>D.some(r=>r.status===s);
+ const base=Object.keys(STS0).map(s=>`<div class="sti"><i style="background:${STS0[s]}"></i>${esc(s)} <small>padrão</small></div>`).join("");
+ const cu=CUST.map((s,i)=>`<div class="sti"><i style="background:${esc(s.c)}"></i>${esc(s.n)} <small>${s.o?"em aberto":"encerra o agendamento"}</small> ${used(s.n)?'<small>· em uso</small>':`<button class="btn mini d" onclick="delStatus(${i},${id?`'${id}'`:"null"})">remover</button>`}</div>`).join("");
+ $("mb").innerHTML=`<h3 style="margin:0;color:#1B2A4A">Novo status</h3>
+ <label>Nome do status</label><input id="n_nome" maxlength="30" placeholder="Ex.: Aguardando retorno">
+ <label>Cor</label><input type="color" id="n_cor" value="#6c5ce7" style="height:34px;padding:2px">
+ <label style="display:flex;gap:6px;align-items:flex-start;font-weight:400"><input type="checkbox" id="n_open" checked style="width:auto;margin-top:2px"> <span>Agendamento ainda em aberto (continua nas regras de ação, no alerta de horário vencido e no relatório das 08h). Desmarque se o status encerra o agendamento.</span></label>
+ <div style="margin-top:12px;font-size:12px;font-weight:700;color:#1B2A4A">Status existentes</div><div class="stl">${base}${cu}</div>
+ <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px"><button class="btn" onclick="closeM();render()">Cancelar</button> <button class="btn p" onclick="addStatus(${id?`'${id}'`:"null"})">Salvar status</button></div>`;
+ $("m").classList.add("on");setTimeout(()=>{const e=$("n_nome");if(e)e.focus()},50)}
+function addStatus(id){const n=$("n_nome").value.trim().replace(/\s+/g," ");
+ if(!n){alert("Informe o nome do status.");return}
+ if(n==="__novo__"||Object.keys(STS).some(k=>k.toLowerCase()===n.toLowerCase())){alert("Já existe um status com esse nome.");return}
+ CUST.push({n,c:$("n_cor").value||"#6c5ce7",o:$("n_open").checked});saveCust();
+ if(id){const r=D.find(x=>x.id===id);if(r){r.status=n;save()}}
+ closeM();render()}
+function delStatus(i,id){const s=CUST[i];if(!s||D.some(r=>r.status===s.n))return;CUST.splice(i,1);saveCust();openStatus(id);render()}
 function saveF(id){
  const o={nome:$("f_nome").value.trim(),cpf:$("f_cpf").value.replace(/\D/g,""),esp:$("f_esp").value.trim(),prof:$("f_prof").value.trim(),dt:$("f_dt").value,status:$("f_st").value,link:$("f_link").value.trim(),obs:$("f_obs").value.trim()};
  if(!o.nome||!o.dt||!o.esp){alert("Informe paciente, especialidade e data/hora.");return}
@@ -335,19 +915,29 @@ async function loadFile(f){if(!f)return;
  const ok=rows.filter(x=>toIso(x["Horário agendado"])&&x["Nome"]);
  if(!ok.length){alert("Nenhuma linha válida encontrada. Confira se é a planilha de agendamentos (colunas Nome, CPF, Status, Especialidade, Profissional, Horário agendado, Link do paciente).");return}
  PEND={name:f.name,rows:ok};showPend()}
-function showPend(){const el=$("rep");if(!PEND){el.innerHTML="";return}
- el.innerHTML=`<div class="pend"><span>📄 <b>${esc(PEND.name)}</b> — ${PEND.rows.length} agendamento(s). Ao clicar em OK, a base atual é <b>substituída</b>; quem já está no painel mantém o status.</span> <button class="btn p mini" onclick="confirmLoad()">OK</button> <button class="btn mini" onclick="PEND=null;showPend()">Cancelar</button></div>`}
-function confirmLoad(){if(!PEND)return;
+let LASTR=null;
+function showPend(){const el=$("rep");if(!PEND){el.innerHTML=LASTR?`<div class="pend" style="background:#eef7f1;border-color:#2e8b57"><span>✔ Base atualizada: <b>${LASTR.mant}</b> mantido(s) (status e observações resgatados) · <b>${LASTR.novos}</b> novo(s) · <b>${LASTR.rem}</b> removido(s) (não constam na nova planilha).</span> <button class="btn mini" onclick="LASTR=null;showPend()">Fechar</button></div>`:"";return}
+ el.innerHTML=`<div class="pend"><span>📄 <b>${esc(PEND.name)}</b> — ${PEND.rows.length} agendamento(s). Ao clicar em OK: quem está nas duas bases <b>mantém status e observações</b>; quem não consta na nova planilha <b>sai</b>; os novos entram.</span> <button class="btn p mini" onclick="confirmLoad()">OK</button> <button class="btn mini" onclick="PEND=null;showPend()">Cancelar</button></div>`}
+const ARKEY="okSaudeArquivo_v1";
+function arq(){try{const a=JSON.parse(localStorage.getItem(ARKEY));return Array.isArray(a)?a:[]}catch(e){return[]}}
+async function confirmLoad(){if(!PEND)return;
+ if(syncCfg()){toast("Buscando a versão mais recente na nuvem…");try{await pull(true)}catch(e){}}
+ snapBk("Antes de atualizar a base");
  const norm=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/\s+/g," ").trim();
- const old=D.slice(),used=new Set(),out=[];let n=0,mant=0;
+ const old=D.slice(),used=new Set(),out=[],AR=arq(),usedA=new Set();let n=0,mant=0;
  PEND.rows.forEach(x=>{const dt=toIso(x["Horário agendado"]),nome=String(x["Nome"]).trim(),nn=norm(nome),esp=x["Especialidade"];
   const cpf=String(x["CPF"]).replace(/\D/g,"").padStart(11,"0"),link=x["Link do paciente"]||"";
   const free=old.filter(o=>!used.has(o.id));
   const m=free.find(o=>link&&o.link===link)||free.find(o=>norm(o.nome)===nn&&o.dt===dt)||free.find(o=>norm(o.nome)===nn&&o.esp===esp)||free.find(o=>norm(o.nome)===nn);
+  const ma=m?null:AR.find(o=>!usedA.has(o.id)&&((link&&o.link===link)||(norm(o.nome)===nn&&o.dt===dt)));
+  if(ma){usedA.add(ma.id);mant++;out.push({...ma,id:ma.id,cpf,esp:esp||ma.esp,prof:x["Profissional"]||ma.prof,dt,link:link||ma.link,ausente:false});return}
   if(m){used.add(m.id);mant++;
    out.push({...m,cpf,esp:esp||m.esp,prof:x["Profissional"]||m.prof,dt,link:link||m.link,criado:m.criado||toIso(x["Criado em"]),done:m.dt===dt?(m.done||{}):{},ausente:false})}
   else out.push({id:"i"+Date.now()+"_"+(n++),nome,cpf,esp,prof:x["Profissional"],dt,status:STS[x["Status"]]?x["Status"]:"Agendada",link,obs:"",criado:toIso(x["Criado em"])})});
- D=out;
+ if(old.length&&!mant&&!confirm("Atenção: NENHUM dos "+old.length+" agendamentos atuais consta na nova planilha.\n\nSe isso não era esperado, cancele e confira se este é o aparelho/endereço certo. Se continuar, o status, as observações e o histórico dos atuais ficam arquivados (Recuperar dados) e a lista passa a ser só a da nova planilha.\n\nContinuar?"))return;
+ const gone=old.filter(o=>!used.has(o.id)),keep=gone.filter(o=>o.status!=="Agendada"||o.obs||(o.hist||[]).length||Object.keys(o.done||{}).length).map(o=>({...o,arquivadoEm:Date.now()}));
+ try{const ids=new Set(keep.map(o=>o.id));localStorage.setItem(ARKEY,JSON.stringify(keep.concat(AR.filter(o=>!ids.has(o.id)&&!usedA.has(o.id))).slice(0,800)))}catch(e){}
+ D=out;LASTR={mant,novos:out.length-mant,rem:old.length-used.size};
  try{localStorage.setItem(IKEY,JSON.stringify({at:Date.now(),n:out.length,mant}))}catch(_){}
  PEND=null;save();render();showPend()}
 $("imp").onchange=async e=>{await loadFile(e.target.files[0]);e.target.value=""};
@@ -356,6 +946,8 @@ const up=$("up");["dragenter","dragover"].forEach(v=>up.addEventListener(v,e=>{e
 up.addEventListener("drop",e=>loadFile(e.dataTransfer.files[0]));
 $("m").onclick=e=>{if(e.target.id==="m")closeM()};
 ["q","fs","fe","fp","fd","fa","cpfv"].forEach(i=>$(i).addEventListener("input",render));
+$("hm").addEventListener("mousemove",hmTip);$("hm").addEventListener("click",hmTip);$("hm").addEventListener("mouseleave",()=>{$("hmtip").style.display="none"});
+document.addEventListener("click",e=>{if(!e.target.closest||!e.target.closest(".hc[data-i]"))$("hmtip").style.display="none"});
 setInterval(()=>{if(!$("m").classList.contains("on")&&document.activeElement.tagName!=="SELECT"&&document.activeElement.tagName!=="INPUT")render()},60000);
-document.body.dataset.tab='agenda';render();showPend();if(syncCfg())pull();else syncMsg('não configurada');
+try{if(localStorage.getItem('okSaudeAutoBk')!==TODAY&&(D.length||NS.length)){localStorage.setItem('okSaudeAutoBk',TODAY);snapBk('Automático diário')}}catch(e){}document.body.dataset.tab='agenda';render();showPend();if(syncCfg())pull();else syncMsg('não configurada');
 </script></body></html>
